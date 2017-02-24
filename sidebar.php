@@ -4,9 +4,9 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'expanse_options' );
 ?>
 
 <?php if (is_page_template('contact.php') ) {

@@ -2,8 +2,8 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Yvonne's Theme 0.1.20150828\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/yttheme\n"
+"Project-Id-Version: Expanse 0.1.20150828\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/expanse\n"
 "POT-Creation-Date: 2015-11-20 12:58:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Footer Social Links Menu"
 msgstr ""
 
-#. #-#-#-#-#  yttheme.pot (Yvonne's Theme 0.1.20150828)  #-#-#-#-#
+#. #-#-#-#-#  expanse.pot (Expanse 0.1.20150828)  #-#-#-#-#
 #. Author URI of the plugin/theme
 #: footer.php:51
 msgid "https://wordpress.org/"
@@ -172,7 +172,7 @@ msgstr ""
 
 #: inc/back-compat.php:41 inc/back-compat.php:53 inc/back-compat.php:68
 msgid ""
-"Yvonne's Theme requires at least WordPress version 4.4. You are running "
+"Expanse requires at least WordPress version 4.4. You are running "
 "version %s. Please upgrade and try again."
 msgstr ""
 
@@ -324,20 +324,20 @@ msgid "Featured"
 msgstr ""
 
 #. Theme Name of the plugin/theme
-msgid "Yvonne's Theme"
+msgid "Expanse"
 msgstr ""
 
 #. Theme URI of the plugin/theme
-msgid "https://wordpress.org/themes/yttheme/"
+msgid "https://wordpress.org/themes/expanse/"
 msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Yvonne's Theme is a modernized take on an ever-popular WordPress layout — "
+"Expanse is a modernized take on an ever-popular WordPress layout — "
 "the horizontal masthead with an optional right sidebar that works perfectly "
 "for blogs and websites. It has custom color options with beautiful default "
 "color schemes, a harmonious fluid grid using a mobile-first approach, and "
-"impeccable polish in every detail. Yvonne's Theme will make your WordPress "
+"impeccable polish in every detail. Expanse will make your WordPress "
 "look beautiful everywhere."
 msgstr ""
 

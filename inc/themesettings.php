@@ -1,137 +1,150 @@
 <?php
-/*
-Yvonne is doing a thing. She does not know what the thing is. She may be going about this bassackwards.
-*/
 
 /*Oh gosh, shortcodes! Adding buttons for shortcodes into the WP editor
 -----------------------------------------------------------------*/
 
 function the_content_filter($content) {
-    $block = join("|",array("row", "full", "half", "third", "fourth"));
+    $block = join("|",array("row", "half", "third", "fourth"));
     $rep = preg_replace("/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/","[$2$3]",$content);
     $rep = preg_replace("/(<p>)?\[\/($block)](<\/p>|<br \/>)?/","[/$2]",$rep);
 return $rep;
 }
 add_filter("the_content", "the_content_filter");
 
-// $shortcodesarray= array('row','full','half','third','fourth');
-
-// foreach ($shortcodesarray as $shortcode) {
-// 	add_shortcode( $shortcode, $shortcode.'_shortcode' );
-// 	function row_shortcode( $atts , $content = null ) {
-// 		$a = shortcode_atts(
-// 			array(
-// 				'bg-color' => '',
-// 				'color' => '',
-// 				'bg-image' => '',
-// 				'padding' => '',
-// 				'class' => '',
-// 			), $atts
-// 		);
-// 		$html = '<div class="'.$shortcode;
-// 			if ( !empty( $a['class'] ) ) {
-// 				$html.= ' '.esc_attr($a['class']).'"';
-// 			} else {
-// 				$html.= '"';
-// 			}
-// 			if ( !empty( $a['bg-color'] || $a['color'] || $a['bg-image'] || $a['padding'] ) ) {
-// 				$html.= ' style="';
-// 			}
-// 				if ( !empty( $a['bg-color'] ) ) {
-// 					$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
-// 				}
-// 				if ( !empty( $a['color'] ) ) {
-// 					$html.= 'color:'. esc_attr($a['color']).'; ';
-// 				}
-// 				if ( !empty( $a['bg-image'] ) ) {
-// 					$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
-// 				}
-// 				if ( !empty( $a['padding'] ) ) {
-// 					$html.= 'padding:'. esc_attr($a['padding']).';';
-// 				}
-// 			if ( !empty( $a['bg-color'] || $a['color'] || $a['bg-image'] || $a['padding'] ) ) {
-// 				$html.= '"';
-// 			}
-// 		if ($shortcode=='row') {
-// 			$html.= '><div class="site-inner">' . do_shortcode($content) . '</div></div>';
-// 		} else {
-// 			$html.= '>' . do_shortcode($content) . '</div>';
-// 		}
-// 		return $html;
-// 	}
-// }
-
-	add_shortcode( 'row', 'row_shortcode' );
-	function row_shortcode( $atts , $content = null ) {
-		$a = shortcode_atts(
-			array(
-				'bg-color' => 'inherit',
-				'color' => 'inherit',
-				'bg-image' => '',
-				'padding' => '50px 2.5%',
-			), $atts
-		);
-		return '<div class="row" style="background-color:'. esc_attr($a['bg-color']) . '; color:'. esc_attr($a['color']) . '; background-image: url('. esc_attr($a['bg-image']) . '); padding: '. esc_attr($a['padding']) . '">' . do_shortcode($content) . '</div>';
-	}
-	add_shortcode( 'full', 'full_shortcode' );
-	function full_shortcode( $atts , $content = null ) {
-		$a = shortcode_atts(
-			array(
-				'bg-color' => 'inherit',
-				'color' => 'inherit',
-				'bg-image' => '',
-				'padding' => '50px 2.5%',
-			), $atts
-		);
-		return '<div class="container" style="background-color:'. esc_attr($a['bg-color']) . '; color:'. esc_attr($a['color']) . '; background-image: url('. esc_attr($a['bg-image']) . '); padding: '. esc_attr($a['padding']) . '">' . do_shortcode($content) . '</div>';
-	}
-	add_shortcode( 'half', 'half_shortcode' );
-	function half_shortcode( $atts , $content = null ) {
-		$a = shortcode_atts(
-			array(
-				'bg-color' => 'inherit',
-				'color' => 'inherit',
-				'bg-image' => '',
-				'padding' => '50px 2.5%',
-			), $atts
-		);
-		return '<div class="half" style="background-color:'. esc_attr($a['bg-color']) . '; color:'. esc_attr($a['color']) . '; background-image: url('. esc_attr($a['bg-image']) . '); padding: '. esc_attr($a['padding']) . '">' . do_shortcode($content) . '</div>';
-	}
-	add_shortcode( 'third', 'third_shortcode' );
-	function third_shortcode( $atts , $content = null ) {
-		$a = shortcode_atts(
-			array(
-				'bg-color' => 'inherit',
-				'color' => 'inherit',
-				'bg-image' => '',
-				'padding' => '50px 2.5%',
-			), $atts
-		);
-		return '<div class="third" style="background-color:'. esc_attr($a['bg-color']) . '; color:'. esc_attr($a['color']) . '; background-image: url('. esc_attr($a['bg-image']) . '); padding: '. esc_attr($a['padding']) . '">' . do_shortcode($content) . '</div>';
-	}
-	add_shortcode( 'fourth', 'fourth_shortcode' );
-	function fourth_shortcode( $atts , $content = null ) {
-		$a = shortcode_atts(
-			array(
-				'bg-color' => 'inherit',
-				'color' => 'inherit',
-				'bg-image' => '',
-				'padding' => '50px 2.5%',
-			), $atts
-		);
-		return '<div class="fourth" style="background-color:'. esc_attr($a['bg-color']) . '; color:'. esc_attr($a['color']) . '; background-image: url('. esc_attr($a['bg-image']) . '); padding: '. esc_attr($a['padding']) . '">' . do_shortcode($content) . '</div>';
-	}
-
-add_action( 'init', 'yttheme_buttons' );
-function yttheme_buttons() {
-    add_filter( "mce_external_plugins", "yttheme_add_buttons" );
-    add_filter( 'mce_buttons', 'yttheme_register_buttons' );
+$shortcodesarray= array('row','half','third','fourth');
+foreach ($shortcodesarray as $shortcode) {
+	add_shortcode( $shortcode, $shortcode.'_shortcode' );
 }
-function yttheme_add_buttons( $plugin_array ) {
-    $plugin_array['yttheme'] = get_template_directory_uri() . '/inc/yt-shortcode.js';
+function row_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="row';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+			$html.= '"';
+		}
+		$html.= '><div class="site-inner">' . do_shortcode($content) . '</div></div>';
+	return $html;
+}
+
+function half_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="half';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+			$html.= '"';
+		}
+		$html.= '>' . do_shortcode($content) . '</div>';
+	return $html;
+}
+
+function third_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="third';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+			$html.= '"';
+		}
+		$html.= '>' . do_shortcode($content) . '</div>';
+	return $html;
+}
+
+function fourth_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="fourth';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+			$html.= '"';
+		}
+		$html.= '>' . do_shortcode($content) . '</div>';
+	return $html;
+}
+
+add_action( 'init', 'expanse_buttons' );
+function expanse_buttons() {
+    add_filter( "mce_external_plugins", "expanse_add_buttons" );
+    add_filter( 'mce_buttons', 'expanse_register_buttons' );
+}
+function expanse_add_buttons( $plugin_array ) {
+    $plugin_array['expanse'] = get_template_directory_uri() . '/inc/yt-shortcode.js';
     return $plugin_array;
 }
-function yttheme_register_buttons( $buttons ) {
+function expanse_register_buttons( $buttons ) {
     array_push( $buttons, 'Shortcodes' );
     return $buttons;
 }
@@ -139,161 +152,187 @@ function yttheme_register_buttons( $buttons ) {
 /* Adding More Options to the Wordpress Theme Customizer.
 -----------------------------------------------------------------*/
 
-function yttheme_site_options( $wp_customize ) {
-	$wp_customize->add_setting( 'yttheme_logo' );
+/* Adding the logo to the settings page*/
 
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'yttheme_logo', array(
+function expanse_site_options( $wp_customize ) {
+	$wp_customize->add_setting( 'expanse_logo' );
+
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'expanse_logo', array(
 	'label' => __( 'Logo' ),
 	'section'  => 'title_tagline',
-	'settings' => 'yttheme_logo',
+	'settings' => 'expanse_logo',
 	) ) );
 }
 
-add_action('customize_register', 'yttheme_site_options');
+add_action('customize_register', 'expanse_site_options');
+
+/* Logo size */
+
+function expanse_get_image_id($image_url) {
+	global $wpdb;
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url )); 
+        return $attachment[0]; 
+}
 
 
 /* Enqueuing STUFF!
 -----------------------------------------------------------------*/
 
-function yttheme_scripts() {
+function expanse_scripts() {
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'js', get_stylesheet_directory_uri(). '/js/js.js', array(), '1.0.0', true );
 	wp_enqueue_style( 'css', get_stylesheet_directory_uri().'/inc/css.css' );
 }
-add_action( 'admin_init', 'yttheme_scripts' );
+add_action( 'admin_init', 'expanse_scripts' );
 
 
 /* Adding the Menus
 -----------------------------------------------------------------*/
 
-add_action( 'admin_menu', 'yttheme_admin' );
+add_action( 'admin_menu', 'expanse_admin' );
 
-function yttheme_admin() {
+function expanse_admin() {
     /* Base Menu */
-    add_submenu_page('themes.php', "Yvonne's Theme", "Yvonne's Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
+    add_submenu_page('themes.php', "Expanse", "Expanse Theme", 'manage_options', 'expanse_options', 'expanse_index');
 }
 
 /* OPTION PAGE SETTINGS 
 -----------------------------------------------------------------*/
 
-add_action('admin_init', 'yttheme_initialize_options');
-function yttheme_initialize_options() {
-	if( false == get_option( 'yttheme_options' ) ) {
-		add_option( 'yttheme_options', apply_filters( 'yttheme_default_options', yttheme_default_options() ) );
+add_action('admin_init', 'expanse_initialize_options');
+function expanse_initialize_options() {
+	if( false == get_option( 'expanse_options' ) ) {
+		add_option( 'expanse_options', apply_filters( 'expanse_default_options', expanse_default_options() ) );
 	} // end if
 	add_settings_section(
 		'options_section',
-		__( 'Options', 'yttheme' ),
-		'yttheme_callback',
-		'yttheme_options'
+		__( 'Options', 'expanse' ),
+		'expanse_callback',
+		'expanse_options'
 	);
 	
 	add_settings_field(
 		'Nav',
-		__( 'Navigation Bar Position', 'yttheme' ),
-		'yttheme_nav_callback',
-		'yttheme_options',
+		__( 'Navigation Bar Position', 'expanse' ),
+		'expanse_nav_callback',
+		'expanse_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Sitcky Nav',
-		__( 'Sticky Nav', 'yttheme' ),
-		'yttheme_stickynav_callback',
-		'yttheme_options',
-		'options_section'
-	);
-	
-	add_settings_field(
-		'Full Width',
-		__( 'Full Width', 'yttheme' ),
-		'yttheme_fullwidth_callback',
-		'yttheme_options',
-		'options_section'
-	);
-	
-	add_settings_field(
-		'Featured Style',
-		__( 'Featured Boxes Style', 'yttheme' ),
-		'yttheme_featured_style_callback',
-		'yttheme_options',
-		'options_section'
-	);
-	
-	add_settings_field(
-		'Related Posts',
-		__( 'Related Posts', 'yttheme' ),
-		'yttheme_related_posts_callback',
-		'yttheme_options',
-		'options_section'
-	);
-	
-	add_settings_field(
-		'Latest Post',
-		__( 'Latest Post', 'yttheme' ),
-		'yttheme_latest_post_callback',
-		'yttheme_options',
+		__( 'Sticky Nav', 'expanse' ),
+		'expanse_stickynav_callback',
+		'expanse_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Google Analytics',
-		__( 'Google Analytics', 'yttheme' ),
-		'yttheme_ga_callback',
-		'yttheme_options',
+		__( 'Google Analytics', 'expanse' ),
+		'expanse_ga_callback',
+		'expanse_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Social Share Buttons',
-		__( 'Social Share Buttons', 'yttheme' ),
-		'yttheme_ss_callback',
-		'yttheme_options',
+		__( 'Social Share Buttons', 'expanse' ),
+		'expanse_ss_callback',
+		'expanse_options',
+		'options_section'
+	);
+	
+	add_settings_field(
+		'Blog Layout',
+		__( 'Blog Layout', 'expanse' ),
+		'expanse_blog_layout_callback',
+		'expanse_options',
+		'options_section'
+	);
+	
+	add_settings_field(
+		'Featured Style',
+		__( 'Featured Boxes Style', 'expanse' ),
+		'expanse_featured_style_callback',
+		'expanse_options',
+		'options_section'
+	);
+	
+	add_settings_field(
+		'Related Posts',
+		__( 'Related Posts', 'expanse' ),
+		'expanse_related_posts_callback',
+		'expanse_options',
+		'options_section'
+	);
+	
+	add_settings_field(
+		'Headlines On Homepage',
+		__( 'Latest Post', 'expanse' ),
+		'expanse_latest_post_callback',
+		'expanse_options',
+		'options_section'
+	);
+	
+	add_settings_field(
+		'Extra Widget Areas',
+		__( 'Extra Widget Areas', 'expanse' ),
+		'expanse_extra_sidebars_callback',
+		'expanse_options',
 		'options_section'
 	);
 
 	register_setting(
-		'yttheme_options',
-		'yttheme_options'
+		'expanse_options',
+		'expanse_options'
 	);
 } // end settings field
 
-add_action('admin_init', 'yttheme_initialize_options_export_import');
-function yttheme_initialize_options_export_import() {
+add_action('admin_init', 'expanse_initialize_options_export_import');
+function expanse_initialize_options_export_import() {
 	add_settings_section(
 		'options_section_export_import',
-		__( 'Options Export/Import', 'yttheme' ),
-		'yttheme_callback_export_import',
-		'yttheme_options_export_import'
+		__( '', 'expanse' ),
+		'expanse_callback_export_import',
+		'expanse_options_export_import'
 	);
 
 	register_setting(
-		'yttheme_options_export_import',
-		'yttheme_options_export_import'
+		'expanse_options_export_import',
+		'expanse_options_export_import'
 	);
 } // end settings field
 
 /* Register Default Settings
 -----------------------------------------------------------------*/
 
-function yttheme_default_options() {
+function expanse_default_options() {
 	$defaults = array(
 		'nav'				=>	'',
 		'stickynav'			=>	'',
-		'fullwidth'			=>	'',
+		'blog_layout'		=>	'',
 		'featured_style'	=>	'',
 		'related_posts'		=>	'',
 		'latest_post'		=>	'',
 		'ga'				=>	'',
 		'ssbutton'			=>	'',
-		'ss_fb'				=>	'',
-		'ss_tw'				=>	'',
-		'ss_gp'				=>	'',
-		'ss_li'				=>	'',
-		'ss_pin'			=>	'',
-		'ss_email'			=>	''
+			'ss_fb'			=>	'',
+			'ss_tw'			=>	'',
+			'ss_gp'			=>	'',
+			'ss_li'			=>	'',
+			'ss_pin'		=>	'',
+			'ss_email'		=>	'',
+		'es_home'			=>	'',
+		'es_page'			=>	'',
+		'es_blog'			=>	'',
+		'es_contact'		=>	'',
+		'es_above'			=>	'',
+		'es_features'		=>	'',
+		'es_footer'			=>	''
+
 	);
-	return apply_filters( 'yttheme_default_options', $defaults );
+	return apply_filters( 'expanse_default_options', $defaults );
 }
 
 
@@ -302,8 +341,8 @@ function yttheme_default_options() {
 
 /* Section Callbacks */
 
-	function yttheme_callback() {
-		echo '<p>' . __( 'How do you want your site?', 'yttheme' ) . '</p>';
+	function expanse_callback() {
+		echo '<p>' . __( 'How do you want your site?', 'expanse' ) . '</p>';
 	}
 
 
@@ -311,229 +350,242 @@ function yttheme_default_options() {
 
 /* -- Callbacks -- */
 
-	function yttheme_nav_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_nav_callback() {
+		$options = get_option( 'expanse_options' );
 		
-		$html = '<select id="nav" name="yttheme_options[nav]">';
-			$html .= '<option value="next"' . selected( $options['nav'], 'next', false) . '>' . __( 'Next to the Logo (75%)', 'yttheme' ) . '</option>';
-			$html .= '<option value="below"' . selected( $options['nav'], 'below', false) . '>' . __( 'Below (100%)', 'yttheme' ) . '</option>';
+		$html = '<select id="nav" name="expanse_options[nav]">';
+			$html .= '<option value="next"' . selected( $options['nav'], 'next', false) . '>' . __( 'Next to the Logo (75%)', 'expanse' ) . '</option>';
+			$html .= '<option value="below"' . selected( $options['nav'], 'below', false) . '>' . __( 'Below (100%)', 'expanse' ) . '</option>';
 			$html .= '</select>';
 			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/next.png"></div>';
 		echo $html;
 	}
 	
-	function yttheme_stickynav_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_stickynav_callback() {
+		$options = get_option( 'expanse_options' );
 
 		$sticky = $options['stickynav'];
-			$html .= ' <input type="checkbox" id="stickynav" name="yttheme_options[stickynav]" ';
+			$html .= ' <input type="checkbox" id="stickynav" name="expanse_options[stickynav]" ';
 			if ($sticky) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Sticky?';
 		echo $html;
 	}
-	
-	function yttheme_fullwidth_callback() {
-		$options = get_option( 'yttheme_options' );
 
-		$sticky = $options['fullwidth'];
-			$html .= ' <input type="checkbox" id="fullwidth" name="yttheme_options[fullwidth]" ';
-			if ($sticky) {
-				$html .= 'checked="checked"';
-			}
-			$html .= '> Full Width Site?';
+	function expanse_blog_layout_callback() {
+		$options = get_option( 'expanse_options' );
+		
+		$html = '<select id="blog_layout" name="expanse_options[blog_layout]">';
+			$html .= '<option value="hero"' . selected( $options['blog_layout'], 'hero', false) . '>' . __( 'Hero First', 'expanse' ) . '</option>';
+			$html .= '<option value="rich"' . selected( $options['blog_layout'], 'rich', false) . '>' . __( 'Image Rich', 'expanse' ) . '</option>';
+			$html .= '<option value="full"' . selected( $options['blog_layout'], 'full', false) . '>' . __( 'Full Card', 'expanse' ) . '</option>';
+			$html .= '<option value="simple"' . selected( $options['blog_layout'], 'simple', false) . '>' . __( 'Simple Card', 'expanse' ) . '</option>';
+			$html .= '</select>';
+			$html .= '<div class="floatimg" style="margin-top:-125px;"><img src="'. get_template_directory_uri() .'/inc/img/bloglayout.jpg"></div>';
 		echo $html;
 	}
 
-	function yttheme_featured_style_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_featured_style_callback() {
+		$options = get_option( 'expanse_options' );
 		
-		$html = '<select id="featured_style" name="yttheme_options[featured_style]">';
-			$html .= '<option value="icon"' . selected( $options['featured_style'], 'icon', false) . '>' . __( 'Title + icon / Text', 'yttheme' ) . '</option>';
-			$html .= '<option value="rollover"' . selected( $options['featured_style'], 'rollover', false) . '>' . __( 'Image bg, title, text rollover', 'yttheme' ) . '</option>';
+		$html = '<select id="featured_style" name="expanse_options[featured_style]">';
+			$html .= '<option value="icon"' . selected( $options['featured_style'], 'icon', false) . '>' . __( 'Title + icon / Text', 'expanse' ) . '</option>';
+			$html .= '<option value="rollover"' . selected( $options['featured_style'], 'rollover', false) . '>' . __( 'Image bg, title, text rollover', 'expanse' ) . '</option>';
 			$html .= '</select>';
 			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/featured.png"></div>';
 		echo $html;
 	}
 
-	function yttheme_related_posts_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_related_posts_callback() {
+		$options = get_option( 'expanse_options' );
 		
-		$html = '<select id="related_posts" name="yttheme_options[related_posts]">';
-			$html .= '<option value="none"' . selected( $options['related_posts'], 'none', false) . '>' . __( 'No related posts', 'yttheme' ) . '</option>';
-			$html .= '<option value="below"' . selected( $options['related_posts'], 'below', false) . '>' . __( 'Below posts', 'yttheme' ) . '</option>';
-			$html .= '<option value="side"' . selected( $options['related_posts'], 'side', false) . '>' . __( 'On the sidebar', 'yttheme' ) . '</option>';
+		$html = '<select id="related_posts" name="expanse_options[related_posts]">';
+			$html .= '<option value="none"' . selected( $options['related_posts'], 'none', false) . '>' . __( 'No related posts', 'expanse' ) . '</option>';
+			$html .= '<option value="below"' . selected( $options['related_posts'], 'below', false) . '>' . __( 'Below posts', 'expanse' ) . '</option>';
+			$html .= '<option value="side"' . selected( $options['related_posts'], 'side', false) . '>' . __( 'On the sidebar', 'expanse' ) . '</option>';
 			$html .= '</select>';
 		echo $html;
 	}
 
-	function yttheme_latest_post_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_latest_post_callback() {
+		$options = get_option( 'expanse_options' );
 		
-		$html = '<select id="latest_post" name="yttheme_options[latest_post]">';
-			$html .= '<option value="yes"' . selected( $options['latest_post'], 'yes', false) . '>' . __( 'Show', 'yttheme' ) . '</option>';
-			$html .= '<option value="no"' . selected( $options['latest_post'], 'no', false) . '>' . __( 'I\'ll put it elsewhere' , 'yttheme' ) . '</option>';
+		$html = '<select id="latest_post" name="expanse_options[latest_post]">';
+			$html .= '<option value="yes"' . selected( $options['latest_post'], 'yes', false) . '>' . __( 'Show', 'expanse' ) . '</option>';
+			$html .= '<option value="no"' . selected( $options['latest_post'], 'no', false) . '>' . __( 'I\'ll put it elsewhere' , 'expanse' ) . '</option>';
 			$html .= '</select>';
 			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/hoh.png"></div>';
 		echo $html;
 	}
 
-	function yttheme_ga_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_ga_callback() {
+		$options = get_option( 'expanse_options' );
 
 		$ga = '';
 		if( isset( $options['ga'] ) ) {
 			$ga = sanitize_html_class( $options['ga'] );
 		}
 
-		echo '<input type="text" id="ga" name="yttheme_options[ga]" value="' . $ga . '" placeholder="UA-xxxxxxxx-xx" />';
+		echo '<input type="text" id="ga" name="expanse_options[ga]" value="' . $ga . '" placeholder="UA-xxxxxxxx-xx" />';
 	}
 
-	function yttheme_ss_callback() {
-		$options = get_option( 'yttheme_options' );
+	function expanse_ss_callback() {
+		$options = get_option( 'expanse_options' );
 
 		$ssbutton = $options['ssbutton'];
-			$html .= '<input type="checkbox" id="ssbutton" name="yttheme_options[ssbutton]"';
+			$html .= '<input type="checkbox" id="ssbutton" name="expanse_options[ssbutton]"';
 			if ($ssbutton) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Social Share Buttons?<p class="ss" style="display:none">';
 
 		$facebook = $options['ss_fb'];
-			$html .= ' <input type="checkbox" id="ss_fb" name="yttheme_options[ss_fb]"';
+			$html .= ' <input type="checkbox" id="ss_fb" name="expanse_options[ss_fb]"';
 			if ($facebook) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Facebook? &nbsp; &nbsp;';
 
 		$twitter = $options['ss_tw'];
-			$html .= ' <input type="checkbox" id="ss_tw" name="yttheme_options[ss_tw]"';
+			$html .= ' <input type="checkbox" id="ss_tw" name="expanse_options[ss_tw]"';
 			if ($twitter) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Twitter? &nbsp; &nbsp;';
 
 		$gplus = $options['ss_gp'];
-			$html .= ' <input type="checkbox" id="ss_gp" name="yttheme_options[ss_gp]"';
+			$html .= ' <input type="checkbox" id="ss_gp" name="expanse_options[ss_gp]"';
 			if ($gplus) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Google+? &nbsp; &nbsp;';
 
 		$linkedin = $options['ss_li'];
-			$html .= ' <input type="checkbox" id="ss_li" name="yttheme_options[ss_li]"';
+			$html .= ' <input type="checkbox" id="ss_li" name="expanse_options[ss_li]"';
 			if ($linkedin) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> LinkedIn? &nbsp; &nbsp;';
 
 		$pinterest = $options['ss_pin'];
-			$html .= ' <input type="checkbox" id="ss_pin" name="yttheme_options[ss_pin]"';
+			$html .= ' <input type="checkbox" id="ss_pin" name="expanse_options[ss_pin]"';
 			if ($pinterest) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Pinterest? &nbsp; &nbsp;';
 
 		$email = $options['ss_email'];
-			$html .= ' <input type="checkbox" id="ss_email" name="yttheme_options[ss_email]"';
+			$html .= ' <input type="checkbox" id="ss_email" name="expanse_options[ss_email]"';
 			if ($email) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Email?</p>';
 		echo $html;
-
 	}
 
-	function yttheme_callback_export_import() {
+	function expanse_extra_sidebars_callback() {
+		$options = get_option( 'expanse_options' );
 
-		echo '<table><tr><td style="width: 50%;vertical-align: text-top;"><p>Export Settings (as a .json file.)</p>
-			<form method="post">
-				<p><input type="hidden" name="yttheme_action" value="export_settings" /></p>
-				<p>';
-					wp_nonce_field( 'yttheme_export_nonce', 'yttheme_export_nonce' );
-					submit_button( __( 'Export' ), 'secondary', 'submit', false );
-		echo '</p>
-			</form></td>
-			<td><p>Import Settings</p>
-			<form method="post" enctype="multipart/form-data">
-				<p>
-					<input type="file" name="import_file"/>
-				</p>
-				<p>
-					<input type="hidden" name="yttheme_action" value="import_settings" />';
-					wp_nonce_field( 'yttheme_import_nonce', 'yttheme_import_nonce' );
-					submit_button( __( 'Import' ), 'secondary', 'submit', false );
-		echo '	</p>
-			</form></td></tr></table>';
+		$html .'You want extra widget areas with that?';
+
+		$home = $options['es_home'];
+			$html .= '<p><input type="checkbox" id="es_home" name="expanse_options[es_home]"';
+			if ($home) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Home Sidebar &nbsp; &nbsp;';
+
+		$page = $options['es_page'];
+			$html .= ' <input type="checkbox" id="es_page" name="expanse_options[es_page]"';
+			if ($page) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Page Sidebar &nbsp; &nbsp;';
+
+		$blog = $options['es_blog'];
+			$html .= ' <input type="checkbox" id="es_blog" name="expanse_options[es_blog]"';
+			if ($blog) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Blog Sidebar &nbsp; &nbsp;';
+
+		$contact = $options['es_contact'];
+			$html .= ' <input type="checkbox" id="es_contact" name="expanse_options[es_contact]"';
+			if ($contact) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Contact Sidebar</p><p>';
+
+		$above = $options['es_above'];
+			$html .= ' <input type="checkbox" id="es_above" name="expanse_options[es_above]"';
+			if ($contact) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Above the Header &nbsp; &nbsp; &nbsp;';
+
+		$header = $options['es_header'];
+			$html .= ' <input type="checkbox" id="es_header" name="expanse_options[es_header]"';
+			if ($header) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Header &nbsp; &nbsp; &nbsp;';
+
+		$features = $options['es_features'];
+			$html .= ' <input type="checkbox" id="es_features" name="expanse_options[es_features]"';
+			if ($features) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Features Widget Area &nbsp; &nbsp; &nbsp;';
+
+		$footer = $options['es_footer'];
+			$html .= ' <input type="checkbox" id="es_footer" name="expanse_options[es_footer]"';
+			if ($footer) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Footer Widget Area</p>';
+		echo $html;
+	}
+
+	function expanse_callback_export_import() {?>
+		<h4>Backup/Export</h4>
+		<p>Here are the stored settings for the current theme:</p>
+		<p><textarea class="code" rows="5" cols="100" onclick="this.select()"><?php echo serialize(get_option( 'expanse_options' )); ?></textarea></p>
+		<p><a href="?page=expanse_options&tab=import_settings&action=download" class="button-secondary">Download as file</a></p>
+		<h4>Restore/Import</h4>
+		<p><label class="description" for="upload">Restore a previous backup</label></p>
+		<p><input type="file" name="file" /> <input type="submit" name="upload" id="upload" class="button-primary" value="Upload file" /></p>
+		<?php if (function_exists('wp_nonce_field')) wp_nonce_field('expanse_restoreOptions', 'expanse_restoreOptions'); ?>
+	<?php
 	}
 
 
 
 /* Import/Export Settings thingum
 -----------------------------------------------------------------*/
-/* -- Starting it, json file generation -- */
 
-// function yttheme_settings_export() {
-
-// 	if( empty( $_POST['yttheme_action'] ) || 'export_settings' != $_POST['yttheme_action'] )
-// 		return;
-
-// 	if( ! wp_verify_nonce( $_POST['yttheme_export_nonce'], 'yttheme_export_nonce' ) )
-// 		return;
-
-// 	if( ! current_user_can( 'manage_options' ) )
-// 		return;
-
-// 	$settings = get_option( 'yttheme_options' );
-
-// 	ignore_user_abort( true );
-
-// 	nocache_headers();
-// 	header( 'Content-Type: application/json; charset=utf-8' );
-// 	header( 'Content-Disposition: attachment; filename=yttheme-settings-export-' . date( 'm-d-Y' ) . '.json' );
-// 	header( "Expires: 0" );
-
-// 	echo json_encode( $settings );
-// 	exit;
-// }
-// add_action( 'admin_init', 'yttheme_settings_export' );
-
-
-
-/* -- importing -- */
-
-// function yttheme_process_settings_import() {
-
-// 	if( empty( $_POST['yttheme_action'] ) || 'import_settings' != $_POST['yttheme_action'] )
-// 		return;
-
-// 	if( ! wp_verify_nonce( $_POST['yttheme_import_nonce'], 'yttheme_import_nonce' ) )
-// 		return;
-
-// 	if( ! current_user_can( 'manage_options' ) )
-// 		return;
-
-// 	$extension = end( explode( '.', $_FILES['import_file']['name'] ) );
-
-// 	if( $extension != 'json' ) {
-// 		wp_die( __( 'Please upload a valid .json file' ) );
-// 	}
-
-// 	$import_file = $_FILES['import_file']['tmp_name'];
-
-// 	if( empty( $import_file ) ) {
-// 		wp_die( __( 'Please upload a file to import' ) );
-// 	}
-
-// 	// Retrieve the settings from the file and convert the json object to an array.
-// 	$settings = (array) json_decode( file_get_contents( $import_file ) );
-
-// 	update_option( 'yttheme_settings', $settings );
-
-// 	wp_safe_redirect( admin_url( 'themes.php?page=yttheme_options&tab=display_options' ) ); exit;
-
-// }
+function expanse_settings_export() {
+	if (isset($_GET['action']) && ($_GET['action'] == 'download')) {
+		header("Cache-Control: public, must-revalidate");
+		header("Pragma: hack");
+		header("Content-Type: text/plain");
+		header('Content-Disposition: attachment; filename="theme-options-'.date("dMy").'.dat"');
+		echo serialize(get_option( 'expanse_options' ));
+		die();
+	}
+	if (isset($_POST['upload']) && check_admin_referer('expanse_restoreOptions', 'expanse_restoreOptions')) {
+		if ($_FILES["file"]["error"] > 0) {
+		} else {
+			$options = unserialize(file_get_contents($_FILES["file"]["tmp_name"]));
+			if ($options) {
+				update_option("expanse_options", $options);
+			}
+		}
+		wp_redirect(admin_url('themes.php?page=expanse_options&tab=import_settings'));
+		exit;
+	}
+}
+add_action( 'admin_init', 'expanse_settings_export' );
 
 
 
@@ -543,17 +595,19 @@ function yttheme_default_options() {
 /**
  * Renders a simple page to display for the theme menu defined above.
  */
-function yttheme_index() {
+function expanse_index() {
 ?>
 
 	<!-- Create a header in the default WordPress 'wrap' container -->
 	<div class="wrap">
 
-		<h2><?php _e( 'Yvonne\'s Theme Options', 'yttheme' ); ?></h2>
+		<h2><?php _e( 'Expanse Theme Options', 'expanse' ); ?></h2>
 		<?php settings_errors(); ?>
 		
 		<?php if( isset( $_GET[ 'tab' ] ) ) {
 			$active_tab = $_GET[ 'tab' ];
+		} else if( $active_tab == 'import_settings' ) {
+			$active_tab = 'import_settings';
 		} else if( $active_tab == 'shortcode' ) {
 			$active_tab = 'shortcode';
 		} else {
@@ -561,52 +615,49 @@ function yttheme_index() {
 		} // end if/else ?>
 
 		<h2 class="nav-tab-wrapper">
-			<a href="?page=yttheme_options&tab=display_options" class="nav-tab <?php echo $active_tab == 'display_options' ? 'nav-tab-active' : ''; ?>">Theme Options</a>
-			<a href="?page=yttheme_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
+			<a href="?page=expanse_options&tab=display_options" class="nav-tab <?php echo $active_tab == 'display_options' ? 'nav-tab-active' : ''; ?>">Theme Options</a>
+			<a href="?page=expanse_options&tab=import_settings" class="nav-tab <?php echo $active_tab == 'import_settings' ? 'nav-tab-active' : ''; ?>">Options Export/Import</a>
+ 			<a href="?page=expanse_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
 		</h2>
-		
-		<form method="post" action="options.php">
 
+		<form method="post" action="options.php"<?php if( $active_tab == 'import_settings' ) { echo ' enctype="multipart/form-data"'; } ?> >
 		<?php
 			if( $active_tab == 'display_options' ) {
-				settings_fields( 'yttheme_options' );
-				do_settings_sections( 'yttheme_options' );
+				settings_fields( 'expanse_options' );
+				do_settings_sections( 'expanse_options' );
 				submit_button();
-				// settings_fields( 'yttheme_options_export_import' );
-				// do_settings_sections( 'yttheme_options_export_import' );
+			} else if( $active_tab == 'import_settings' ) {
+				settings_fields( 'expanse_options_export_import' );
+				do_settings_sections( 'expanse_options_export_import' );
 			} else { ?>
-				<h2>Shortcodes</h2>
+				<h2>Team Shortcode</h2>
+					<pre>[team]</pre>
+				<h2>Shortcode Examples</h2>
 				<p>Row - <pre>[row]Your Content[/row]</pre>
-				<p>Full Width - <pre>[full]Your Content[/full]</pre></p>
 				<p>Half - <pre>[half]Your Content[/half]</pre></p>
 				<p>Third - <pre>[third]Your Content[/third]</pre></p>
 				<p>Fourth - <pre>[fourth]Your Content[/fourth]</pre></p>
-				<p>You'll need to use the Full Width template with the [row] shortcode in order to get . You can put other shortcodes within the row shortcode.</p>
-				<p><strong>Attributes:</strong> color, bg-color, bg-image, and padding. Hexcodes, color names, and percentages are ok!</p><br/>
-				<h2>Example:</h2><pre>[row]Your Content[/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short1.png" class="short"></p>
-				<p>[row][full][/full][/row] would mean that there is space between the row and the content.</p>
+				<p><strong>Attributes:</strong> class, color, bg-color, bg-image, and padding. Hexcodes, color names, and percentages are ok!</p><br/>
+				<h2>Examples:</h2>
+				<pre>[row]text[/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short1.png" class="short">
+				<pre>[row bg-color="steelblue"]Galaxies quis... bits of moving fluff?[/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short2.png" class="short">
+				<pre>[row bg-color="steelblue" padding="50px"]Galaxies quis... bits of moving fluff?[/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short2a.png" class="short">
+				<pre>[row][half]Duis aute irure dolor... fugiat nulla pariatur.[/half][third]Galaxies quis... commodo consequat.[/third][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short3.png" class="short">
+				<pre>[row bg-color="cornflowerblue"][half]Galaxies quis... commodo consequat.[/half][fourth bg-color="lightblue" padding="25px"]Excepteur sint... moving fluff?[/fourth][fourth]Duis aute... nulla pariatur.[/fourth][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short4.png" class="short">
+				<pre>[half bg-color="cornflowerblue"]Galaxies quis... commodo consequat.[/half][fourth bg-color="lightblue" padding="25px"]Excepteur sint... moving fluff?[/fourth][fourth bg-color="cornflowerblue"]Duis aute... fugiat nulla pariatur.[/fourth]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short5.png" class="short">
+				<pre>[row bg-color="darkslateblue" padding=0][half color="#fff" padding=110px bg-image="wombat url"]&lt;h1&gt;Your&lt;/h1&gt;[/half][fourth color="pink"]Content[/fourth][fourth color="#000" ]Astonishment.[/fourth][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short6.png" class="short">
+				<pre>[row bg-color="#666" color="#fff" padding="0"][half bg-image="wombat url"]Light years![/half][half]Emerged into... cosmic fugue.[/half][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short7.png" class="short">
 
-				<h2>Example:</h2>
-				<pre>[row bg-color="cornflowerblue"][full]Are creatures of the cosmos!... little good evidence?[/full][/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short4.png" class="short"></p>
-				<pre>[row bg-color="steelblue"]Are creatures of the cosmos!... little good evidence?[/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short5.png" class="short"></p>
-
-				<h2>Example:</h2>
-					<pre>[row bg-color="darkslateblue" padding=0][full padding=0][half padding=110px bg-image="wombat_image_url"]&#60;h1&#62;Your&#60;/h1&#62;[/half][fourth color="pink"]Content[/fourth][fourth color="#000" ]Astonishment.[/fourth][/full][/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short2.png" class="short">
-					<br/><br/>
-
-				<p>[row][/row] without the [full][/full] will have no space between the content and the edge of the screen.</p>
-				<h2>Example:</h2>
-					<pre>[row bg-color="#666" color="#fff" padding="0"][half bg-image="wombat_image_url"]Light years![/half][half]Emerged into consciousness a billion trillion realm of the galaxies, Sea of Tranquility globular star cluster brain is the seed of intelligence permanence of the stars Rig Veda, paroxysm of global death Drake Equation tingling of the spine science cosmic fugue.[/half][/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short3.png" class="short">
-			<?php } // end if/else
-		?>
-
+			<?php } ?>
 		</form>
-		
 	</div>
 <?php
 } ?>

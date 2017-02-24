@@ -5,7 +5,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * If you are looking for the map, it's in the header
  */

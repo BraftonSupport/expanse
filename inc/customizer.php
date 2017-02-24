@@ -1,28 +1,28 @@
 <?php
 /**
- * Yvonne's Theme Customizer functionality
+ * Expanse Customizer functionality
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
 
 /**
  * Sets up the WordPress core custom header and custom background features.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
- * @see yttheme_header_style()
+ * @see expanse_header_style()
  */
-function yttheme_custom_header_and_background() {
-	$color_scheme             = yttheme_get_color_scheme();
+function expanse_custom_header_and_background() {
+	$color_scheme             = expanse_get_color_scheme();
 	$default_background_color = trim( $color_scheme[0], '#' );
 	$default_text_color       = trim( $color_scheme[4], '#' );
 
 	/**
-	 * Filter the arguments used when adding 'custom-background' support in Yvonne's Theme.
+	 * Filter the arguments used when adding 'custom-background' support in Expanse.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Expanse 1.0
 	 *
 	 * @param array $args {
 	 *     An array of custom-background support arguments.
@@ -30,14 +30,14 @@ function yttheme_custom_header_and_background() {
 	 *     @type string $default-color Default color of the background.
 	 * }
 	 */
-	add_theme_support( 'custom-background', apply_filters( 'yttheme_custom_background_args', array(
+	add_theme_support( 'custom-background', apply_filters( 'expanse_custom_background_args', array(
 		'default-color' => $default_background_color,
 	) ) );
 
 	/**
-	 * Filter the arguments used when adding 'custom-header' support in Yvonne's Theme.
+	 * Filter the arguments used when adding 'custom-header' support in Expanse.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Expanse 1.0
 	 *
 	 * @param array $args {
 	 *     An array of custom-header support arguments.
@@ -50,27 +50,27 @@ function yttheme_custom_header_and_background() {
 	 *                                      displayed on the blog.
 	 * }
 	 */
-	add_theme_support( 'custom-header', apply_filters( 'yttheme_custom_header_args', array(
+	add_theme_support( 'custom-header', apply_filters( 'expanse_custom_header_args', array(
 		'default-text-color'     => $default_text_color,
 		'width'                  => 1200,
 		'height'                 => 280,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'yttheme_header_style',
+		'wp-head-callback'       => 'expanse_header_style',
 	) ) );
 }
-add_action( 'after_setup_theme', 'yttheme_custom_header_and_background' );
+add_action( 'after_setup_theme', 'expanse_custom_header_and_background' );
 
-if ( ! function_exists( 'yttheme_header_style' ) ) :
+if ( ! function_exists( 'expanse_header_style' ) ) :
 /**
  * Styles the header text displayed on the site.
  *
- * Create your own yttheme_header_style() function to override in a child theme.
+ * Create your own expanse_header_style() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
- * @see yttheme_custom_header_and_background().
+ * @see expanse_custom_header_and_background().
  */
-function yttheme_header_style() {
+function expanse_header_style() {
 	// If the header text option is untouched, let's bail.
 	if ( display_header_text() ) {
 		return;
@@ -78,7 +78,7 @@ function yttheme_header_style() {
 
 	// If the header text has been hidden.
 	?>
-	<style type="text/css" id="yttheme-header-css">
+	<style type="text/css" id="expanse-header-css">
 		.site-branding {
 			margin: 0 auto 0 0;
 		}
@@ -91,17 +91,17 @@ function yttheme_header_style() {
 	</style>
 	<?php
 }
-endif; // yttheme_header_style
+endif; // expanse_header_style
 
 /**
  * Adds postMessage support for site title and description for the Customizer.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @param WP_Customize_Manager $wp_customize The Customizer object.
  */
-function yttheme_customize_register( $wp_customize ) {
-	$color_scheme = yttheme_get_color_scheme();
+function expanse_customize_register( $wp_customize ) {
+	$color_scheme = expanse_get_color_scheme();
 
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
@@ -109,15 +109,15 @@ function yttheme_customize_register( $wp_customize ) {
 	// Add color scheme setting and control.
 	$wp_customize->add_setting( 'color_scheme', array(
 		'default'           => 'default',
-		'sanitize_callback' => 'yttheme_sanitize_color_scheme',
+		'sanitize_callback' => 'expanse_sanitize_color_scheme',
 		'transport'         => 'postMessage',
 	) );
 
 	$wp_customize->add_control( 'color_scheme', array(
-		'label'    => __( 'Base Color Scheme', 'yttheme' ),
+		'label'    => __( 'Base Color Scheme', 'expanse' ),
 		'section'  => 'colors',
 		'type'     => 'select',
-		'choices'  => yttheme_get_color_scheme_choices(),
+		'choices'  => expanse_get_color_scheme_choices(),
 		'priority' => 1,
 	) );
 
@@ -129,7 +129,7 @@ function yttheme_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'secondary_background_color', array(
-		'label'       => __( 'Secondary Background Color', 'yttheme' ),
+		'label'       => __( 'Secondary Background Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 
@@ -144,7 +144,7 @@ function yttheme_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-		'label'       => __( 'Link Color', 'yttheme' ),
+		'label'       => __( 'Link Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 
@@ -156,7 +156,7 @@ function yttheme_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_hover_color', array(
-		'label'       => __( 'Link Hover Color', 'yttheme' ),
+		'label'       => __( 'Link Hover Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 
@@ -168,7 +168,7 @@ function yttheme_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_text_color', array(
-		'label'       => __( 'Main Text Color', 'yttheme' ),
+		'label'       => __( 'Main Text Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 
@@ -180,16 +180,16 @@ function yttheme_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'secondary_text_color', array(
-		'label'       => __( 'Secondary Text Color', 'yttheme' ),
+		'label'       => __( 'Secondary Text Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 }
-add_action( 'customize_register', 'yttheme_customize_register', 11 );
+add_action( 'customize_register', 'expanse_customize_register', 11 );
 
 /**
- * Registers color schemes for Yvonne's Theme.
+ * Registers color schemes for Expanse.
  *
- * Can be filtered with {@see 'yttheme_color_schemes'}.
+ * Can be filtered with {@see 'expanse_color_schemes'}.
  *
  * The order of colors in a colors array:
  * 1. Main Background Color.
@@ -199,17 +199,17 @@ add_action( 'customize_register', 'yttheme_customize_register', 11 );
  * 5. Main Text Color.
  * 6. Secondary Text Color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @return array An associative array of color scheme options.
  */
-function yttheme_get_color_schemes() {
+function expanse_get_color_schemes() {
 	/**
-	 * Filter the color schemes registered for use with Yvonne's Theme.
+	 * Filter the color schemes registered for use with Expanse.
 	 *
 	 * The default schemes include 'default', 'dark', 'gray', 'red', and 'blue'.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Expanse 1.0
 	 *
 	 * @param array $schemes {
 	 *     Associative array of color schemes data.
@@ -224,9 +224,9 @@ function yttheme_get_color_schemes() {
 	 *     }
 	 * }
 	 */
-	return apply_filters( 'yttheme_color_schemes', array(
+	return apply_filters( 'expanse_color_schemes', array(
 		'default' => array(
-			'label'  => __( 'Default', 'yttheme' ),
+			'label'  => __( 'Default', 'expanse' ),
 			'colors' => array(
 				'#f0f0f0',
 				'#cccccc',
@@ -237,7 +237,7 @@ function yttheme_get_color_schemes() {
 			),
 		),
 		'dark' => array(
-			'label'  => __( 'Dark', 'yttheme' ),
+			'label'  => __( 'Dark', 'expanse' ),
 			'colors' => array(
 				'#222222',
 				'#111111',
@@ -248,7 +248,7 @@ function yttheme_get_color_schemes() {
 			),
 		),
 		'gray' => array(
-			'label'  => __( 'Gray', 'yttheme' ),
+			'label'  => __( 'Gray', 'expanse' ),
 			'colors' => array(
 				'#616a73',
 				'#4d545c',
@@ -259,7 +259,7 @@ function yttheme_get_color_schemes() {
 			),
 		),
 		'red' => array(
-			'label'  => __( 'Red', 'yttheme' ),
+			'label'  => __( 'Red', 'expanse' ),
 			'colors' => array(
 				'#dddddd',
 				'#dd3838',
@@ -270,7 +270,7 @@ function yttheme_get_color_schemes() {
 			),
 		),
 		'blue' => array(
-			'label'  => __( 'Blue', 'yttheme' ),
+			'label'  => __( 'Blue', 'expanse' ),
 			'colors' => array(
 				'#bbddee',
 				'#005791',
@@ -283,19 +283,19 @@ function yttheme_get_color_schemes() {
 	) );
 }
 
-if ( ! function_exists( 'yttheme_get_color_scheme' ) ) :
+if ( ! function_exists( 'expanse_get_color_scheme' ) ) :
 /**
- * Retrieves the current Yvonne's Theme color scheme.
+ * Retrieves the current Expanse color scheme.
  *
- * Create your own yttheme_get_color_scheme() function to override in a child theme.
+ * Create your own expanse_get_color_scheme() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @return array An associative array of either the current or default color scheme HEX values.
  */
-function yttheme_get_color_scheme() {
+function expanse_get_color_scheme() {
 	$color_scheme_option = get_theme_mod( 'color_scheme', 'default' );
-	$color_schemes       = yttheme_get_color_schemes();
+	$color_schemes       = expanse_get_color_schemes();
 
 	if ( array_key_exists( $color_scheme_option, $color_schemes ) ) {
 		return $color_schemes[ $color_scheme_option ]['colors'];
@@ -303,21 +303,21 @@ function yttheme_get_color_scheme() {
 
 	return $color_schemes['default']['colors'];
 }
-endif; // yttheme_get_color_scheme
+endif; // expanse_get_color_scheme
 
-if ( ! function_exists( 'yttheme_get_color_scheme_choices' ) ) :
+if ( ! function_exists( 'expanse_get_color_scheme_choices' ) ) :
 /**
- * Retrieves an array of color scheme choices registered for Yvonne's Theme.
+ * Retrieves an array of color scheme choices registered for Expanse.
  *
- * Create your own yttheme_get_color_scheme_choices() function to override
+ * Create your own expanse_get_color_scheme_choices() function to override
  * in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @return array Array of color schemes.
  */
-function yttheme_get_color_scheme_choices() {
-	$color_schemes                = yttheme_get_color_schemes();
+function expanse_get_color_scheme_choices() {
+	$color_schemes                = expanse_get_color_schemes();
 	$color_scheme_control_options = array();
 
 	foreach ( $color_schemes as $color_scheme => $value ) {
@@ -326,23 +326,23 @@ function yttheme_get_color_scheme_choices() {
 
 	return $color_scheme_control_options;
 }
-endif; // yttheme_get_color_scheme_choices
+endif; // expanse_get_color_scheme_choices
 
 
-if ( ! function_exists( 'yttheme_sanitize_color_scheme' ) ) :
+if ( ! function_exists( 'expanse_sanitize_color_scheme' ) ) :
 /**
- * Handles sanitization for Yvonne's Theme color schemes.
+ * Handles sanitization for Expanse color schemes.
  *
- * Create your own yttheme_sanitize_color_scheme() function to override
+ * Create your own expanse_sanitize_color_scheme() function to override
  * in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @param string $value Color scheme name value.
  * @return string Color scheme name.
  */
-function yttheme_sanitize_color_scheme( $value ) {
-	$color_schemes = yttheme_get_color_scheme_choices();
+function expanse_sanitize_color_scheme( $value ) {
+	$color_schemes = expanse_get_color_scheme_choices();
 
 	if ( ! array_key_exists( $value, $color_schemes ) ) {
 		return 'default';
@@ -350,16 +350,16 @@ function yttheme_sanitize_color_scheme( $value ) {
 
 	return $value;
 }
-endif; // yttheme_sanitize_color_scheme
+endif; // expanse_sanitize_color_scheme
 
 /**
  * Enqueues front-end CSS for color scheme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
-function yttheme_color_scheme_css() {
+function expanse_color_scheme_css() {
 	$color_scheme_option = get_theme_mod( 'color_scheme', 'default' );
 
 	// Don't do anything if the default color scheme is selected.
@@ -367,11 +367,11 @@ function yttheme_color_scheme_css() {
 		return;
 	}
 
-	$color_scheme = yttheme_get_color_scheme();
+	$color_scheme = expanse_get_color_scheme();
 
 	// Convert main text hex color to rgba.
-	$color_textcolor_rgb = yttheme_hex2rgb( $color_scheme[4] );
-	$color_linkcolor_rgb = yttheme_hex2rgb( $color_scheme[2] );
+	$color_textcolor_rgb = expanse_hex2rgb( $color_scheme[4] );
+	$color_linkcolor_rgb = expanse_hex2rgb( $color_scheme[2] );
 
 	// If the rgba values are empty return early.
 	if ( empty( $color_textcolor_rgb ) || empty( $color_linkcolor_rgb ) ) {
@@ -392,45 +392,45 @@ function yttheme_color_scheme_css() {
 
 	);
 
-	$color_scheme_css = yttheme_get_color_scheme_css( $colors );
+	$color_scheme_css = expanse_get_color_scheme_css( $colors );
 
-	wp_add_inline_style( 'yttheme-style', $color_scheme_css );
+	wp_add_inline_style( 'expanse-style', $color_scheme_css );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_color_scheme_css' );
+add_action( 'wp_enqueue_scripts', 'expanse_color_scheme_css' );
 
 /**
  * Binds the JS listener to make Customizer color_scheme control.
  *
  * Passes color scheme data as colorScheme global.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
-function yttheme_customize_control_js() {
+function expanse_customize_control_js() {
 	wp_enqueue_script( 'color-scheme-control', get_template_directory_uri() . '/js/color-scheme-control.js', array( 'customize-controls', 'iris', 'underscore', 'wp-util' ), '20150825', true );
-	wp_localize_script( 'color-scheme-control', 'colorScheme', yttheme_get_color_schemes() );
+	wp_localize_script( 'color-scheme-control', 'colorScheme', expanse_get_color_schemes() );
 }
-add_action( 'customize_controls_enqueue_scripts', 'yttheme_customize_control_js' );
+add_action( 'customize_controls_enqueue_scripts', 'expanse_customize_control_js' );
 
 /**
  * Binds JS handlers to make the Customizer preview reload changes asynchronously.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
-function yttheme_customize_preview_js() {
-	wp_enqueue_script( 'yttheme-customize-preview', get_template_directory_uri() . '/js/customize-preview.js', array( 'customize-preview' ), '20150825', true );
+function expanse_customize_preview_js() {
+	wp_enqueue_script( 'expanse-customize-preview', get_template_directory_uri() . '/js/customize-preview.js', array( 'customize-preview' ), '20150825', true );
 }
-add_action( 'customize_preview_init', 'yttheme_customize_preview_js' );
+add_action( 'customize_preview_init', 'expanse_customize_preview_js' );
 
 /**
  * Returns CSS for the color schemes.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @param array $colors Color scheme colors.
  * @return string Color scheme CSS.
  */
 
-function yttheme_get_color_scheme_css( $colors ) {
+function expanse_get_color_scheme_css( $colors ) {
 	$colors = wp_parse_args( $colors, array(
 		'background_color'      => '',
 		'secondary_background_color' => '',
@@ -457,7 +457,7 @@ function yttheme_get_color_scheme_css( $colors ) {
 	.secondary,
 	.site-footer,
 	.site-header-menu.below,
-	#top,
+	.top,
 	.feature .inside a:hover {
 		background-color: {$colors['secondary_background_color']};
 		color: {$colors['secondary_text_color']};
@@ -772,9 +772,9 @@ CSS;
  * The template generates the css dynamically for instant display in the
  * Customizer preview.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
-function yttheme_color_scheme_css_template() {
+function expanse_color_scheme_css_template() {
 	$colors = array(
 		'background_color'      => '{{ data.background_color }}',
 		'secondary_background_color' => '{{ data.secondary_background_color }}',
@@ -786,22 +786,22 @@ function yttheme_color_scheme_css_template() {
 		'secondlink_color'		=> '{{ data.secondlink_color }}',
 	);
 	?>
-	<script type="text/html" id="tmpl-yttheme-color-scheme">
-		<?php echo yttheme_get_color_scheme_css( $colors ); ?>
+	<script type="text/html" id="tmpl-expanse-color-scheme">
+		<?php echo expanse_get_color_scheme_css( $colors ); ?>
 	</script>
 	<?php
 }
-add_action( 'customize_controls_print_footer_scripts', 'yttheme_color_scheme_css_template' );
+add_action( 'customize_controls_print_footer_scripts', 'expanse_color_scheme_css_template' );
 
 /**
  * Enqueues front-end CSS for the secondary background color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
-function yttheme_secondary_background_color_css() {
-	$color_scheme          = yttheme_get_color_scheme();
+function expanse_secondary_background_color_css() {
+	$color_scheme          = expanse_get_color_scheme();
 	$default_color         = $color_scheme[1];
 	$secondary_background_color = get_theme_mod( 'secondary_background_color', $default_color );
 
@@ -816,25 +816,25 @@ function yttheme_secondary_background_color_css() {
 		.secondary,
 		.site-footer,
 		.site-header-menu.below,
-		#top,
+		.top,
 		.feature .inside a:hover {
 			background-color: %1$s;
 		}
 	';
 
-	wp_add_inline_style( 'yttheme-style', sprintf( $css, $secondary_background_color ) );
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_background_color ) );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_secondary_background_color_css', 11 );
+add_action( 'wp_enqueue_scripts', 'expanse_secondary_background_color_css', 11 );
 
 /**
  * Enqueues front-end CSS for the link color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
-function yttheme_link_color_css() {
-	$color_scheme    = yttheme_get_color_scheme();
+function expanse_link_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
 	$default_color   = $color_scheme[2];
 	$link_color = get_theme_mod( 'link_color', $default_color );
 
@@ -844,7 +844,7 @@ function yttheme_link_color_css() {
 	}
 
 	// Convert link hex color to rgba.
-	$link_color_rgb = yttheme_hex2rgb( $link_color );
+	$link_color_rgb = expanse_hex2rgb( $link_color );
 
 	// If the rgba values are empty return early.
 	if ( empty( $link_color_rgb ) ) {
@@ -939,12 +939,12 @@ function yttheme_link_color_css() {
 		}
 	';
 
-	wp_add_inline_style( 'yttheme-style', sprintf( $css, $link_color, $secondlink_color, $secondlink_hover_color ) );
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $link_color, $secondlink_color, $secondlink_hover_color ) );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_link_color_css', 11 );
+add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
 
-function yttheme_link_hover_color_css() {
-	$color_scheme    = yttheme_get_color_scheme();
+function expanse_link_hover_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
 	$default_color   = $color_scheme[3];
 	$link_hover_color = get_theme_mod( 'link_hover_color', $default_color );
 
@@ -1043,19 +1043,19 @@ function yttheme_link_hover_color_css() {
 		}
 	';
 
-	wp_add_inline_style( 'yttheme-style', sprintf( $css, $link_color ) );
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $link_color ) );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_link_color_css', 11 );
+add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
 
 /**
  * Enqueues front-end CSS for the main text color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
-function yttheme_main_text_color_css() {
-	$color_scheme    = yttheme_get_color_scheme();
+function expanse_main_text_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
 	$default_color   = $color_scheme[4];
 	$main_text_color = get_theme_mod( 'main_text_color', $default_color );
 
@@ -1065,7 +1065,7 @@ function yttheme_main_text_color_css() {
 	}
 
 	// Convert main text hex color to rgba.
-	$main_text_color_rgb = yttheme_hex2rgb( $main_text_color );
+	$main_text_color_rgb = expanse_hex2rgb( $main_text_color );
 
 	// If the rgba values are empty return early.
 	if ( empty( $main_text_color_rgb ) ) {
@@ -1179,19 +1179,19 @@ function yttheme_main_text_color_css() {
 		}
 	';
 
-	wp_add_inline_style( 'yttheme-style', sprintf( $css, $main_text_color, $border_color ) );
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $main_text_color, $border_color ) );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_main_text_color_css', 11 );
+add_action( 'wp_enqueue_scripts', 'expanse_main_text_color_css', 11 );
 
 /**
  * Enqueues front-end CSS for the secondary text color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
-function yttheme_secondary_text_color_css() {
-	$color_scheme    = yttheme_get_color_scheme();
+function expanse_secondary_text_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
 	$default_color   = $color_scheme[5];
 	$secondary_text_color = get_theme_mod( 'secondary_text_color', $default_color );
 
@@ -1211,7 +1211,7 @@ function yttheme_secondary_text_color_css() {
 		.secondary,
 		.site-footer,
 		.site-header-menu.below,
-		#top,
+		.top,
 		.feature .inside a:hover,
 		.social-navigation a {
 			color: %1$s;
@@ -1223,6 +1223,6 @@ function yttheme_secondary_text_color_css() {
 		}
 	';
 
-	wp_add_inline_style( 'yttheme-style', sprintf( $css, $secondary_text_color ) );
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_text_color ) );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_secondary_text_color_css', 11 );
+add_action( 'wp_enqueue_scripts', 'expanse_secondary_text_color_css', 11 );

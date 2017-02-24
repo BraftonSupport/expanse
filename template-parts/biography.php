@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
 ?>
 
@@ -12,25 +12,25 @@
 	<div class="author-avatar">
 		<?php
 		/**
-		 * Filter the Yvonne's Theme author bio avatar size.
+		 * Filter the Expanse author bio avatar size.
 		 *
-		 * @since Yvonne's Theme 1.0
+		 * @since Expanse 1.0
 		 *
 		 * @param int $size The avatar height and width size in pixels.
 		 */
-		$author_bio_avatar_size = apply_filters( 'yttheme_author_bio_avatar_size', 42 );
+		$author_bio_avatar_size = apply_filters( 'expanse_author_bio_avatar_size', 42 );
 
 		echo get_avatar( get_the_author_meta( 'user_email' ), $author_bio_avatar_size );
 		?>
 	</div><!-- .author-avatar -->
 
 	<div class="author-description">
-		<h2 class="author-title"><span class="author-heading"><?php _e( 'Author:', 'yttheme' ); ?></span> <?php echo get_the_author(); ?></h2>
+		<h2 class="author-title"><span class="author-heading"><?php _e( 'Author:', 'expanse' ); ?></span> <?php echo get_the_author(); ?></h2>
 
 		<p class="author-bio">
 			<?php the_author_meta( 'description' ); ?>
 			<a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
-				<?php printf( __( 'View all posts by %s', 'yttheme' ), get_the_author() ); ?>
+				<?php printf( __( 'View all posts by %s', 'expanse' ), get_the_author() ); ?>
 			</a>
 		</p><!-- .author-bio -->
 	</div><!-- .author-description -->

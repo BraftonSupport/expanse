@@ -5,7 +5,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
 get_header(); ?>
 

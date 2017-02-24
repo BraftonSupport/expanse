@@ -13,7 +13,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
 
 get_header(); ?>
@@ -46,9 +46,9 @@ get_header(); ?>
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'yttheme' ),
-				'next_text'          => __( 'Next page', 'yttheme' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'yttheme' ) . ' </span>',
+				'prev_text'          => __( 'Previous page', 'expanse' ),
+				'next_text'          => __( 'Next page', 'expanse' ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'expanse' ) . ' </span>',
 			) );
 
 		// If no content, include the "No posts found" template.

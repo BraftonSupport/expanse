@@ -4,9 +4,9 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'expanse_options' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -14,20 +14,20 @@ $options = get_option( 'yttheme_options' );
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php yttheme_excerpt(); ?>
+	<?php expanse_excerpt(); ?>
 
-	<?php yttheme_post_thumbnail('full'); ?>
+	<?php expanse_post_thumbnail('full'); ?>
 
 	<div class="entry-content">
 		<?php
 			the_content();
 
 			wp_link_pages( array(
-				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'yttheme' ) . '</span>',
+				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'expanse' ) . '</span>',
 				'after'       => '</div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
-				'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'yttheme' ) . ' </span>%',
+				'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'expanse' ) . ' </span>%',
 				'separator'   => '<span class="screen-reader-text">, </span>',
 			) );
 
@@ -38,12 +38,12 @@ $options = get_option( 'yttheme_options' );
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php yttheme_entry_meta(); ?>
+		<?php expanse_entry_meta(); ?>
 		<?php
 			edit_post_link(
 				sprintf(
 					/* translators: %s: Name of current post */
-					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'yttheme' ),
+					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'expanse' ),
 					get_the_title()
 				),
 				'<span class="edit-link">',

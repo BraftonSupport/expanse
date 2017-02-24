@@ -1,5 +1,5 @@
 /******************************************************************
-Theme Name: YVONNE IS DOING A THING
+Theme Name: Expanse
 Description: I don't know. ...I just don't know
 Author: Yvonne Tse
 Author URI: http://www.yvonnetse.com/
@@ -255,12 +255,12 @@ optgroup {
  * Default Colors
  */
  body { color: #1a1a1a; background-color: #f0f0f0; }
-.secondary, .site-footer, .site-header-menu.below, #top, .feature .inside a:hover { background: #cccccc; color: #686868; }
+.secondary, .site-footer, .site-header .below, .feature .inside a:hover { background: #cccccc; color: #686868; }
 a { color: #007acc; }
 a:hover, a:focus, a:active { color: #00b1dd; }
 
-.features.rollover .feature .inside { background: rgba(17, 85, 153, 0.35); }
-.features.rollover .feature:hover .inside { background: rgba(17, 85, 153, 0.75); }
+.rollover .feature .inside { background: rgba(17, 85, 153, 0.35); }
+.rollover .feature:hover .inside { background: rgba(17, 85, 153, 0.75); }
 
 
 /**
@@ -766,7 +766,7 @@ a:active,
 	background: #cccccc;
 	z-index: 9999999999999;
 }
-.scrolled .site-header-menu.below { clear: right; float: right;background-color: transparent; }
+.scrolled .below { clear: right; float: right;background-color: transparent; }
 .scrolled img.site-title { max-width: 120px; }
 .scrolled .site-branding { margin: 3px 0; }
 .scrolled .site-description, .scrolled .widget { display: none; }
@@ -774,26 +774,20 @@ a:active,
 .scrolled .main-navigation a { font-size: 12px; }
 .site-header-main.scrolled .menu-item-has-children > a:after { top: inherit; }
 
-.scrolled .site-header-menu.below .main-navigation.container { max-width: 100%; }
+.scrolled .below .main-navigation.container { max-width: 100%; }
 
 .scrolled .site-header-menu {
     margin: 0;
 }
 
-.site-header-menu {
-	clear: right;
-    float: right;
-	display: none;
-	margin: 1em 0 0.875em 0;
-	-webkit-flex: 0 1 100%;
-	-ms-flex: 0 1 100%;
-	flex: 0 1 100%;
-}
-
-.site-header-menu.below {
+.site-header .below {
 	float: none;
 	clear: both;
 	margin: 0;
+}
+
+.site-header-menu {
+	display: none;
 }
 
 .site-header-menu.toggled-on,
@@ -801,6 +795,9 @@ a:active,
 	clear: both;
 	display: block;
 	float:none;
+	-webkit-flex: 0 1 100%;
+    -ms-flex: 0 1 100%;
+    flex: 0 1 100%;
 }
 
 .site-header-menu aside, .site-header-menu section {
@@ -1411,8 +1408,7 @@ blockquote:after,
  */
 
 .latest .post,
-.top .container,
-.features,
+.container,
 .nav-links,
 .row {
 	display: -ms-flexbox;
@@ -1430,11 +1426,11 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
 
 .feature .wp_widget_feature { text-align: center;  min-height: 150px; background-repeat: no-repeat; }
 .feature .widget { margin-bottom: 0; }
-.features.rollover {
+.rollover {
 	height: 235px;
     overflow: hidden;
 }
-.features.rollover .wp_widget_feature {
+.rollover .wp_widget_feature {
 	height: 215px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -1447,10 +1443,10 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
     color: #fff;
 }
 
-.features.rollover .img {
+.rollover .img {
 	display: none;
 }
-.features.rollover .feature .inside {
+.rollover .feature .inside {
 	padding: 175px 15px 25px;
 	min-height: 215px;
 	-webkit-transition: all .5s ease;
@@ -1458,18 +1454,18 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
 	-o-transition: all .5s ease;
 	transition: all .5s ease;
 }
-.features.rollover .feature:hover .inside {
+.rollover .feature:hover .inside {
 	padding-top: 15px;
 }
-.features.icon .wp_widget_feature {
+.icon .wp_widget_feature {
 	background: none!important;
 }
 
-.features.icon .wp_widget_feature .img {
+.icon .wp_widget_feature .img {
 	margin: auto;
 	display: block;
 }
-.features.icon .widget-title {
+.icon .widget-title {
 	margin-top: 10px;
 }
 .feature .inside a {
@@ -1487,11 +1483,11 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
 	top: 2px;
 }
 
-.site-content .container.latest.roll {
+.site-content .latest.roll {
 	padding: 25px 0 75px 0;
 }
 
-.boxed .container.latest, .latest {
+.latest {
     padding: 25px 0;
 }
 
@@ -1722,21 +1718,8 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
  * 11.0 - Content
  */
 
-.boxed .container {
-    padding: 0 4.5455%;
-}
 
-.boxed .site-inner {background: rgba(255, 255, 255, 0.25);}
-
-.boxed .site-inner, .boxed .container,
-body.boxed .site-content {
-	max-width: 1100px;
-}
-
-.page-template-full-width article {padding: 25px 0;}
-
-.site-inner, .container,
-body:not(.no-sidebar):not(.page-template-full-width) .site-content {
+.site-inner {
 	max-width: 1320px; margin: 0 auto; clear: both;
 }
 .yes-sidebar .site-content, .site-content {
@@ -1803,11 +1786,6 @@ body:not(.no-sidebar):not(.page-template-full-width) .site-content {
 	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
 }
-.row .container {
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-}
 
 .half { width: 50%;}
 .third { width: 33%;}
@@ -1839,6 +1817,11 @@ body:not(.no-sidebar):not(.page-template-full-width) .site-content {
 .top .w2 section:first-of-type { text-align: left; }
 
 .site-header-main .widget { float: right; margin: 0; }
+.site-header-main .container { 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
 
 .site-branding {
 	margin: 1em auto 1em 0;
@@ -2026,10 +2009,6 @@ article:first-of-type .post-thumbnail {
 .post-thumbnail img {
 	display: block;
 	width: 100%;
-}
-
-.no-sidebar .post-thumbnail img {
-	margin: 0 auto;
 }
 
 a.post-thumbnail:hover,
@@ -2996,10 +2975,6 @@ p > video {
 		bottom: 0;
 	}
 
-	.site {
-		margin: 0 21px;
-	}
-
 	.fullwidth .site {
 		margin: 0;
 	}
@@ -3149,6 +3124,11 @@ p > video {
 	body:not(.search-results) .entry-summary blockquote > ol {
 		margin-left: 1.473684211em;
 	}
+	.site-header-main .container {
+    	-webkit-flex-wrap: nowrap;
+    	-ms-flex-wrap: nowrap;
+    	flex-wrap: nowrap;
+	}
 }
 
 
@@ -3289,10 +3269,6 @@ p > video {
 	.site-header .social-navigation,
 	.site-footer .main-navigation {
 		display: none;
-	}
-
-	.site-content, .boxed .container {
-		padding: 0 4.5455%;
 	}
 
 	.yes-sidebar .content-area {
@@ -3517,9 +3493,6 @@ p > video {
 		-webkit-align-items: center;
 		-ms-flex-align: center;
 		align-items: center;
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
@@ -3537,26 +3510,6 @@ p > video {
 		-webkit-order: 1;
 		-ms-flex-order: 1;
 		order: 1;
-	}
-
-	.no-sidebar .content-area {
-		float: none;
-		margin: 0;
-		width: 100%;
-	}
-
-	.no-sidebar .entry-header,
-	.no-sidebar .entry-content,
-	.no-sidebar .entry-summary,
-	.no-sidebar .entry-footer,
-	.no-sidebar .comments-area,
-	.no-sidebar .image-navigation,
-	.no-sidebar .post-navigation,
-	.no-sidebar .pagination,
-	.no-sidebar .page-header,
-	.no-sidebar .page-content {
-		margin-right: 15%;
-		margin-left: 15%;
 	}
 
 	.widecolumn {
@@ -3759,19 +3712,6 @@ p > video {
 		margin: 0 0 0.5384615385em;
 		width: 49px;
 	}
-
-	body.no-sidebar:not(.search-results) article:not(.type-page) .entry-content {
-		float: left;
-		margin-right: -100%;
-		margin-left: 34.99999999%;
-		width: 50.00000001%;
-	}
-
-	body.no-sidebar:not(.search-results) article:not(.type-page) .entry-footer {
-		margin-right: -100%;
-		margin-left: 15%;
-		width: 15%;
-	}
 }
 
 
@@ -3898,7 +3838,7 @@ p > video {
 }
 
 @media (max-width: 1375px) {
-	.site-inner, .container, body:not(.no-sidebar):not(.page-template-full-width) .site-content {
+	.site-inner {
 		max-width: 94%;
 	}
 }
@@ -3906,11 +3846,8 @@ p > video {
 @media (max-width: 768px) {
 	.top section, header section { font-size: .8em; }
 	.widget .widget-title { margin: 0 0 .5em; }
-	.features { display: block; }
-	.features .widget { margin-bottom: 0; }
-	.features.rollover { height: inherit; overflow: none; }
-	.features.rollover .feature .inside { padding: 15px; }
-	.features .textwidget img { float:left; width: 45%; padding-right: 15px; }
+	.rollover { height: inherit; overflow: none; }
+	.rollover .feature .inside { padding: 15px; }
 	.entry-content { margin: 0; }
 	.row .container {display: block; max-width: 100%;}
 	.entry-header, .entry-summary, .entry-content, .entry-footer, .page-content { margin-right: 0; margin-left: 0; }
@@ -3936,7 +3873,7 @@ p > video {
 	.latest .post a { width: 100%; margin: 0 0 2% 0; height: 200px; overflow: hidden; }
 	.latest.roll h5, .latest.roll .thumb { height: 200px; }
 	.latest.roll h5 { top: -200px; }
-	.features.rollover .wp_widget_feature { height: inherit; }
+	.rollover .wp_widget_feature { height: inherit; }
 }
 
 @media (max-width: 435px) {
@@ -4124,10 +4061,6 @@ p > video {
 	.pingback .comment-body > a {
 		box-shadow: none;
 		border-bottom: 1px solid #007acc !important; /* Make sure color schemes don't affect to print */
-	}
-
-	.site {
-		margin: 5%;
 	}
 
 	.site-inner {

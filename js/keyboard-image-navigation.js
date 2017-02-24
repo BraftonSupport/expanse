@@ -1,9 +1,9 @@
 /**
- * Yvonne's Theme keyboard support for image navigation.
+ * Expanse keyboard support for image navigation.
  */
 
 ( function( $ ) {
-	$( document ).on( 'keydown.yttheme', function( e ) {
+	$( document ).on( 'keydown.expanse', function( e ) {
 		var url = false;
 
 		// Left arrow key code.

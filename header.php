@@ -6,9 +6,9 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Expanse 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'expanse_options' );
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -22,7 +22,7 @@ $options = get_option( 'yttheme_options' );
 	<?php wp_head(); ?>
 
 <?php
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'expanse_options' );
 if ( $options['ga'] ) : ?>
 	<!-- Google Analytics -->
 		<script>
@@ -41,53 +41,48 @@ if ( $options['ga'] ) : ?>
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<div class="site-inner">
-		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'yttheme' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'expanse' ); ?></a>
 
-		<header id="masthead" class="site-header" role="banner">
-			<?php if ( is_active_sidebar( 'top' ) ) {
-				echo '<div id="top"><div class="top"><div class="container w';
-				echo get_widgets_count( 'top' );
-				echo '">';
-				dynamic_sidebar( 'top' );
-				echo '</div></div></div>';
-			} ?>
-			<div class="site-header-main">
-				<div class="container">
-					<div class="site-branding">
+	<header id="masthead" class="site-header" role="banner">
+		<?php if ( is_active_sidebar( 'top' ) ) {
+			echo '<div class="top"><div class="site-inner container">';
+			dynamic_sidebar( 'top' );
+			echo '</div></div>';
+		} ?>
+		<div class="site-header-main site-inner">
+			<div class="container">
+				<div class="site-branding">
 
-						<?php if ( get_theme_mod( 'yttheme_logo' ) ) { ?>
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-								<img src='<?php echo esc_url( get_theme_mod( 'yttheme_logo' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-title">
-							</a>
-						<?php } else {
-							if ( is_front_page() && is_home() ) { ?>
-								<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-							<?php } else { ?>
-								<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-							<?php }
-						}
+					<?php if ( get_theme_mod( 'expanse_logo' ) ) : ?>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+							<img src='<?php echo esc_url( get_theme_mod( 'expanse_logo' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-title">
+						</a>
+					<?php else :
+						if ( is_front_page() && is_home() ) : ?>
+							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+						<?php else : ?>
+							<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+						<?php endif;
+					endif;
 
-						$description = get_bloginfo( 'description', 'display' );
-						if ( $description || is_customize_preview() ) : ?>
-							<p class="site-description"><?php echo $description; ?></p>
-						<?php endif; ?>
-					</div><!-- .site-branding -->
+					$description = get_bloginfo( 'description', 'display' );
+					if ( $description || is_customize_preview() ) : ?>
+						<p class="site-description"><?php echo $description; ?></p>
+					<?php endif; ?>
+				</div><!-- .site-branding -->
 
-					<?php if ( has_nav_menu( 'primary' ) || has_nav_menu( 'social' ) ) : ?>
-						
-						<?php if ( is_active_sidebar( 'header' ) ) {
-							dynamic_sidebar( 'header' );
-						} ?>
+				<?php if ( has_nav_menu( 'primary' ) || has_nav_menu( 'social' ) ) : ?>
+					<?php if ( is_active_sidebar( 'header' ) ) :
+						dynamic_sidebar( 'header' );
+					endif; ?>
+					<button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'expanse' ); ?></button>
 
-						<button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'yttheme' ); ?></button>
+					<?php if ($options['nav'] == 'below') { echo '</div><!-- .container --></div><!-- .site-header-main --><div class="below">'; } ?>
 
-				<?php if ($options['nav'] == 'below') { echo "</div>"; } ?>
-
-						<div id="site-header-menu" class="site-header-menu<?php if ($options['nav'] == 'below') { echo " below"; } ?>">
+						<div id="site-header-menu" class="site-header-menu<?php if ($options['nav'] == 'below') { echo " site-inner"; } ?>">
 
 							<?php if ( has_nav_menu( 'social' ) ) : ?>
-								<nav id="social-navigation" class="social-navigation<?php if ($options['nav'] == 'below') { echo " container"; } ?>" role="navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'yttheme' ); ?>">
+								<nav id="social-navigation" class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'expanse' ); ?>">
 									<?php
 										wp_nav_menu( array(
 											'theme_location' => 'social',
@@ -101,7 +96,7 @@ if ( $options['ga'] ) : ?>
 							<?php endif; ?>
 
 							<?php if ( has_nav_menu( 'primary' ) ) : ?>
-								<nav id="site-navigation" class="main-navigation<?php if ($options['nav'] == 'below') { echo " container"; } ?>" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'yttheme' ); ?>">
+								<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'expanse' ); ?>">
 									<?php
 										wp_nav_menu( array(
 											'theme_location' => 'primary',
@@ -112,26 +107,24 @@ if ( $options['ga'] ) : ?>
 							<?php endif; ?>
 						</div><!-- .site-header-menu -->
 					<?php endif; ?>
-				<?php if ($options['nav'] == 'next') { echo '</div><br class="clear"/>'; } ?>
-			</div><!-- .site-header-main -->
+				<?php if ($options['nav'] == 'next') { echo '<br class="clear"/>'; } ?>
+			</div><!-- .container -->
 
-			<?php if ( get_header_image() && is_front_page() ) : ?>
-				<?php
-					$custom_header_sizes = apply_filters( 'yttheme_custom_header_sizes', '(max-width: 709px) 85vw, (max-width: 909px) 81vw, (max-width: 1362px) 88vw, 1200px' );
-				?>
-				<div class="header-image" style="background-image: url(<?php header_image(); ?>)"></div>
-			<?php elseif ( is_page() && has_post_thumbnail() && !is_page_template('contact.php') ) : 
+			<?php if ( get_header_image() && is_front_page() ) :
+				$custom_header_sizes = apply_filters( 'expanse_custom_header_sizes', '(max-width: 709px) 85vw, (max-width: 909px) 81vw, (max-width: 1362px) 88vw, 1200px' ); ?>
+				<div class="header-image" style="background-image: url(<?php header_image(); ?>)">
+					<?php the_title( '<h1>', '</h1>' ); ?>
+				</div>
+			<?php elseif ( is_page() && has_post_thumbnail() && !is_page_template('contact.php') ) :
 				$url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
 				<div class="header-image" style="background-image: url(<?php echo $url; ?>)">
-					<?php if (get_post(get_post_thumbnail_id())->post_content) :
-						echo get_post(get_post_thumbnail_id())->post_content;
-					else :
-						the_title( '<h1>', '</h1>' );
-					endif; ?>
+					<?php the_title( '<h1>', '</h1>' ); ?>
 				</div>
 			<?php elseif ( is_page_template('contact.php') ) : ?>
 				<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d11793.352744614434!2d-71.055708!3d42.3566315!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1462392769721" width="100%" height="350" frameborder="0" style="border:0;pointer-events: none;" allowfullscreen></iframe>
-			<?php endif; // End header image check. ?>
-		</header><!-- .site-header -->
+			<?php endif; // End header image check.  ?>
+		</div><!-- .site-header-main -->
 
-		<div id="content" class="site-content">
+	</header><!-- .site-header -->
+
+	<div id="content" class="site-content site-inner">

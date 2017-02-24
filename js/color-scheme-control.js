@@ -5,7 +5,7 @@
  */
 
 ( function( api ) {
-	var cssTemplate = wp.template( 'yttheme-color-scheme' ),
+	var cssTemplate = wp.template( 'expanse-color-scheme' ),
 		colorSchemeKeys = [
 			'background_color',
 			'secondary_background_color',

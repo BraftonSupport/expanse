@@ -1,5 +1,5 @@
 /*
-Theme Name: Yvonne's Theme
+Theme Name: Expanse
 Description: Adds support for languages written in a Right To Left (RTL) direction.
 It's easy, just a matter of overwriting all the horizontal positioning attributes
 of your CSS stylesheet in a separate stylesheet file named rtl.css.
@@ -625,25 +625,6 @@ body:not(.search-results) .entry-summary .alignleft {
 		margin: 0.538461538em 0 0.538461538em auto;
 	}
 
-	.no-sidebar .entry-header,
-	.no-sidebar .entry-content,
-	.no-sidebar .entry-summary,
-	.no-sidebar .entry-footer,
-	.no-sidebar .comments-area,
-	.no-sidebar .image-navigation,
-	.no-sidebar .post-navigation,
-	.no-sidebar .pagination,
-	.no-sidebar .page-header,
-	.no-sidebar .page-content {
-		margin-right: 15%;
-		margin-left: 15%;
-	}
-
-	.no-sidebar .post-thumbnail {
-		margin-right: 0;
-		margin-left: 0;
-	}
-
 	.widecolumn {
 		padding-right: 15%;
 		padding-left: 15%;
@@ -682,17 +663,6 @@ body:not(.search-results) .entry-summary .alignleft {
 
 	body:not(.search-results) article:not(.type-page) .entry-footer {
 		float: right;
-	}
-
-	body.no-sidebar:not(.search-results) article:not(.type-page) .entry-content {
-		float: right;
-		margin-right: 34.99999999%;
-		margin-left: -100%;
-	}
-
-	body.no-sidebar:not(.search-results) article:not(.type-page) .entry-footer {
-		margin-right: 15%;
-		margin-left: -100%;
 	}
 }
 
