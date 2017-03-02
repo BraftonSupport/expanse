@@ -465,6 +465,7 @@ function expanse_get_color_scheme_css( $colors ) {
 
 	mark,
 	ins,
+	.button,
 	button,
 	button[disabled]:hover,
 	button[disabled]:focus,
@@ -535,6 +536,7 @@ function expanse_get_color_scheme_css( $colors ) {
 
 	mark,
 	ins,
+	.button,
 	button,
 	button[disabled]:hover,
 	button[disabled]:focus,
@@ -634,9 +636,20 @@ function expanse_get_color_scheme_css( $colors ) {
 		color: {$colors['link_hover_color']};
 	}
 
+	.button:hover,
+	button:hover,
+	button:focus,
+	input[type="button"]:hover,
+	input[type="button"]:focus,
+	input[type="reset"]:hover,
+	input[type="reset"]:focus,
+	input[type="submit"]:hover,
+	input[type="submit"]:focus {
+		background: {$colors['link_hover_color']};
+	}
+
 	/* Main Text Color */
 	body,
-	button,
 	input,
 	textarea,
 	blockquote cite,
@@ -665,14 +678,6 @@ function expanse_get_color_scheme_css( $colors ) {
 		border-color: {$colors['main_text_color']};
 	}
 
-	button:hover,
-	button:focus,
-	input[type="button"]:hover,
-	input[type="button"]:focus,
-	input[type="reset"]:hover,
-	input[type="reset"]:focus,
-	input[type="submit"]:hover,
-	input[type="submit"]:focus,
 	.pagination:before,
 	.pagination:after,
 	.pagination .prev,
@@ -892,6 +897,7 @@ function expanse_link_color_css() {
 
 		mark,
 		ins,
+		.button,
 		button,
 		button[disabled]:hover,
 		button[disabled]:focus,
@@ -1017,6 +1023,7 @@ function expanse_link_hover_color_css() {
 
 		mark,
 		ins,
+		.button:hover,
 		button:hover,
 		button:focus,
 		input[type="button"]:hover,
@@ -1107,6 +1114,7 @@ function expanse_main_text_color_css() {
 			border-color: %1$s;
 		}
 
+		.button:hover,
 		button:hover,
 		button:focus,
 		input[type="button"]:hover,

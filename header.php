@@ -110,12 +110,7 @@ if ( $options['ga'] ) : ?>
 				<?php if ($options['nav'] == 'next') { echo '<br class="clear"/>'; } ?>
 			</div><!-- .container -->
 
-			<?php if ( get_header_image() && is_front_page() ) :
-				$custom_header_sizes = apply_filters( 'expanse_custom_header_sizes', '(max-width: 709px) 85vw, (max-width: 909px) 81vw, (max-width: 1362px) 88vw, 1200px' ); ?>
-				<div class="header-image" style="background-image: url(<?php header_image(); ?>)">
-					<?php the_title( '<h1>', '</h1>' ); ?>
-				</div>
-			<?php elseif ( is_page() && has_post_thumbnail() && !is_page_template('contact.php') ) :
+			<?php if ( is_page() && has_post_thumbnail() && !is_page_template('contact.php') && !is_page_template('full-width.php') ) :
 				$url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
 				<div class="header-image" style="background-image: url(<?php echo $url; ?>)">
 					<?php the_title( '<h1>', '</h1>' ); ?>

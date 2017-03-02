@@ -41,7 +41,7 @@ function row_shortcode( $atts , $content = null ) {
 		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
 			$html.= '"';
 		}
-		$html.= '><div class="site-inner">' . do_shortcode($content) . '</div></div>';
+		$html.= '><div class="container site-inner">' . do_shortcode($content) . '</div></div>';
 	return $html;
 }
 
@@ -180,8 +180,8 @@ function expanse_get_image_id($image_url) {
 
 function expanse_scripts() {
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'js', get_stylesheet_directory_uri(). '/js/js.js', array(), '1.0.0', true );
-	wp_enqueue_style( 'css', get_stylesheet_directory_uri().'/inc/css.css' );
+	wp_enqueue_script( 'js', get_template_directory_uri(). '/js/js.js', array(), '1.0.0', true );
+	wp_enqueue_style( 'css', get_template_directory_uri().'/inc/css.css' );
 }
 add_action( 'admin_init', 'expanse_scripts' );
 
@@ -357,7 +357,7 @@ function expanse_default_options() {
 			$html .= '<option value="next"' . selected( $options['nav'], 'next', false) . '>' . __( 'Next to the Logo (75%)', 'expanse' ) . '</option>';
 			$html .= '<option value="below"' . selected( $options['nav'], 'below', false) . '>' . __( 'Below (100%)', 'expanse' ) . '</option>';
 			$html .= '</select>';
-			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/next.png"></div>';
+			$html .= '<div class="floatimg"><img src="'. get_template_directory_uri() .'/inc/img/next.png"></div>';
 		echo $html;
 	}
 	
@@ -393,7 +393,7 @@ function expanse_default_options() {
 			$html .= '<option value="icon"' . selected( $options['featured_style'], 'icon', false) . '>' . __( 'Title + icon / Text', 'expanse' ) . '</option>';
 			$html .= '<option value="rollover"' . selected( $options['featured_style'], 'rollover', false) . '>' . __( 'Image bg, title, text rollover', 'expanse' ) . '</option>';
 			$html .= '</select>';
-			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/featured.png"></div>';
+			$html .= '<div class="floatimg"><img src="'. get_template_directory_uri() .'/inc/img/featured.png"></div>';
 		echo $html;
 	}
 
@@ -415,7 +415,7 @@ function expanse_default_options() {
 			$html .= '<option value="yes"' . selected( $options['latest_post'], 'yes', false) . '>' . __( 'Show', 'expanse' ) . '</option>';
 			$html .= '<option value="no"' . selected( $options['latest_post'], 'no', false) . '>' . __( 'I\'ll put it elsewhere' , 'expanse' ) . '</option>';
 			$html .= '</select>';
-			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/hoh.png"></div>';
+			$html .= '<div class="floatimg"><img src="'. get_template_directory_uri() .'/inc/img/hoh.png"></div>';
 		echo $html;
 	}
 
