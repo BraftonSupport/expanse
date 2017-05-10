@@ -35,10 +35,10 @@ function row_shortcode( $atts , $content = null ) {
 			if ( !empty( $a['bg-image'] ) ) {
 				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
-			if ( !empty( $a['padding'] ) ) {
+			if ( !empty( $a['padding'] || $a['padding'] == '0' ) ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
 			}
-		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= '"';
 		}
 		$html.= '><div class="container site-inner">' . do_shortcode($content) . '</div></div>';
@@ -53,7 +53,7 @@ function half_shortcode( $atts , $content = null ) {
 		} else {
 			$html.= '"';
 		}
-		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= ' style="';
 		}
 			if ( !empty( $a['bg-color'] ) ) {
@@ -65,10 +65,10 @@ function half_shortcode( $atts , $content = null ) {
 			if ( !empty( $a['bg-image'] ) ) {
 				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
-			if ( !empty( $a['padding'] ) ) {
+			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
 			}
-		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= '"';
 		}
 		$html.= '>' . do_shortcode($content) . '</div>';
@@ -83,7 +83,7 @@ function third_shortcode( $atts , $content = null ) {
 		} else {
 			$html.= '"';
 		}
-		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= ' style="';
 		}
 			if ( !empty( $a['bg-color'] ) ) {
@@ -95,10 +95,10 @@ function third_shortcode( $atts , $content = null ) {
 			if ( !empty( $a['bg-image'] ) ) {
 				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
-			if ( !empty( $a['padding'] ) ) {
+			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
 			}
-		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= '"';
 		}
 		$html.= '>' . do_shortcode($content) . '</div>';
@@ -113,7 +113,7 @@ function fourth_shortcode( $atts , $content = null ) {
 		} else {
 			$html.= '"';
 		}
-		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= ' style="';
 		}
 			if ( !empty( $a['bg-color'] ) ) {
@@ -125,10 +125,10 @@ function fourth_shortcode( $atts , $content = null ) {
 			if ( !empty( $a['bg-image'] ) ) {
 				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
-			if ( !empty( $a['padding'] ) ) {
+			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
 			}
-		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 			$html.= '"';
 		}
 		$html.= '>' . do_shortcode($content) . '</div>';
@@ -328,6 +328,7 @@ function expanse_default_options() {
 		'es_blog'			=>	'',
 		'es_contact'		=>	'',
 		'es_above'			=>	'',
+		'es_header'			=>	'',
 		'es_features'		=>	'',
 		'es_footer'			=>	''
 
@@ -519,7 +520,7 @@ function expanse_default_options() {
 
 		$above = $options['es_above'];
 			$html .= ' <input type="checkbox" id="es_above" name="expanse_options[es_above]"';
-			if ($contact) {
+			if ($above) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Above the Header &nbsp; &nbsp; &nbsp;';

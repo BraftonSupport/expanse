@@ -293,14 +293,17 @@ function expanse_body_classes( $classes ) {
 	}
 
 	// Adds a class of sidebar to sites without active sidebar.
-	if ( is_front_page() && is_active_sidebar( 'home-sidebar' ) ) {
-		$classes[] = 'yes-sidebar';
+	if ( is_page_template('contact.php') && is_active_sidebar('contact-sidebar') ) {
+		$classes[] = 'has-sidebar';
 	}
-	if ( !is_front_page() && is_page() && is_active_sidebar( 'pages-sidebar' ) ) {
-		$classes[] = 'yes-sidebar';
+	if ( is_front_page() && is_active_sidebar('home-sidebar') ) {
+		$classes[] = 'has-sidebar';
 	}
-	if ( !is_front_page() && !is_page() && is_active_sidebar( 'blog-sidebar' ) ) {
-		$classes[] = 'yes-sidebar';
+	if ( !is_front_page() && !is_page_template('contact.php') && is_page() && is_active_sidebar('pages-sidebar') ) {
+		$classes[] = 'has-sidebar';
+	}
+	if ( !is_page() && is_active_sidebar('blog-sidebar') ) {
+		$classes[] = 'has-sidebar';
 	}
 
 	// Adds a class of hfeed to non-singular pages.

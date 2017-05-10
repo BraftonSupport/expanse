@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Contact Page
- * Description: Page template without sidebar
+ * Description: Contact Page template
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen

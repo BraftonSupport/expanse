@@ -30,7 +30,7 @@ endif; ?>
 		<?php
 		// Start the loop.
 		while ( have_posts() ) : the_post();
-
+			if ( !is_front_page() ){ the_title( '<h1>', '</h1>' ); }
 			// Include the page content template.
 			get_template_part( 'template-parts/content', 'page' );
 

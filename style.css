@@ -775,6 +775,7 @@ a:active,
 }
 .scrolled .below { clear: right; float: right;background-color: transparent; }
 .scrolled img.site-title { max-width: 120px; }
+.scrolled .site-title { display: block; }
 .scrolled .site-branding { margin: 3px 0; }
 .scrolled .site-description, .scrolled .widget { display: none; }
 .scrolled .main-navigation .menu-main-menu-container { margin-top: 6px; }
@@ -786,6 +787,8 @@ a:active,
 .scrolled .site-header-menu {
     margin: 0;
 }
+
+.site-icon { display: none; }
 
 .site-header .below {
 	float: none;
@@ -805,6 +808,12 @@ a:active,
 	-webkit-flex: 0 1 100%;
     -ms-flex: 0 1 100%;
     flex: 0 1 100%;
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    left: 0;
+    padding: 10px;
+    margin-top: 40px;
 }
 
 .site-header-menu aside, .site-header-menu section {
@@ -887,13 +896,12 @@ a:active,
 }
 
 .dropdown-toggle:after {
-	border: 0 solid #d1d1d1;
-	border-left-width: 1px;
 	content: "\f431";
 	font-size: 24px;
-	left: 1px;
 	position: relative;
 	width: 36px;
+	left: -8px;
+    top: -8px;
 }
 
 .dropdown-toggle:hover,
@@ -1116,6 +1124,7 @@ a:active,
 }
 
 .pagination {
+	clear: both;
 	border-top: 2px solid #1a1a1a;
 	font-size: 19px;
 	font-size: 1.1875rem;
@@ -1499,7 +1508,12 @@ aside, section {
     margin: 15px 0;
 }
 
-.sidebar .latest a { display: block; margin-bottom: 15px; }
+.sidebar .latest a {
+	display: block;
+	margin-bottom: 15px;
+	overflow: hidden;
+	clear: both;
+}
 .sidebar .latest.roll a {
 	overflow: hidden;
 	height: 150px;
@@ -1724,9 +1738,15 @@ aside, section {
 
 
 .site-inner {
-	max-width: 1244px; margin: 0 auto; clear: both;
+	width: 90%; max-width: 1000px; margin: 0 auto; clear: both;
+	position: relative;
 }
-.yes-sidebar .site-content, .site-content {
+
+.site-inner .site-inner {
+	max-width: 100%; width: 100%;
+}
+
+.has-sidebar .site-content, .site-content {
 	margin: 50px auto 0;
 }
 
@@ -1735,7 +1755,7 @@ aside, section {
 	padding: 0;
 	max-width: inherit;
 }
-.page-template-full-width .content-area, .page-template-full-width.yes-sidebar .content-area {
+.page-template-full-width .content-area, .page-template-full-width.has-sidebar .content-area {
 	width: 100%;
 	float: none;
 }
@@ -1750,12 +1770,8 @@ aside, section {
 	margin: 0 2em 1.75em 4em;
 }
 
-.yes-sidebar:not(.page-template-full-width) .content-area .has-post-thumbnail {
+.page.has-sidebar:not(.page-template-full-width) .content-area .has-post-thumbnail {
 	margin-top: 15px;
-}
-
-.site-inner {
-	position: relative;
 }
 
 .site-content {
@@ -1797,6 +1813,17 @@ aside, section {
 	flex-wrap: wrap;
 }
 
+.aligntop .container {
+	align-items: flex-start;
+	-webkit-align-items: flex-start;
+	-ms-flex-align: flex-start;
+}
+
+.center * {
+	text-align: center;
+	margin: auto;
+}
+
 .half {
 	width: 49%;
 }
@@ -1812,6 +1839,11 @@ aside, section {
 }
 .half:last-child, .third:last-child, .fourth:last-child {
 	margin-right: 0;
+}
+
+.half > *, .third >* , .fourth > * {
+	padding-right: 15px;
+	padding-left: 15px;
 }
 
 /* Do not show the outline on the skip link target. */
@@ -1838,13 +1870,14 @@ aside, section {
 .top ul li { display: inline; margin: 0 2px; }
 .top .w2 section:first-of-type { text-align: left; }
 
-.site-header-main .widget { float: right; margin: 0; }
 .site-header-main .container { 
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-
+.site-branding, .site-header-main .next {
+	margin: auto;
+}
 .site-branding {
 	margin: 1em auto 1em 0;
 	float: left;
@@ -1936,7 +1969,6 @@ img.site-title {
 	clear: both;
 	margin: 0;
 	font-size: 1.5em;
-	text-shadow: 0 0 20px #000;
 	display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -2113,7 +2145,7 @@ a.post-thumbnail:focus {
 h1, h2, h3, h4, h5, h6{
 	font-weight: 700;
 	text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .entry-content h1:first-child,
@@ -2423,6 +2455,25 @@ body.search-no-results .page-header {
 .page-template-contact input[type="submit"] {
 	float: right;
 }
+
+.page .entry-footer {
+	clear: both;
+	text-align: center;
+}
+
+/* Blog Format Types*/
+
+article:not(.hero):not(:first-of-type) {
+	width: 48%;
+	float: left;
+	margin-right: 2%;
+	min-height: 450px;
+}
+
+article:not(.hero):nth-of-type(2n+1) {
+	margin-right: 0;
+}
+
 
 /**
  * 11.3 - Post Formats
@@ -2980,6 +3031,19 @@ p > video {
 
 
 /**
+ * 14.01 - >= 710px
+ */
+
+@media screen and (min-width: 40em) {
+	.site-branding {
+		margin: auto auto 1em 0;
+	}
+	.site-header-main .next {
+		margin:0;
+	}
+}
+
+/**
  * 14.1 - >= 710px
  */
 
@@ -3158,8 +3222,20 @@ p > video {
 	body:not(.custom-background-image).admin-bar:before {
 		top: 32px;
 	}
-}
+	.site-header-menu.toggled-on,
+	.no-js .site-header-menu {
+		-webkit-flex: 1 0 0;
+	    -ms-flex: 1 0 0;
+	    flex: 1 0 0;
+	}
 
+	.dropdown-toggle:after {
+		border: 0 solid #d1d1d1;
+		border-left-width: 1px;
+		left: 1px;
+		top: inherit;
+	}
+}
 
 /**
  * 14.3 - >= 910px
@@ -3257,7 +3333,7 @@ p > video {
 	}
 
 	.main-navigation .menu-item-has-children > a {
-		margin: 0;
+		margin: 0 0 15px 0;
 		padding-right: 2.25em;
 	}
 
@@ -3289,7 +3365,7 @@ p > video {
 		display: none;
 	}
 
-	.yes-sidebar .content-area {
+	.has-sidebar .content-area {
 		float: left;
 		margin-right: -100%;
 		width: 70%;
@@ -3325,7 +3401,7 @@ p > video {
 		font-size: 0.8125rem;
 		line-height: 1.6153846154;
 		margin-bottom: 3.230769231em;
-		padding-top: 1.615384615em;
+		padding-top: 1.25em;
 	}
 
 	.widget .widget-title {
@@ -3563,7 +3639,7 @@ p > video {
 	}
 
 	.site-main > article {
-		margin-bottom: 7.0em;
+		margin-bottom: 3.0em;
 	}
 
 	.entry-title {
@@ -3652,7 +3728,7 @@ p > video {
 
 	.comment-list + .comment-respond,
 	.comment-navigation + .comment-respond {
-		padding-top: 5.25em;
+		padding-top: 2.25em;
 	}
 
 	.comments-area,
@@ -3738,6 +3814,8 @@ p > video {
  */
 
 @media screen and (min-width: 75em) {
+	.site-inner { width: inherit; }
+
 	body:not(.search-results) .entry-summary {
 		font-size: 23px;
 		font-size: 1.4375rem;
@@ -3852,12 +3930,6 @@ p > video {
 
 	body:not(.search-results) .entry-summary .aligncenter {
 		margin-bottom: 1.5217391304em;
-	}
-}
-
-@media (max-width: 1375px) {
-	.site-inner {
-		max-width: 90%;
 	}
 }
 

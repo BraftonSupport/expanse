@@ -6,14 +6,14 @@
  * @subpackage Twenty_Sixteen
  * @since Expanse 1.0
  */
+$options = get_option( 'expanse_options' );
+$blog = $options['blog_layout'];
+$thumbnail = get_the_post_thumbnail_url();
 ?>
+<article id="post-<?php the_ID(); ?>"<?php post_class($blog); if ($blog=="rich") { ?> style="background-image: url(<?php echo $thumbnail; ?>);"<?php } ?>>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<?php if ($blog!=="rich") { expanse_post_thumbnail(); } ?>
 
-	<?php expanse_excerpt(); ?>
-
-	<?php expanse_post_thumbnail(); ?>
-	
 	<header class="entry-header">
 		<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
 			<span class="sticky-post"><?php _e( 'Featured', 'expanse' ); ?></span>
@@ -40,7 +40,7 @@
 	<div class="entry-content">
 		<?php
 			/* translators: %s: Name of current post */
-			the_content( sprintf(
+			the_excerpt( sprintf(
 				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'expanse' ),
 				get_the_title()
 			) );

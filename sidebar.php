@@ -9,7 +9,7 @@
 $options = get_option( 'expanse_options' );
 ?>
 
-<?php if (is_page_template('contact.php') ) {
+<?php if (is_page_template('contact.php') && is_active_sidebar('contact-sidebar') ) {
 	echo '<aside id="secondary" class="sidebar widget-area" role="complementary">';
 	dynamic_sidebar( 'contact-sidebar' );
 	echo '</aside><!-- .sidebar .widget-area -->';
@@ -17,7 +17,7 @@ $options = get_option( 'expanse_options' );
 	echo '<aside id="secondary" class="sidebar widget-area" role="complementary">';
 	dynamic_sidebar( 'home-sidebar' );
 	echo '</aside><!-- .sidebar .widget-area -->';
-} else if (!is_front_page() && is_page() && is_active_sidebar('pages-sidebar')) {
+} else if (!is_front_page() && !is_page_template('contact.php') && is_page() && is_active_sidebar('pages-sidebar')) {
 	echo '<aside id="secondary" class="sidebar widget-area" role="complementary">';
 	dynamic_sidebar( 'pages-sidebar' );
 	echo '</aside><!-- .sidebar .widget-area -->';

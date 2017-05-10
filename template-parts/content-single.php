@@ -14,8 +14,6 @@ $options = get_option( 'expanse_options' );
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php expanse_excerpt(); ?>
-
 	<?php expanse_post_thumbnail('full'); ?>
 
 	<div class="entry-content">

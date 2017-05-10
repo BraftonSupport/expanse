@@ -17,7 +17,7 @@
 function expanse_custom_header_and_background() {
 	$color_scheme             = expanse_get_color_scheme();
 	$default_background_color = trim( $color_scheme[0], '#' );
-	$default_text_color       = trim( $color_scheme[4], '#' );
+	$default_text_color       = trim( $color_scheme[1], '#' );
 
 	/**
 	 * Filter the arguments used when adding 'custom-background' support in Expanse.
@@ -121,15 +121,15 @@ function expanse_customize_register( $wp_customize ) {
 		'priority' => 1,
 	) );
 
-	// Add page background color setting and control.
-	$wp_customize->add_setting( 'secondary_background_color', array(
+	// Add main text color setting and control.
+	$wp_customize->add_setting( 'main_text_color', array(
 		'default'           => $color_scheme[1],
 		'sanitize_callback' => 'sanitize_hex_color',
 		'transport'         => 'postMessage',
 	) );
 
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'secondary_background_color', array(
-		'label'       => __( 'Secondary Background Color', 'expanse' ),
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_text_color', array(
+		'label'       => __( 'Main Text Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 
@@ -160,15 +160,15 @@ function expanse_customize_register( $wp_customize ) {
 		'section'     => 'colors',
 	) ) );
 
-	// Add main text color setting and control.
-	$wp_customize->add_setting( 'main_text_color', array(
+	// Add secondary background color setting and control.
+	$wp_customize->add_setting( 'secondary_background_color', array(
 		'default'           => $color_scheme[4],
 		'sanitize_callback' => 'sanitize_hex_color',
 		'transport'         => 'postMessage',
 	) );
 
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_text_color', array(
-		'label'       => __( 'Main Text Color', 'expanse' ),
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'secondary_background_color', array(
+		'label'       => __( 'Secondary Background Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
 
@@ -183,6 +183,31 @@ function expanse_customize_register( $wp_customize ) {
 		'label'       => __( 'Secondary Text Color', 'expanse' ),
 		'section'     => 'colors',
 	) ) );
+
+	// Add 2nd link color setting and control.
+	$wp_customize->add_setting( 'secondary_link_color', array(
+		'default'           => $color_scheme[6],
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'secondary_link_color', array(
+		'label'       => __( 'Secondary Link Color', 'expanse' ),
+		'section'     => 'colors',
+	) ) );
+
+	// Add link hover color setting and control.
+	$wp_customize->add_setting( 'secondary_link_hover_color', array(
+		'default'           => $color_scheme[7],
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'secondary_link_hover_color', array(
+		'label'       => __( 'Secondary Link Hover Color', 'expanse' ),
+		'section'     => 'colors',
+	) ) );
+
 }
 add_action( 'customize_register', 'expanse_customize_register', 11 );
 
@@ -193,11 +218,13 @@ add_action( 'customize_register', 'expanse_customize_register', 11 );
  *
  * The order of colors in a colors array:
  * 1. Main Background Color.
- * 2. Page Background Color.
- * 3. Link Color.
- * 4. Link Hover Color.
- * 5. Main Text Color.
+ * 2. Main Text Color.
+ * 3. Main Link Color.
+ * 4. Main Link Hover Color.
+ * 5. Secondary Background Color.
  * 6. Secondary Text Color.
+ * 7. Secondary Link Color.
+ * 8. Secondary Link Hover Color.
  *
  * @since Expanse 1.0
  *
@@ -229,55 +256,65 @@ function expanse_get_color_schemes() {
 			'label'  => __( 'Default', 'expanse' ),
 			'colors' => array(
 				'#f0f0f0',
-				'#cccccc',
+				'#777777',
 				'#007acc',
 				'#00b1dd',
-				'#1a1a1a',
-				'#686868',
+				'#cccccc',
+				'#555555',
+				'#00468c',
+				'#000000',
 			),
 		),
 		'dark' => array(
 			'label'  => __( 'Dark', 'expanse' ),
 			'colors' => array(
 				'#222222',
+				'#cccccc',
+				'#aa7252',
+				'#ce8133',
 				'#111111',
-				'#bc825c',
-				'#eabb8c',
-				'#bababa',
-				'#999999',
+				'#aaaaaa',
+				'#ad632b',
+				'#ce8133',
 			),
 		),
 		'gray' => array(
 			'label'  => __( 'Gray', 'expanse' ),
 			'colors' => array(
-				'#616a73',
-				'#4d545c',
-				'#bdd6ad',
+				'#dbe0e4',
+				'#555555',
+				'#87ad73',
 				'#66ddff',
-				'#f5f5f5',
-				'#f0f0f0',
+				'#4d545c',
+				'#ffffff',
+				'#92d2e5',
+				'#b9e5a5',
 			),
 		),
 		'red' => array(
 			'label'  => __( 'Red', 'expanse' ),
 			'colors' => array(
-				'#dddddd',
-				'#dd3838',
-				'#000000',
-				'#ff8c8c',
+				'#eeeeee',
 				'#770000',
-				'#ffbbbb',
+				'#000000',
+				'#ff6161',
+				'#660000',
+				'#ffeeee',
+				'#ff8484',
+				'#b1b1b1',
 			),
 		),
 		'blue' => array(
 			'label'  => __( 'Blue', 'expanse' ),
 			'colors' => array(
-				'#bbddee',
+				'#cceeff',
+				'#555555',
+				'#00a9ff',
+				'#145271',
 				'#005791',
-				'#42c0ff',
-				'#87a6c1',
-				'#333333',
 				'#ffffff',
+				'#00a9ff',
+				'#a2a2a2',
 			),
 		),
 	) );
@@ -370,8 +407,8 @@ function expanse_color_scheme_css() {
 	$color_scheme = expanse_get_color_scheme();
 
 	// Convert main text hex color to rgba.
-	$color_textcolor_rgb = expanse_hex2rgb( $color_scheme[4] );
-	$color_linkcolor_rgb = expanse_hex2rgb( $color_scheme[2] );
+	$color_textcolor_rgb = expanse_hex2rgb( $color_scheme[1] ); //hey
+	$color_linkcolor_rgb = expanse_hex2rgb( $color_scheme[2] ); //hey
 
 	// If the rgba values are empty return early.
 	if ( empty( $color_textcolor_rgb ) || empty( $color_linkcolor_rgb ) ) {
@@ -380,16 +417,17 @@ function expanse_color_scheme_css() {
 
 	// If we get this far, we have a custom color scheme.
 	$colors = array(
-		'background_color'      => $color_scheme[0],
-		'secondary_background_color' => $color_scheme[1],
-		'link_color'            => $color_scheme[2],
-		'link_hover_color'      => $color_scheme[3],
-		'main_text_color'       => $color_scheme[4],
-		'secondary_text_color'  => $color_scheme[5],
-		'border_color'          => vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.2)', $color_textcolor_rgb ),
-		'secondlink_color'      => vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.35)', $color_linkcolor_rgb ),
-		'secondlink_hover_color'=> vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.75)', $color_linkcolor_rgb ),
-
+		'background_color'		=> $color_scheme[0],
+		'main_text_color'		=> $color_scheme[1],
+		'link_color'			=> $color_scheme[2],
+		'link_hover_color'		=> $color_scheme[3],
+		'secondary_background_color' => $color_scheme[4],
+		'secondary_text_color'	=> $color_scheme[5],
+		'secondary_link_color'	=> $color_scheme[6],
+		'secondary_link_hover_color' => $color_scheme[7],
+		'border_color'          => vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.2)', $color_textcolor_rgb ), //hey
+		'secondlink_color'      => vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.35)', $color_linkcolor_rgb ), //hey
+		'secondlink_hover_color'=> vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.75)', $color_linkcolor_rgb ), //hey
 	);
 
 	$color_scheme_css = expanse_get_color_scheme_css( $colors );
@@ -432,78 +470,61 @@ add_action( 'customize_preview_init', 'expanse_customize_preview_js' );
 
 function expanse_get_color_scheme_css( $colors ) {
 	$colors = wp_parse_args( $colors, array(
-		'background_color'      => '',
-		'secondary_background_color' => '',
-		'link_color'            => '',
-		'link_hover_color'      => '',
-		'main_text_color'       => '',
+		'background_color'		=> '',
+		'main_text_color'		=> '',
+		'link_color'			=> '',
+		'link_hover_color'		=> '',
+		'secondary_background_color'	=> '',
 		'secondary_text_color'  => '',
-		'border_color'          => '',
-		'secondlink_color'      => '',
-		'secondlink_hover_color'      => '',
+		'secondary_link_color'	=> '',
+		'secondary_link_hover_color'	=> '',
+		'border_color'			=> '',
+		'secondlink_color'		=> '',
+		'secondlink_hover_color'	=> '',
 	) );
 
 	return <<<CSS
 	/* Color Scheme */
 
 	/* Background Color */
-	body {
+	body, .site-header, .site-header-main, .site-header-menu.toggled-on {
 		background-color: {$colors['background_color']};
 	}
 
 	/* Secondary Background Color */
 	body:not(.search-results) .entry-summary,
-	.site-header-main.scrolled,
+	.site-header.scrolled,
+	header .top,
 	.secondary,
 	.site-footer,
-	.site-header-menu.below,
-	.top,
-	.feature .inside a:hover {
+	.simple .entry-footer,
+	body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer,
+	.site-header-menu.below {
 		background-color: {$colors['secondary_background_color']};
 		color: {$colors['secondary_text_color']};
 	}
 
 	mark,
 	ins,
-	.button,
-	button,
-	button[disabled]:hover,
-	button[disabled]:focus,
-	input[type="button"],
-	input[type="button"][disabled]:hover,
-	input[type="button"][disabled]:focus,
-	input[type="reset"],
-	input[type="reset"][disabled]:hover,
-	input[type="reset"][disabled]:focus,
-	input[type="submit"],
-	input[type="submit"][disabled]:hover,
-	input[type="submit"][disabled]:focus,
 	.menu-toggle.toggled-on,
 	.menu-toggle.toggled-on:hover,
 	.menu-toggle.toggled-on:focus,
-	.pagination .prev,
-	.pagination .next,
-	.pagination .prev:hover,
-	.pagination .prev:focus,
-	.pagination .next:hover,
-	.pagination .next:focus,
-	.pagination .nav-links:before,
-	.pagination .nav-links:after,
 	.widget_calendar tbody a,
 	.widget_calendar tbody a:hover,
 	.widget_calendar tbody a:focus,
 	.page-links a,
 	.page-links a:hover,
-	.page-links a:focus {
+	.page-links a:focus,
+	.simple .entry-header {
 		color: {$colors['secondary_background_color']};
 	}
 
 	/* Link Color */
 
-	.latest.roll h5, .features.rollover .feature .inside {
+	.latest h5, .teammiddle .fa-spinner {
 		background: {$colors['secondlink_color']};
 	}
-	.latest.roll a:hover h5, .features.rollover .feature:hover .inside {
+	.latest a:hover h5, .rich .entry-content {
 		background: {$colors['secondlink_hover_color']};
 	}
 
@@ -521,8 +542,6 @@ function expanse_get_color_scheme_css( $colors ) {
 	.tagcloud a:focus,
 	.site-branding .site-title a:hover,
 	.site-branding .site-title a:focus,
-	.entry-title a:hover,
-	.entry-title a:focus,
 	.comment-metadata a:hover,
 	.comment-metadata a:focus,
 	.pingback .comment-edit-link:hover,
@@ -549,16 +568,21 @@ function expanse_get_color_scheme_css( $colors ) {
 	input[type="submit"],
 	input[type="submit"][disabled]:hover,
 	input[type="submit"][disabled]:focus,
+	.pagination .prev,
+	.pagination .next,
 	.menu-toggle.toggled-on,
 	.menu-toggle.toggled-on:hover,
 	.menu-toggle.toggled-on:focus,
-	.pagination .prev:hover,
-	.pagination .prev:focus,
-	.pagination .next:hover,
-	.pagination .next:focus,
 	.widget_calendar tbody a,
 	.page-links a:hover,
-	.page-links a:focus {
+	.page-links a:focus,
+	.team .container:first-of-type .previous.button,
+	.team .container:last-of-type .next.button,
+	.team .container:first-of-type .previous.button:hover,
+	.team .container:last-of-type .next.button:hover,
+	.simple .entry-header,
+	.hero .more-link,
+	.full {
 		background-color: {$colors['link_color']};
 	}
 
@@ -577,7 +601,6 @@ function expanse_get_color_scheme_css( $colors ) {
 	}
 
 	/* Link Hover Color */
-	blockquote,
 	.post-password-form label,
 	a:hover,
 	a:focus,
@@ -589,7 +612,6 @@ function expanse_get_color_scheme_css( $colors ) {
 	.widget_rss .rss-date,
 	.widget_rss cite,
 	.author-bio,
-	.entry-footer,
 	.entry-footer a:hover,
 	.entry-footer a:focus,
 	.sticky-post,
@@ -609,8 +631,6 @@ function expanse_get_color_scheme_css( $colors ) {
 	.gallery-caption,
 	.widecolumn label,
 	.widecolumn .mu_register label,
-	.menu-toggle:hover,
-	.menu-toggle:focus,
 	.main-navigation a:hover,
 	.main-navigation a:focus,
 	.dropdown-toggle:hover,
@@ -627,25 +647,13 @@ function expanse_get_color_scheme_css( $colors ) {
 	.comment-metadata a:focus,
 	.pingback .comment-edit-link:hover,
 	.pingback .comment-edit-link:focus,
+	.pagination a:hover,
+	.pagination a:focus,
 	.comment-reply-link,
 	.comment-reply-link:hover,
 	.comment-reply-link:focus,
-	.social-navigation a:hover:before,
-	.social-navigation a:focus:before,
 	.required {
 		color: {$colors['link_hover_color']};
-	}
-
-	.button:hover,
-	button:hover,
-	button:focus,
-	input[type="button"]:hover,
-	input[type="button"]:focus,
-	input[type="reset"]:hover,
-	input[type="reset"]:focus,
-	input[type="submit"]:hover,
-	input[type="submit"]:focus {
-		background: {$colors['link_hover_color']};
 	}
 
 	/* Main Text Color */
@@ -667,32 +675,62 @@ function expanse_get_color_scheme_css( $colors ) {
 		color: {$colors['main_text_color']};
 	}
 
-	blockquote,
 	.menu-toggle.toggled-on,
 	.menu-toggle.toggled-on:hover,
 	.menu-toggle.toggled-on:focus,
 	.pagination,
-	.page-links a,
 	.comments-title,
 	.comment-reply-title {
 		border-color: {$colors['main_text_color']};
 	}
 
-	.pagination:before,
-	.pagination:after,
-	.pagination .prev,
-	.pagination .next,
-	.page-links a {
+	.pagination:before, .pagination:after {
 		background-color: {$colors['main_text_color']};
 	}
 
-	.social-navigation a {
+	.button:hover,
+	button:hover,
+	button:focus,
+	input[type="button"]:hover,
+	input[type="button"]:focus,
+	input[type="reset"]:hover,
+	input[type="reset"]:focus,
+	input[type="submit"]:hover,
+	input[type="submit"]:focus,
+	.pagination .prev:hover,
+	.pagination .prev:focus,
+	.pagination .next:hover,
+	.pagination .next:focus,
+	.page-links a,
+	.hero .more-link:hover {
+		background-color: {$colors['link_hover_color']};
+	}
+
+	.hero .more-link:hover {
 		color: {$colors['secondary_text_color']};
 	}
 
 	.widget_calendar tbody a:hover,
 	.widget_calendar tbody a:focus {
 		background-color: {$colors['secondary_text_color']};
+	}
+
+	/* Secondary Link Color*/
+
+	.simple .entry-footer a,
+	body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a,
+	header .top a,
+	.site-footer a,
+	.social-navigation a {
+		color: {$colors['secondary_link_color']};
+	}
+
+	.simple .entry-footer a:hover,
+	body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a:hover,
+	header .top a:hover,
+	.site-footer a:hover,
+	.social-navigation a:hover {
+		color: {$colors['secondary_link_hover_color']};
 	}
 
 	/* Border Color */
@@ -781,13 +819,15 @@ CSS;
  */
 function expanse_color_scheme_css_template() {
 	$colors = array(
-		'background_color'      => '{{ data.background_color }}',
-		'secondary_background_color' => '{{ data.secondary_background_color }}',
-		'link_color'            => '{{ data.link_color }}',
-		'link_hover_color'      => '{{ data.link_hover_color }}',
-		'main_text_color'       => '{{ data.main_text_color }}',
-		'secondary_text_color'  => '{{ data.secondary_text_color }}',
-		'border_color'          => '{{ data.border_color }}',
+		'background_color'		=> '{{ data.background_color }}',
+		'main_text_color'		=> '{{ data.main_text_color }}',
+		'link_color'			=> '{{ data.link_color }}',
+		'link_hover_color'		=> '{{ data.link_hover_color }}',
+		'secondary_background_color'	=> '{{ data.secondary_background_color }}',
+		'secondary_text_color'	=> '{{ data.secondary_text_color }}',
+		'secondary_link_color'	=> '{{ data.secondary_link_color }}',
+		'secondary_link_hover_color'	=> '{{ data.secondary_link_hover_color }}',
+		'border_color'			=> '{{ data.border_color }}',
 		'secondlink_color'		=> '{{ data.secondlink_color }}',
 	);
 	?>
@@ -798,261 +838,37 @@ function expanse_color_scheme_css_template() {
 }
 add_action( 'customize_controls_print_footer_scripts', 'expanse_color_scheme_css_template' );
 
+
 /**
- * Enqueues front-end CSS for the secondary background color.
+ * Enqueues front-end CSS for the background color.
  *
  * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
-function expanse_secondary_background_color_css() {
+function expanse_background_color_css() {
 	$color_scheme          = expanse_get_color_scheme();
-	$default_color         = $color_scheme[1];
-	$secondary_background_color = get_theme_mod( 'secondary_background_color', $default_color );
+	$default_color         = $color_scheme[0];
+	$background_color = get_theme_mod( 'background_color', $default_color );
 
 	// Don't do anything if the current color is the default.
-	if ( $secondary_background_color === $default_color ) {
+	if ( $background_color === $default_color ) {
 		return;
 	}
 
 	$css = '
 		/* Custom Page Background Color */
-		body:not(.search-results) .entry-summary,
-		.secondary,
-		.site-footer,
-		.site-header-menu.below,
-		.top,
-		.feature .inside a:hover {
-			background-color: %1$s;
+		.site-header-menu.toggled-on, .no-js .site-header-menu {
+			background-color: #%1$s;
 		}
 	';
 
-	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_background_color ) );
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $background_color ) );
 }
-add_action( 'wp_enqueue_scripts', 'expanse_secondary_background_color_css', 11 );
+add_action( 'wp_enqueue_scripts', 'expanse_background_color_css', 11 );
 
-/**
- * Enqueues front-end CSS for the link color.
- *
- * @since Expanse 1.0
- *
- * @see wp_add_inline_style()
- */
-function expanse_link_color_css() {
-	$color_scheme    = expanse_get_color_scheme();
-	$default_color   = $color_scheme[2];
-	$link_color = get_theme_mod( 'link_color', $default_color );
 
-	// Don't do anything if the current color is the default.
-	if ( $link_color === $default_color ) {
-		return;
-	}
 
-	// Convert link hex color to rgba.
-	$link_color_rgb = expanse_hex2rgb( $link_color );
-
-	// If the rgba values are empty return early.
-	if ( empty( $link_color_rgb ) ) {
-		return;
-	}
-
-	// If we get this far, we have a custom color scheme.
-	$secondlink_color = vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.35)', $link_color_rgb );
-	$secondlink_hover_color = vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.75)', $link_color_rgb );
-
-	$css = '
-		.latest.roll h5, .features.rollover .feature .inside {
-		background-color: %2$s;
-		}
-		.latest.roll a:hover h5, .features.rollover .feature:hover .inside {
-		background-color: %3$s;
-		}
-
-		/* Custom Link Color */
-		a,
-		.menu-toggle:hover,
-		.menu-toggle:focus,
-		.main-navigation a:hover,
-		.main-navigation a:focus,
-		.dropdown-toggle:hover,
-		.dropdown-toggle:focus,
-		.post-navigation a:hover .post-title,
-		.post-navigation a:focus .post-title,
-		.tagcloud a:hover,
-		.tagcloud a:focus,
-		.site-branding .site-title a:hover,
-		.site-branding .site-title a:focus,
-		.entry-title a:hover,
-		.entry-title a:focus,
-		.comment-metadata a:hover,
-		.comment-metadata a:focus,
-		.pingback .comment-edit-link:hover,
-		.pingback .comment-edit-link:focus,
-		.comment-reply-link,
-		.comment-reply-link:hover,
-		.comment-reply-link:focus,
-		.required {
-			color: %1$s;
-		}
-
-		mark,
-		ins,
-		.button,
-		button,
-		button[disabled]:hover,
-		button[disabled]:focus,
-		input[type="button"],
-		input[type="button"][disabled]:hover,
-		input[type="button"][disabled]:focus,
-		input[type="reset"],
-		input[type="reset"][disabled]:hover,
-		input[type="reset"][disabled]:focus,
-		input[type="submit"],
-		input[type="submit"][disabled]:hover,
-		input[type="submit"][disabled]:focus,
-		.menu-toggle.toggled-on,
-		.menu-toggle.toggled-on:hover,
-		.menu-toggle.toggled-on:focus,
-		.pagination .prev:hover,
-		.pagination .prev:focus,
-		.pagination .next:hover,
-		.pagination .next:focus,
-		.widget_calendar tbody a,
-		.page-links a:hover,
-		.page-links a:focus {
-			background-color: %1$s;
-		}
-
-		input[type="text"]:focus,
-		input[type="email"]:focus,
-		input[type="url"]:focus,
-		input[type="password"]:focus,
-		input[type="search"]:focus,
-		select:focus,
-		textarea:focus,
-		.tagcloud a:hover,
-		.tagcloud a:focus,
-		.menu-toggle:hover,
-		.menu-toggle:focus {
-			border-color: %1$s;
-		}
-
-		@media screen and (min-width: 56.875em) {
-			.main-navigation li:hover > a,
-			.main-navigation li.focus > a {
-				color: %1$s;
-			}
-		}
-	';
-
-	wp_add_inline_style( 'expanse-style', sprintf( $css, $link_color, $secondlink_color, $secondlink_hover_color ) );
-}
-add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
-
-function expanse_link_hover_color_css() {
-	$color_scheme    = expanse_get_color_scheme();
-	$default_color   = $color_scheme[3];
-	$link_hover_color = get_theme_mod( 'link_hover_color', $default_color );
-
-	// Don't do anything if the current color is the default.
-	if ( $link_hover_color === $default_color ) {
-		return;
-	}
-
-	$css = '
-		/* Custom Link Color */
-		blockquote,
-		.post-password-form label,
-		a:hover,
-		a:focus,
-		a:active,
-		.post-navigation .meta-nav,
-		.image-navigation,
-		.comment-navigation,
-		.widget_recent_entries .post-date,
-		.widget_rss .rss-date,
-		.widget_rss cite,
-		.site-description,
-		.author-bio,
-		.entry-footer,
-		.sticky-post,
-		.taxonomy-description,
-		.entry-caption,
-		.comment-metadata,
-		.pingback .edit-link,
-		.comment-metadata a,
-		.pingback .comment-edit-link,
-		.comment-form label,
-		.comment-notes,
-		.comment-awaiting-moderation,
-		.logged-in-as,
-		.form-allowed-tags,
-		.site-info,
-		.wp-caption .wp-caption-text,
-		.gallery-caption,
-		.widecolumn label,
-		.widecolumn .mu_register label,
-		.menu-toggle:hover,
-		.menu-toggle:focus,
-		.main-navigation a:hover,
-		.main-navigation a:focus,
-		.dropdown-toggle:hover,
-		.dropdown-toggle:focus,
-		.post-navigation a:hover .post-title,
-		.post-navigation a:focus .post-title,
-		.tagcloud a:hover,
-		.tagcloud a:focus,
-		.site-branding .site-title a:hover,
-		.site-branding .site-title a:focus,
-		.entry-title a:hover,
-		.entry-title a:focus,
-		.entry-footer a:hover,
-		.entry-footer a:focus,
-		.comment-metadata a:hover,
-		.comment-metadata a:focus,
-		.pingback .comment-edit-link:hover,
-		.pingback .comment-edit-link:focus,
-		.comment-reply-link,
-		.comment-reply-link:hover,
-		.comment-reply-link:focus,
-		.social-navigation a:hover:before,
-		.social-navigation a:focus:before,
-		.required{
-			color: %1$s;
-		}
-
-		mark,
-		ins,
-		.button:hover,
-		button:hover,
-		button:focus,
-		input[type="button"]:hover,
-		input[type="button"]:focus,
-		input[type="reset"]:hover,
-		input[type="reset"]:focus,
-		input[type="submit"]:hover,
-		input[type="submit"]:focus,
-		.pagination .prev:hover,
-		.pagination .prev:focus,
-		.pagination .next:hover,
-		.pagination .next:focus,
-		.widget_calendar tbody a,
-		.page-links a:hover,
-		.page-links a:focus {
-			background-color: %1$s;
-		}
-
-		@media screen and (min-width: 56.875em) {
-			.main-navigation li:hover > a,
-			.main-navigation li.focus > a {
-				color: %1$s;
-			}
-		}
-	';
-
-	wp_add_inline_style( 'expanse-style', sprintf( $css, $link_color ) );
-}
-add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
 
 /**
  * Enqueues front-end CSS for the main text color.
@@ -1063,7 +879,7 @@ add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
  */
 function expanse_main_text_color_css() {
 	$color_scheme    = expanse_get_color_scheme();
-	$default_color   = $color_scheme[4];
+	$default_color   = $color_scheme[1];
 	$main_text_color = get_theme_mod( 'main_text_color', $default_color );
 
 	// Don't do anything if the current color is the default.
@@ -1091,8 +907,6 @@ function expanse_main_text_color_css() {
 		.menu-toggle,
 		.dropdown-toggle,
 		.post-navigation a,
-		.pagination a:hover,
-		.pagination a:focus,
 		.widget-title a,
 		.site-branding .site-title a,
 		.entry-title a,
@@ -1103,7 +917,6 @@ function expanse_main_text_color_css() {
 			color: %1$s
 		}
 
-		blockquote,
 		.menu-toggle.toggled-on,
 		.menu-toggle.toggled-on:hover,
 		.menu-toggle.toggled-on:focus,
@@ -1114,20 +927,8 @@ function expanse_main_text_color_css() {
 			border-color: %1$s;
 		}
 
-		.button:hover,
-		button:hover,
-		button:focus,
-		input[type="button"]:hover,
-		input[type="button"]:focus,
-		input[type="reset"]:hover,
-		input[type="reset"]:focus,
-		input[type="submit"]:hover,
-		input[type="submit"]:focus,
 		.pagination:before,
-		.pagination:after,
-		.pagination .prev,
-		.pagination .next,
-		.page-links a {
+		.pagination:after {
 			background-color: %1$s;
 		}
 
@@ -1192,12 +993,270 @@ function expanse_main_text_color_css() {
 add_action( 'wp_enqueue_scripts', 'expanse_main_text_color_css', 11 );
 
 /**
+ * Enqueues front-end CSS for the link color.
+ *
+ * @since Expanse 1.0
+ *
+ * @see wp_add_inline_style()
+ */
+function expanse_link_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
+	$default_color   = $color_scheme[2];
+	$link_color = get_theme_mod( 'link_color', $default_color );
+
+	// Don't do anything if the current color is the default.
+	if ( $link_color === $default_color ) {
+		return;
+	}
+
+	// Convert link hex color to rgba.
+	$link_color_rgb = expanse_hex2rgb( $link_color );
+
+	// If the rgba values are empty return early.
+	if ( empty( $link_color_rgb ) ) {
+		return;
+	}
+
+	// If we get this far, we have a custom color scheme.
+	$secondlink_color = vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.35)', $link_color_rgb );
+	$secondlink_hover_color = vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.75)', $link_color_rgb );
+
+	$css = '
+		.latest h5, .teammiddle .fa-spinner {
+		background-color: %2$s;
+		}
+		.latest a:hover h5, .rich .entry-content {
+		background-color: %3$s;
+		}
+
+		/* Custom Link Color */
+		a,
+		.menu-toggle:hover,
+		.menu-toggle:focus,
+		.main-navigation a:hover,
+		.main-navigation a:focus,
+		.dropdown-toggle:hover,
+		.dropdown-toggle:focus,
+		.post-navigation a:hover .post-title,
+		.post-navigation a:focus .post-title,
+		.tagcloud a:hover,
+		.tagcloud a:focus,
+		.site-branding .site-title a:hover,
+		.site-branding .site-title a:focus,
+		.comment-metadata a:hover,
+		.comment-metadata a:focus,
+		.pingback .comment-edit-link:hover,
+		.pingback .comment-edit-link:focus,
+		.comment-reply-link,
+		.comment-reply-link:hover,
+		.comment-reply-link:focus,
+		.required {
+			color: %1$s;
+		}
+
+		mark,
+		ins,
+		.button,
+		button,
+		button[disabled]:hover,
+		button[disabled]:focus,
+		input[type="button"],
+		input[type="button"][disabled]:hover,
+		input[type="button"][disabled]:focus,
+		input[type="reset"],
+		input[type="reset"][disabled]:hover,
+		input[type="reset"][disabled]:focus,
+		input[type="submit"],
+		input[type="submit"][disabled]:hover,
+		input[type="submit"][disabled]:focus,
+		.pagination .prev,
+		.pagination .next,
+		.menu-toggle.toggled-on,
+		.menu-toggle.toggled-on:hover,
+		.menu-toggle.toggled-on:focus,
+		.widget_calendar tbody a,
+		.team .container:first-of-type .previous.button,
+		.team .container:last-of-type .next.button,
+		.team .container:first-of-type .previous.button:hover,
+		.team .container:last-of-type .next.button:hover,
+		.simple .entry-header,
+		.hero .more-link {
+			background-color: %1$s;
+		}
+
+		input[type="text"]:focus,
+		input[type="email"]:focus,
+		input[type="url"]:focus,
+		input[type="password"]:focus,
+		input[type="search"]:focus,
+		select:focus,
+		textarea:focus,
+		.tagcloud a:hover,
+		.tagcloud a:focus,
+		.menu-toggle:hover,
+		.menu-toggle:focus {
+			border-color: %1$s;
+		}
+
+		@media screen and (min-width: 56.875em) {
+			.main-navigation li:hover > a,
+			.main-navigation li.focus > a {
+				color: %1$s;
+			}
+		}
+	';
+
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $link_color, $secondlink_color, $secondlink_hover_color ) );
+}
+add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
+
+function expanse_link_hover_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
+	$default_color   = $color_scheme[3];
+	$link_hover_color = get_theme_mod( 'link_hover_color', $default_color );
+
+	// Don't do anything if the current color is the default.
+	if ( $link_hover_color === $default_color ) {
+		return;
+	}
+
+	$css = '
+		/* Custom Link Color */
+		.post-password-form label,
+		a:hover,
+		a:focus,
+		a:active,
+		.post-navigation .meta-nav,
+		.image-navigation,
+		.comment-navigation,
+		.widget_recent_entries .post-date,
+		.widget_rss .rss-date,
+		.widget_rss cite,
+		.site-description,
+		.author-bio,
+		.sticky-post,
+		.taxonomy-description,
+		.entry-caption,
+		.comment-metadata,
+		.pingback .edit-link,
+		.comment-metadata a,
+		.pingback .comment-edit-link,
+		.comment-form label,
+		.comment-notes,
+		.comment-awaiting-moderation,
+		.logged-in-as,
+		.form-allowed-tags,
+		.site-info,
+		.wp-caption .wp-caption-text,
+		.gallery-caption,
+		.widecolumn label,
+		.widecolumn .mu_register label,
+		.main-navigation a:hover,
+		.main-navigation a:focus,
+		.dropdown-toggle:hover,
+		.dropdown-toggle:focus,
+		.post-navigation a:hover .post-title,
+		.post-navigation a:focus .post-title,
+		.tagcloud a:hover,
+		.tagcloud a:focus,
+		.site-branding .site-title a:hover,
+		.site-branding .site-title a:focus,
+		.entry-title a:hover,
+		.entry-title a:focus,
+		.entry-footer a:hover,
+		.entry-footer a:focus,
+		.comment-metadata a:hover,
+		.comment-metadata a:focus,
+		.pingback .comment-edit-link:hover,
+		.pingback .comment-edit-link:focus,
+		.pagination a:hover,
+		.pagination a:focus,
+		.comment-reply-link,
+		.comment-reply-link:hover,
+		.comment-reply-link:focus,
+		.social-navigation a:hover:before,
+		.social-navigation a:focus:before,
+		.required{
+			color: %1$s;
+		}
+
+		mark,
+		ins,
+		.button:hover,
+		button:hover,
+		button:focus,
+		input[type="button"]:hover,
+		input[type="button"]:focus,
+		input[type="reset"]:hover,
+		input[type="reset"]:focus,
+		input[type="submit"]:hover,
+		input[type="submit"]:focus,
+		.pagination .prev:hover,
+		.pagination .prev:focus,
+		.pagination .next:hover,
+		.pagination .next:focus,
+		.widget_calendar tbody a,
+		.page-links a:hover,
+		.page-links a:focus,
+		.hero .more-link:hover {
+			background-color: %1$s;
+		}
+
+		@media screen and (min-width: 56.875em) {
+			.main-navigation li:hover > a,
+			.main-navigation li.focus > a {
+				color: %1$s;
+			}
+		}
+	';
+
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $link_color ) );
+}
+add_action( 'wp_enqueue_scripts', 'expanse_link_color_css', 11 );
+
+/**
+ * Enqueues front-end CSS for the secondary background color.
+ *
+ * @since Expanse 1.0
+ *
+ * @see wp_add_inline_style()
+ */
+function expanse_secondary_background_color_css() {
+	$color_scheme          = expanse_get_color_scheme();
+	$default_color         = $color_scheme[4];
+	$secondary_background_color = get_theme_mod( 'secondary_background_color', $default_color );
+
+	// Don't do anything if the current color is the default.
+	if ( $secondary_background_color === $default_color ) {
+		return;
+	}
+
+	$css = '
+		/* Custom Page Background Color */
+		body:not(.search-results) .entry-summary,
+		.secondary,
+		header .top,
+		.site-header.scrolled,
+		.site-footer,
+		.simple .entry-footer,
+		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer,
+		.site-header-menu.below {
+			background-color: %1$s;
+		}
+	';
+
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_background_color ) );
+}
+add_action( 'wp_enqueue_scripts', 'expanse_secondary_background_color_css', 11 );
+
+/**
  * Enqueues front-end CSS for the secondary text color.
  *
  * @since Expanse 1.0
  *
  * @see wp_add_inline_style()
  */
+
 function expanse_secondary_text_color_css() {
 	$color_scheme    = expanse_get_color_scheme();
 	$default_color   = $color_scheme[5];
@@ -1216,11 +1275,12 @@ function expanse_secondary_text_color_css() {
 		 * Do not combine these styles with the next block.
 		 */
 		body:not(.search-results) .entry-summary,
+		header .top,
 		.secondary,
 		.site-footer,
+		.simple .entry-footer a,
+		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a,
 		.site-header-menu.below,
-		.top,
-		.feature .inside a:hover,
 		.social-navigation a {
 			color: %1$s;
 		}
@@ -1234,3 +1294,83 @@ function expanse_secondary_text_color_css() {
 	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_text_color ) );
 }
 add_action( 'wp_enqueue_scripts', 'expanse_secondary_text_color_css', 11 );
+
+/**
+ * Enqueues front-end CSS for the secondary link color.
+ *
+ * @since Expanse 1.0
+ *
+ * @see wp_add_inline_style()
+ */
+
+function expanse_secondary_link_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
+	$default_color   = $color_scheme[6];
+	$secondary_link_color = get_theme_mod( 'secondary_link_color', $default_color );
+
+	// Don't do anything if the current color is the default.
+	if ( $secondary_link_color === $default_color ) {
+		return;
+	}
+
+	$css = '
+		/* Custom Secondary Link Color */
+
+		/**
+		 * IE8 and earlier will drop any block with CSS3 selectors.
+		 * Do not combine these styles with the next block.
+		 */
+
+		.simple .entry-footer a,
+		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a,
+		.site-header-menu.below,
+		header .top a,
+		.social-navigation a,
+		.site-footer a,
+		.social-navigation a {
+			color: %1$s;
+		}
+	';
+
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_link_color ) );
+}
+add_action( 'wp_enqueue_scripts', 'expanse_secondary_link_color_css', 11 );
+
+/**
+ * Enqueues front-end CSS for the secondary link color.
+ *
+ * @since Expanse 1.0
+ *
+ * @see wp_add_inline_style()
+ */
+
+function expanse_secondary_link_hover_color_css() {
+	$color_scheme    = expanse_get_color_scheme();
+	$default_color   = $color_scheme[7];
+	$secondary_link_hover_color = get_theme_mod( 'secondary_link_hover_color', $default_color );
+
+	// Don't do anything if the current color is the default.
+	if ( $secondary_link_hover_color === $default_color ) {
+		return;
+	}
+
+	$css = '
+		/* Custom Secondary Link Hover Color */
+
+		/**
+		 * IE8 and earlier will drop any block with CSS3 selectors.
+		 * Do not combine these styles with the next block.
+		 */
+
+		.simple .entry-footer a:hover,
+		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a:hover,
+		header .top a:hover,
+		.site-footer a:hover,
+		.social-navigation a:hover {
+			color: %1$s;
+		}
+	';
+
+	wp_add_inline_style( 'expanse-style', sprintf( $css, $secondary_link_hover_color ) );
+}
+add_action( 'wp_enqueue_scripts', 'expanse_secondary_link_hover_color_css', 11 );
