@@ -581,7 +581,6 @@ function expanse_get_color_scheme_css( $colors ) {
 	.team .container:first-of-type .previous.button:hover,
 	.team .container:last-of-type .next.button:hover,
 	.simple .entry-header,
-	.hero .more-link,
 	.full {
 		background-color: {$colors['link_color']};
 	}
@@ -596,6 +595,7 @@ function expanse_get_color_scheme_css( $colors ) {
 	.tagcloud a:hover,
 	.tagcloud a:focus,
 	.menu-toggle:hover,
+	.hero .more-link,
 	.menu-toggle:focus {
 		border-color: {$colors['link_color']};
 	}

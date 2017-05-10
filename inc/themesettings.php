@@ -4,14 +4,14 @@
 -----------------------------------------------------------------*/
 
 function the_content_filter($content) {
-    $block = join("|",array("row", "half", "third", "fourth"));
+    $block = join("|",array("row", "half", "third", "fourth", "compact"));
     $rep = preg_replace("/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/","[$2$3]",$content);
     $rep = preg_replace("/(<p>)?\[\/($block)](<\/p>|<br \/>)?/","[/$2]",$rep);
 return $rep;
 }
 add_filter("the_content", "the_content_filter");
 
-$shortcodesarray= array('row','half','third','fourth');
+$shortcodesarray= array('row','half','third','fourth','compact');
 foreach ($shortcodesarray as $shortcode) {
 	add_shortcode( $shortcode, $shortcode.'_shortcode' );
 }
@@ -108,6 +108,36 @@ function third_shortcode( $atts , $content = null ) {
 function fourth_shortcode( $atts , $content = null ) {
     $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
 	$html = '<div class="fourth';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+			$html.= '"';
+		}
+		$html.= '>' . do_shortcode($content) . '</div>';
+	return $html;
+}
+
+function compact_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="compact';
 		if ( !empty( $a['class'] ) ) {
 			$html.= ' '.esc_attr($a['class']).'"';
 		} else {
@@ -323,6 +353,7 @@ function expanse_default_options() {
 			'ss_li'			=>	'',
 			'ss_pin'		=>	'',
 			'ss_email'		=>	'',
+			'ss_on'		=>	'',
 		'es_home'			=>	'',
 		'es_page'			=>	'',
 		'es_blog'			=>	'',
@@ -440,6 +471,25 @@ function expanse_default_options() {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Social Share Buttons?<p class="ss" style="display:none">';
+
+			$ss_on = $options['ss_on'];
+				$html .= '<input type="radio" value="onpost" name="expanse_options[ss_on]"';
+				if ($ss_on==="onpost") {
+					$html .= 'checked';
+				}
+				$html .= '> On Post &nbsp; &nbsp;';
+
+				$html .= '<input type="radio" value="onexcerpt" name="expanse_options[ss_on]"';
+				if ($ss_on==="onexcerpt") {
+					$html .= 'checked';
+				}
+				$html .= '> On Excerpt &nbsp; &nbsp;';
+
+				$html .= '<input type="radio" value="all" name="expanse_options[ss_on]"';
+				if ($ss_on==="all") {
+					$html .= 'checked="checked"';
+				}
+				$html .= '> On All<br/>';
 
 		$facebook = $options['ss_fb'];
 			$html .= ' <input type="checkbox" id="ss_fb" name="expanse_options[ss_fb]"';

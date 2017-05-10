@@ -269,7 +269,7 @@ function expanse_enqueuingallthethings() {
 		'expand'   => __( 'expand child menu', 'expanse' ),
 		'collapse' => __( 'collapse child menu', 'expanse' ),
 	) );
-	
+
 	$options = get_option( 'expanse_options' );
 	if ( $options['stickynav'] ) {
 		wp_enqueue_script( 'sticky', get_template_directory_uri() . '/js/sticky.js', array(), '1.0.0', true );
@@ -409,65 +409,18 @@ function expanse_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'expanse_widget_tag_cloud_args' );
-
-
-
-/**
- * What it says on the tin.
- */
-$options = get_option( 'expanse_options' );
-if ( $options['ssbutton'] ) {
-	function social_sharing_buttons($content) {
-		if(is_single()){
-
-			// Get current page URL 
-			$ssbURL = get_permalink();
-
-			// Get current page title
-			$ssbTitle = str_replace( ' ', '%20', get_the_title());
-			
-			// Get Post Thumbnail for pinterest
-			$ssbThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
-
-			// Construct sharing URL without using any script
-			$facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$ssbURL;
-			$twitterURL = 'https://twitter.com/intent/tweet?text='.$ssbTitle.'&amp;url='.$ssbURL;
-			$googleURL = 'https://plus.google.com/share?url='.$ssbURL;
-			$pinterestURL = 'https://pinterest.com/pin/create/button/?url='.$ssbURL.'&amp;media='.$ssbThumbnail[0].'&amp;description='.$ssbTitle;
-			$linkedURL = 'linkedin.com/shareArticle?mini=true&url='.$ssbURL.'&title='.$ssbTitle;
-
-			// Add sharing button at the end of page/page content
-			$variable .= '<div class="ssb-social"><span>Social Share:</span>';
-			$options = get_option( 'expanse_options' );
-			if ( $options['ss_fb'] ) { $variable .= '<a class="ssb-facebook" href="'.$facebookURL.'" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>'; }
-			if ( $options['ss_tw'] ) { $variable .= '<a class="ssb-twitter" href="'. $twitterURL .'" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>'; }
-			if ( $options['ss_gp'] ) { $variable .= '<a class="ssb-googleplus" href="'.$googleURL.'" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>'; }
-			if ( $options['ss_li'] ) { $variable .= '<a class="ssb-linked" href="'.$linkedURL.'" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>'; }
-			if ( $options['ss_pin'] ) { $variable .= '<a class="ssb-pinterest" href="'.$pinterestURL.'" target="_blank"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>'; }
-			if ( $options['ss_email'] ) { $variable .= '<a class="ssb-email" href="mailto:?subject=I wanted you to see this site&amp;body='.$ssbURL.'"><i class="fa fa-envelope" aria-hidden="true"></i></a>'; }
-			$variable .= '</div>';
-
-			return $variable.$content;
-		}else{
-			// if not a post/page then don't include sharing button
-			return $variable.$content;
-		}
-	};
-	add_filter( 'the_content', 'social_sharing_buttons');
-}
-
 /* Neat background things for home page sections */
 
 add_action( 'admin_enqueue_scripts', 'bg_add_color_picker' );
 function bg_add_color_picker( $hook ) {
  
-    if( is_admin() ) { 
-        // Add the color picker css file       
-        wp_enqueue_style( 'wp-color-picker' ); 
+    // if( is_admin() ) { 
+    //     // Add the color picker css file       
+    //     wp_enqueue_style( 'wp-color-picker' ); 
          
-        // Include our custom jQuery file with WordPress Color Picker dependency
-        wp_enqueue_script( 'color-picker', get_template_directory_uri() . '/js/color-picker.js', array( 'wp-color-picker' ), false, true );
-    }
+    //     // Include our custom jQuery file with WordPress Color Picker dependency
+    //     wp_enqueue_script( 'color-picker', get_template_directory_uri() . '/js/color-picker.js', array( 'wp-color-picker' ), false, true );
+    // }
 }
 
 function bg_meta_markup($object) {

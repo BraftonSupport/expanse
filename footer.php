@@ -15,7 +15,11 @@
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<?php if ( is_active_sidebar( 'footer' ) ) :
 			echo '<div class="site-inner container">';
-			echo '<a href="'.esc_url( home_url( '/' ) ).'" rel="home" class="footer-title widget"><img src="'.get_stylesheet_directory_uri().'/img/marchon-logo-footer.jpg" alt='.esc_attr( get_bloginfo( 'name', 'display' ) ).'></a>';
+			echo '<a href="'.esc_url( home_url( '/' ) ).'" rel="home" class="footer-title widget">';
+				$image_url = esc_url( get_theme_mod( 'expanse_logo' ) );
+				$image_id = expanse_get_image_id($image_url);
+				$image_thumb = wp_get_attachment_image_src($image_id, 'medium');
+			echo '<img src='.$image_thumb[0].' alt='.esc_attr( get_bloginfo( 'name', 'display' ) ).' class="site-title"></a>';
 			dynamic_sidebar( 'footer' );
 			echo '</div><br class="clear"/>';
 		endif; ?>

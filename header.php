@@ -34,7 +34,48 @@ if ( $options['ga'] ) : ?>
 		  ga('send', 'pageview');
 		</script>
 	<!-- End Google Analytics -->
-<?php endif; ?>
+<?php endif;
+
+$description = get_bloginfo( 'description', 'display' );
+echo '<script type="application/ld+json">
+	{
+		"@context": "http://schema.org/",
+		"@type": "Organization",
+		"name": "'.get_bloginfo( "name" ).'",
+		"legalName": "'.get_bloginfo( "name" ).'",
+		"url": "'.network_site_url( '/' ).'",
+		"email": "information@hga-llc.com",
+		"telephone": "1.866.255.6825",
+		"description": "'.$description.'"
+	}
+</script>';
+if(is_single()) {
+	$content = wp_strip_all_tags(apply_filters('the_content', $post->post_content)); 
+	$excerpt = wp_strip_all_tags(apply_filters('the_excerpt', $post->post_content)); 
+	$image_url = esc_url( get_theme_mod( 'expanse_logo' ) );
+	$author = $post->post_author; 
+	echo '<script type="application/ld+json">
+		{ "@context": "http://schema.org",
+		"@type": "BlogPosting",
+		"headline": "'.esc_html( get_the_title() ).'",
+		"image": "'.get_the_post_thumbnail_url().'",
+		"wordcount": "'.str_word_count($content,0).'",
+		"publisher": {
+		"@type": "Organization",
+		"name": "'.get_bloginfo( "name" ).'",
+		"logo": "'.$image_url.'"
+		},
+		"url": "'.get_permalink().'",
+		"datePublished": "'.get_the_date('Y-m-d').'",
+		"description": "'.$excerpt.'",
+		"author": {
+		"@type": "Person",
+		"name": "'.get_the_author_meta( "user_nicename" , $author ).'"
+		}
+		}
+	</script>';
+}
+?>
 
 </head>
 
@@ -71,21 +112,13 @@ if ( $options['ga'] ) : ?>
 							</a>
 						<?php } else { ?>
 							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-						<?php }
-
-						$description = get_bloginfo( 'description', 'display' );
-						if ( $description || is_customize_preview() ) : ?>
-							<p class="site-description"><?php echo $description; ?></p>
-						<?php endif; ?>
+						<?php }	?>
 					</div><!-- .site-branding -->
 
 					<div class="next">
 
 					<?php if ( is_active_sidebar( 'header' ) ) {
 						dynamic_sidebar( 'header' );
-					}
-					if ( $options['ssbutton'] ) {
-						echo social_sharing_buttons($content);
 					}
 					?>
 
