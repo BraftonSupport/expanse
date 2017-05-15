@@ -4,14 +4,14 @@
 -----------------------------------------------------------------*/
 
 function the_content_filter($content) {
-    $block = join("|",array("row", "half", "third", "fourth", "compact"));
+    $block = join("|",array("row", "half", "third", "fourth","twothirds","threefourths", "compact"));
     $rep = preg_replace("/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/","[$2$3]",$content);
     $rep = preg_replace("/(<p>)?\[\/($block)](<\/p>|<br \/>)?/","[/$2]",$rep);
 return $rep;
 }
 add_filter("the_content", "the_content_filter");
 
-$shortcodesarray= array('row','half','third','fourth','compact');
+$shortcodesarray= array('row','half','third','fourth','twothirds','threefourths','compact');
 foreach ($shortcodesarray as $shortcode) {
 	add_shortcode( $shortcode, $shortcode.'_shortcode' );
 }
@@ -108,6 +108,65 @@ function third_shortcode( $atts , $content = null ) {
 function fourth_shortcode( $atts , $content = null ) {
     $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
 	$html = '<div class="fourth';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+			$html.= '"';
+		}
+		$html.= '>' . do_shortcode($content) . '</div>';
+	return $html;
+}
+
+function twothirds_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="twothirds';
+		if ( !empty( $a['class'] ) ) {
+			$html.= ' '.esc_attr($a['class']).'"';
+		} else {
+			$html.= '"';
+		}
+		if ( !empty( $a['bg-color']) || !empty( $a['color']) || !empty( $a['bg-image']) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+			$html.= ' style="';
+		}
+			if ( !empty( $a['bg-color'] ) ) {
+				$html.= 'background-color:'. esc_attr($a['bg-color']).'; ';
+			}
+			if ( !empty( $a['color'] ) ) {
+				$html.= 'color:'. esc_attr($a['color']).'; ';
+			}
+			if ( !empty( $a['bg-image'] ) ) {
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+			}
+			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+				$html.= 'padding:'. esc_attr($a['padding']).';';
+			}
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) || $a['padding'] == '0' ) {
+			$html.= '"';
+		}
+		$html.= '>' . do_shortcode($content) . '</div>';
+	return $html;
+}
+function threefourths_shortcode( $atts , $content = null ) {
+    $a = shortcode_atts( array( 'class' => '', 'bg-color' => '', 'color' => '', 'bg-image' => '', 'padding' => ''), $atts );
+	$html = '<div class="threefourths';
 		if ( !empty( $a['class'] ) ) {
 			$html.= ' '.esc_attr($a['class']).'"';
 		} else {

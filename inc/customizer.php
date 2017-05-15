@@ -498,8 +498,7 @@ function expanse_get_color_scheme_css( $colors ) {
 	.secondary,
 	.site-footer,
 	.simple .entry-footer,
-	body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer,
-	.site-header-menu.below {
+	body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer {
 		background-color: {$colors['secondary_background_color']};
 		color: {$colors['secondary_text_color']};
 	}
@@ -1239,8 +1238,7 @@ function expanse_secondary_background_color_css() {
 		.site-header.scrolled,
 		.site-footer,
 		.simple .entry-footer,
-		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer,
-		.site-header-menu.below {
+		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer {
 			background-color: %1$s;
 		}
 	';
@@ -1280,7 +1278,6 @@ function expanse_secondary_text_color_css() {
 		.site-footer,
 		.simple .entry-footer a,
 		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a,
-		.site-header-menu.below,
 		.social-navigation a {
 			color: %1$s;
 		}
@@ -1323,7 +1320,6 @@ function expanse_secondary_link_color_css() {
 
 		.simple .entry-footer a,
 		body:not(.search-results) article:first-of-type:not(.type-page).simple .entry-footer a,
-		.site-header-menu.below,
 		header .top a,
 		.social-navigation a,
 		.site-footer a,

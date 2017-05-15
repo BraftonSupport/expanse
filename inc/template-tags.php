@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * Custom Expanse template tags
  *
@@ -40,7 +42,9 @@ function expanse_entry_meta() {
 	if ( 'post' === get_post_type() ) {
 		expanse_entry_taxonomies();
 	}
-	social_sharing_buttons();
+
+	$options = get_option( 'expanse_options' );
+	if ( $options['ssbutton'] ) {social_sharing_buttons();}
 	// if ( ! is_singular() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 	// 	echo '<span class="comments-link">';
 	// 	comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'expanse' ), get_the_title() ) );
