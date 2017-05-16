@@ -700,8 +700,7 @@ function expanse_get_color_scheme_css( $colors ) {
 	.pagination .prev:focus,
 	.pagination .next:hover,
 	.pagination .next:focus,
-	.page-links a,
-	.hero .more-link:hover {
+	.page-links a {
 		background-color: {$colors['link_hover_color']};
 	}
 
@@ -1078,8 +1077,7 @@ function expanse_link_color_css() {
 		.team .container:last-of-type .next.button,
 		.team .container:first-of-type .previous.button:hover,
 		.team .container:last-of-type .next.button:hover,
-		.simple .entry-header,
-		.hero .more-link {
+		.simple .entry-header {
 			background-color: %1$s;
 		}
 
@@ -1196,8 +1194,7 @@ function expanse_link_hover_color_css() {
 		.pagination .next:focus,
 		.widget_calendar tbody a,
 		.page-links a:hover,
-		.page-links a:focus,
-		.hero .more-link:hover {
+		.page-links a:focus {
 			background-color: %1$s;
 		}
 
