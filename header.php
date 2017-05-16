@@ -44,14 +44,14 @@ echo '<script type="application/ld+json">
 		"name": "'.get_bloginfo( "name" ).'",
 		"legalName": "'.get_bloginfo( "name" ).'",
 		"url": "'.network_site_url( '/' ).'",
-		"email": "information@hga-llc.com",
-		"telephone": "1.866.255.6825",
+		"email": "",
+		"telephone": "",
 		"description": "'.$description.'"
 	}
 </script>';
 if(is_single()) {
 	$content = wp_strip_all_tags(apply_filters('the_content', $post->post_content)); 
-	$excerpt = wp_strip_all_tags(apply_filters('the_excerpt', $post->post_content)); 
+	$excerpt = wp_strip_all_tags(apply_filters('the_excerpt', $post->post_excerpt)); 
 	$image_url = esc_url( get_theme_mod( 'expanse_logo' ) );
 	$author = $post->post_author; 
 	echo '<script type="application/ld+json">
@@ -84,7 +84,7 @@ if(is_single()) {
 		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'expanse' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
-			<div class="site-header-main<?php if ($options['nav'] == 'below') { echo " below"; } ?>">
+			<div class="site-header-main">
 				<?php if ( is_active_sidebar( 'top' ) ) {
 					echo '<div class="top"><div class="site-inner container">';
 					dynamic_sidebar( 'top' );
@@ -125,7 +125,21 @@ if(is_single()) {
 					<button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'expanse' ); ?></button>
 
 					
-				<?php if ($options['nav'] == 'below') { echo "</div></div>"; } ?>
+				<?php if ($options['nav'] == 'below') { ?>
+				<div id="site-header-menu" class="site-header-menu">
+						<?php if ( has_nav_menu( 'primary' ) ) : ?>
+							<nav id="site-navigation" class="main-navigation next" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'expanse' ); ?>">
+								<?php
+									wp_nav_menu( array(
+										'theme_location' => 'primary',
+										'menu_class'     => 'primary-menu',
+									 ) );
+								?>
+							</nav><!-- .main-navigation -->
+						<?php endif; ?>
+					</div><!-- .site-header-menu -->
+				</div></div>
+				<?php } ?>
 
 					<div id="site-header-menu" class="site-header-menu">
 						<?php if ( has_nav_menu( 'primary' ) ) : ?>
