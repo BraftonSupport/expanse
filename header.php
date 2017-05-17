@@ -128,7 +128,7 @@ if(is_single()) {
 				<?php if ($options['nav'] == 'below') { ?>
 				<div id="site-header-menu" class="site-header-menu">
 						<?php if ( has_nav_menu( 'primary' ) ) : ?>
-							<nav id="site-navigation" class="main-navigation next" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'expanse' ); ?>">
+							<nav id="site-navigation" class="main-navigation below" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'expanse' ); ?>">
 								<?php
 									wp_nav_menu( array(
 										'theme_location' => 'primary',

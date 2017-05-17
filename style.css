@@ -255,7 +255,7 @@ optgroup {
  */
  body { color: #1a1a1a; background-color: #f0f0f0; }
 
-.secondary, .site-footer, .site-header .below, .feature .inside a:hover { background: #cccccc; color: #686868; }
+.secondary, .site-footer, .feature .inside a:hover { background: #cccccc; color: #686868; }
 a { color: #007acc; }
 a:hover, a:focus, a:active { color: #00b1dd; }
 
@@ -780,11 +780,23 @@ a:active,
 
 .scrolled img.site-title { max-width: 120px; }
 .scrolled .site-title { display: block; }
-.scrolled .site-branding { margin: 3px auto 3px 0; width: 25%; }
+.scrolled .site-branding { margin: 3px auto 3px 0; width: 10%; }
 .scrolled .site-description, .scrolled .widget { display: none; }
 .scrolled .main-navigation .menu-main-menu-container { margin-top: 6px; }
 .scrolled .main-navigation a { font-size: 12px; }
+
+.scrolled > .site-header-menu {display: none;}
+.site-header .scrolled .below {display: block;}
+.site-header .below {display: none;}
+
 .site-header-main.scrolled .menu-item-has-children > a:after { top: inherit; }
+
+.site-header-main.scrolled .next {
+	float: right;
+    margin: 0 0 0 auto;
+    width: 80%;
+    text-align: right;
+}
 
 .scrolled.below .below { display: none; }
 .scrolled.below .next .hide { display: block; }
