@@ -33,7 +33,7 @@ function row_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] || $a['padding'] == '0' ) ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
@@ -63,7 +63,7 @@ function half_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
@@ -93,7 +93,7 @@ function third_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
@@ -123,7 +123,7 @@ function fourth_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
@@ -153,7 +153,7 @@ function twothirds_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
@@ -182,7 +182,7 @@ function threefourths_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
@@ -212,7 +212,7 @@ function compact_shortcode( $atts , $content = null ) {
 				$html.= 'color:'. esc_attr($a['color']).'; ';
 			}
 			if ( !empty( $a['bg-image'] ) ) {
-				$html.= 'background-image:url('. esc_attr($a['bg-image']).'); -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
+				$html.= 'background-image:url('. esc_attr($a['bg-image']).');background-position: center; -webkit-align-self: stretch; -ms-flex-item-align: stretch; align-self: stretch;';
 			}
 			if ( !empty( $a['padding'] ) || $a['padding'] == '0' ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
