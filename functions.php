@@ -436,6 +436,26 @@ function bg_add_color_picker( $hook ) {
     // }
 }
 
+
+add_filter( 'theme_page_templates', 'frontpage_template', 10, 3 );
+function frontpage_template( $template, $this, $post ) {
+	if ( is_front_page() ) {
+		unset($template['contact.php']);
+
+		// $files = scandir('./frontpage-parts');
+		// var_dump($files);
+		// die();
+		// foreach ($files as $name){
+		// 	$template[$name] = preg_replace("/-template.php/", "", $name);
+		// }
+		return $template;
+
+	} else {
+		return $template;
+	}
+}
+
+
 function bg_meta_markup($object) {
 	wp_nonce_field(basename(__FILE__), "meta-box-nonce");
 	?>

@@ -10,71 +10,75 @@
  * @subpackage Twenty_Sixteen
  * @since Expanse 1.0
  */
-$options = get_option( 'expanse_options' );
-get_header(); ?>
 
-<?php if ( is_front_page() && is_active_sidebar( 'features' ) ) :
-	echo '<div class="features container';
-	if ( $options['featured_style']=="icon" ) :
-		echo ' icon';
-	elseif ( $options['featured_style']=="rollover" ) :
-		echo ' rollover';
-	endif;
-	echo '">';
-	dynamic_sidebar( 'features' );
-	echo '</div>';
-endif; ?>
+$featured = has_post_thumbnail();
+$color = get_post_meta( get_queried_object_id(), 'textcolor', true );
+$class = get_post_meta( get_queried_object_id(), 'class', true );
+$bg = get_post_meta( get_queried_object_id(), 'bgcolor', true );
+$shadow = get_post_meta( get_queried_object_id(), 'shadow', true );
+get_header(); ?>
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
+		<section class="<?php if ( $class ) { echo $class; } ?>"
+			style="<?php
+			if ( $bg ) { echo 'background-color: ' . $bg . ';'; }
+			if ( $color ) { echo 'color: ' . $color . ';'; }
+			if ( $featured ) {
+				echo 'background-image: url(';
+				the_post_thumbnail_url();
+				echo ');';
+			} ?>" >
 		<?php
 		// Start the loop.
 		while ( have_posts() ) : the_post();
-			if ( !is_front_page() ){ the_title( '<h1>', '</h1>' ); }
+
 			// Include the page content template.
 			get_template_part( 'template-parts/content', 'page' );
 
 			// End of the loop.
 		endwhile;
 		?>
+			<?php if ( $shadow ) { echo '<hr class="shadow"/>'; } ?>
+		</section>
+
+		<?php $args = array( 
+        'child_of' => $post->ID, 
+        'parent' => $post->ID,
+        'hierarchical' => 0,
+        'sort_column' => 'menu_order', 
+        'sort_order' => 'asc'
+		);
+		$mypages = get_pages( $args );
+
+		foreach( $mypages as $child ) {
+			$id = $child->ID;
+			$slug = $child->post_name;
+			$url = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), "full" )[0];
+			$class = get_post_meta( $id, 'class', true );
+			$bg = get_post_meta( $id, 'bgcolor', true );
+			$color = get_post_meta( $id, 'textcolor', true );
+			$shadow = get_post_meta( $id, 'shadow', true );
+
+			echo '<section id="'.$slug.'"';
+				if ( $class ) {
+					echo 'class="'.$class.'"';
+				}
+				if ( $url || $bg || $color ) {
+					echo 'style="';
+						if ( $url ) { echo 'background-image: url('. $url .');'; }
+						if ( $bg ) { echo ' background-color:'. $bg .';'; }
+						if ( $color ) { echo ' color:'. $color .';'; }
+					echo '"';
+				}
+			echo '>';
+			echo apply_filters('the_content', $child->post_content);
+				if ( $shadow ) { echo '<div class="shadow"></div>'; }
+			echo '</section>';
+		} ?>
 
 	</main><!-- .site-main -->
 
 </div><!-- .content-area -->
-
-<?php get_sidebar(); ?>
-
-<?php if ( is_front_page() && $options['latest_post']=="yes" ) :
-echo '<div class="latest container';
-	if ( $options['featured_style']=="icon" ) :
-		echo ' icon';
-	else :
-		echo ' roll';
-	endif;
-	echo '">';
-	?>
-	<a href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>"><h2 class="entry-title">Latest Posts</h2></a>
-	<div class="post">
-	<?php
-		$args = array( 'numberposts' => '3', 'post_status' => 'publish' );
-		$recent_posts = wp_get_recent_posts( $args );
-		foreach( $recent_posts as $recent ){
-			$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($recent["ID"]), 'full' );
-			echo '<a href="' . get_permalink($recent["ID"]) . '" title="'.esc_attr($recent["post_title"]).'">';
-			if ( $options['featured_style']=="rollover" ) :
-				echo '<div class="thumb" style="background-image: url('.$thumb['0'].')"></div>';
-			elseif ( has_post_thumbnail( $recent["ID"]) ) :
-				echo '<img src="'.$thumb['0'].'" alt="'.esc_attr($recent["post_title"]).'">';
-			endif;
-			echo '<h5>' . $recent["post_title"] .'<br/><span class="tiny">' . mysql2date('M j, Y', $recent["post_date"]).'</span></h5>';
-			if ( $options['featured_style']=="icon" ) :
-				echo '<p class="tiny">' . substr($recent["post_content"], 0 , 200) . '</p>';
-			endif;
-			echo '</a>';
-		}
-	?>
-	</div>
-</div>
-<?php endif; ?>
 
 <?php get_footer(); ?>

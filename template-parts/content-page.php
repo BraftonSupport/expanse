@@ -12,6 +12,7 @@
 
 	<div class="entry-content">
 		<?php
+		the_title( '<h1>', '</h1>' );
 		the_content();
 
 		wp_link_pages( array(
