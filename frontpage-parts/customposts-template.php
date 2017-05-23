@@ -26,26 +26,16 @@ $tracking = get_field('tracking');
 	if ( !empty($url) ) { echo 'background-image: url('. $url .');'; }
 	if ( !empty($bgc) ) { echo ' background-color:'. $bgc .';'; }
 	if ( !empty($tc) ) { echo ' color:'. $tc .';'; }
-?>">
+	?>">
 
-	<div class="entry-content">
-		<?php
-		the_title( '<h1>', '</h1>' );
-		if ( $custom_post ) { echo $custom_post; }
-		if( $colors && in_array('red', $colors) ) { ?>
-			echo $custom_show;
-		}
-
-		wp_link_pages( array(
-			'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'expanse' ) . '</span>',
-			'after'       => '</div>',
-			'link_before' => '<span>',
-			'link_after'  => '</span>',
-			'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'expanse' ) . ' </span>%',
-			'separator'   => '<span class="screen-reader-text">, </span>',
-		) );
-		?>
-	</div><!-- .entry-content -->
+	<?php the_title( '<h1>', '</h1>' ); ?>
+	<div class="container">
+	<?php if ( $custom_post ) {
+		foreach( $custom_post as $post ) { ?>
+			<div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo get_the_title($post->ID); ?></a></div>
+		<?php }
+	} ?>
+	</div>
 
 	<?php
 		edit_post_link(
