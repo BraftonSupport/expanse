@@ -422,109 +422,91 @@ function expanse_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'expanse_widget_tag_cloud_args' );
-/* Neat background things for home page sections */
 
-add_action( 'admin_enqueue_scripts', 'bg_add_color_picker' );
-function bg_add_color_picker( $hook ) {
- 
-    // if( is_admin() ) { 
-    //     // Add the color picker css file       
-    //     wp_enqueue_style( 'wp-color-picker' ); 
-         
-    //     // Include our custom jQuery file with WordPress Color Picker dependency
-    //     wp_enqueue_script( 'color-picker', get_template_directory_uri() . '/js/color-picker.js', array( 'wp-color-picker' ), false, true );
-    // }
+
+// // Add templates if is child of front page
+// add_filter( 'theme_page_templates', 'frontpage_template', 1, 3 );
+// function frontpage_template( $template, $this, $post ) {
+//Find the front page
+	// global $post_ID;
+	// if ( wp_get_post_parent_id( $post_ID ) === (int) get_option( 'page_on_front' ) ) {
+// // get rid of your templates
+// 		unset($template);
+// // add only these templates
+// 		$files = array_diff( scandir(__DIR__ . '\frontpage-parts'), array('.', '..') );
+// 		foreach ($files as $name){
+// 			$template[$name] = preg_replace("/-template.php/", "", $name);
+// 		}
+// 		return $template;
+
+// 	} else {
+		// return $template;
+	// }
+// }
+
+
+
+/**
+ * ACF Rule Type: Parent Page Template
+ *
+ * @author Bill Erickson
+ * @see http://www.billerickson.net/acf-custom-location-rules
+ *
+ * @param array $choices, all of the available rule types
+ * @return array
+ */
+function ea_acf_rule_type_parent_page_template( $choices ) {
+	$choices['Page']['parent_page_template'] = 'Parent Page Template';
+	return $choices;
 }
+add_filter( 'acf/location/rule_types', 'ea_acf_rule_type_parent_page_template' );
 
-
-add_filter( 'theme_page_templates', 'frontpage_template', 10, 3 );
-function frontpage_template( $template, $this, $post ) {
-	if ( is_front_page() ) {
-		unset($template['contact.php']);
-
-		// $files = scandir('./frontpage-parts');
-		// var_dump($files);
-		// die();
-		// foreach ($files as $name){
-		// 	$template[$name] = preg_replace("/-template.php/", "", $name);
-		// }
-		return $template;
-
-	} else {
-		return $template;
+/**
+ * ACF Rule Values: Parent Page Template
+ *
+ * @author Bill Erickson
+ * @see http://www.billerickson.net/acf-custom-location-rules
+ *
+ * @param array $choices, available rule values for this type
+ * @return array
+ */
+function ea_acf_rule_values_parent_page_template( $choices ) {
+	$templates = get_page_templates();
+	foreach($templates as $k => $v) {
+		$choices[$v] = $k;
 	}
+	return $choices;
 }
-
-
-function bg_meta_markup($object) {
-	wp_nonce_field(basename(__FILE__), "meta-box-nonce");
-	?>
-		<div>
-			<p><label for="bgcolor">Add a class to this section</label><br>
-			<input class="class" name="class" value="<?php echo get_post_meta($object->ID, "class", true); ?>" ></p>
-
-			<p>Add Shadow&nbsp;<label class="screen-reader-text" for="shadow">Add Shadow</label>
-			<?php $shadow_value = get_post_meta($object->ID, "shadow", true);
-
-			if($shadow_value == "") { ?>
-				<input name="shadow" type="checkbox" value="true">
-			<?php } elseif($shadow_value == "true") { ?>  
-				<input name="shadow" type="checkbox" value="true" checked>
-			<?php } ?>
-
-			<p><label for="bgcolor">Background Color</label><br>
-			<input class="color-field" name="bgcolor" value="<?php echo get_post_meta($object->ID, "bgcolor", true); ?>" ></p>
-
-			<p><label for="textcolor">Text Color</label><br>
-			<input class="color-field" name="textcolor" value="<?php echo get_post_meta($object->ID, "textcolor", true); ?>" ></p>
-
-		</div>
-	<?php  
+add_filter( 'acf/location/rule_values/parent_page_template', 'ea_acf_rule_values_parent_page_template' );
+/**
+ * ACF Rule Match: Parent Page Template
+ *
+ * @author Bill Erickson
+ * @see http://www.billerickson.net/acf-custom-location-rules
+ *
+ * @param boolean $match, whether the rule matches (true/false)
+ * @param array $rule, the current rule you're matching. Includes 'param', 'operator' and 'value' parameters
+ * @param array $options, data about the current edit screen (post_id, page_template...)
+ * @return boolean $match
+ */
+function ea_acf_rule_match_parent_page_template( $match, $rule, $options ) {
+	
+	if ( ! $options['post_id'] || 'page' !== get_post_type( $options['post_id'] ) )
+		return false;
+		
+	$parent = get_post( $options['post_id'] )->post_parent;
+	if( empty( $parent ) )
+		return false;
+		
+	$is_template_match = $rule['value'] == get_page_template_slug( $parent );
+	
+	if ( '==' == $rule['operator'] ) { 
+		$match = $is_template_match;
+	
+	} elseif ( '!=' == $rule['operator'] ) {
+		$match = ! $is_template_match;
+	}
+	
+	return $match;
 }
-
-add_action("add_meta_boxes", "add_bg_meta_box");
-function add_bg_meta_box() {
-	add_meta_box("bg_meta", "Style", "bg_meta_markup", "page", "side", "low", null);
-}
-
-add_action("save_post", "save_bg_meta_box", 10, 3);
-function save_bg_meta_box($post_id, $post, $update)
-{
-	if (!isset($_POST["meta-box-nonce"]) || !wp_verify_nonce($_POST["meta-box-nonce"], basename(__FILE__)))
-		return $post_id;
-
-	if(!current_user_can("edit_post", $post_id))
-		return $post_id;
-
-	if(defined("DOING_AUTOSAVE") && DOING_AUTOSAVE)
-		return $post_id;
-
-	$slug = "page";
-	if($slug != $post->post_type)
-		return $post_id;
-
-	$class = "";
-	$shadow = "";
-	$bg_value = "";
-	$color = "";
-
-	if(isset($_POST["class"])) {
-		$class = $_POST["class"];
-	}   
-	update_post_meta($post_id, "class", $class);
-
-	if(isset($_POST["shadow"])) {
-		$shadow = $_POST["shadow"];
-	}   
-	update_post_meta($post_id, "shadow", $shadow);
-
-	if(isset($_POST["bgcolor"])) {
-		$bg_value = $_POST["bgcolor"];
-	}   
-	update_post_meta($post_id, "bgcolor", $bg_value);
-
-	if(isset($_POST["textcolor"])) {
-		$color = $_POST["textcolor"];
-	}   
-	update_post_meta($post_id, "textcolor", $color);
-}
+add_filter( 'acf/location/rule_match/parent_page_template', 'ea_acf_rule_match_parent_page_template', 10, 3 );

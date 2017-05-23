@@ -155,15 +155,6 @@ if(is_single()) {
 					</div><!-- .site-header-menu -->
 				<?php if ($options['nav'] == 'next') { echo '</div></div>'; } ?>
 
-			<?php if ( is_page() && has_post_thumbnail() && !is_page_template('contact.php') && !is_page_template('full-width.php') ) :
-				$url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
-				<div class="header-image" style="background-image: url(<?php echo $url; ?>)">
-					<?php the_title( '<h1>', '</h1>' ); ?>
-				</div>
-			<?php elseif ( is_page_template('contact.php') ) : ?>
-				<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d11793.352744614434!2d-71.055708!3d42.3566315!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1462392769721" width="100%" height="350" frameborder="0" style="border:0;pointer-events: none;" allowfullscreen></iframe>
-			<?php endif; // End header image check.  ?>
-
 			</div><!-- .site-header-main -->
 		</header>
 

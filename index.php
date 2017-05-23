@@ -2,7 +2,6 @@
 /**
  * The main template file
  */
-ini_set('display_errors',1);
 get_header(); ?>
 
 	<div id="primary" class="content-area site-inner">

@@ -1,6 +1,6 @@
 <?php
 /**
- * The template used for displaying visual subsection of page.
+ * The template used for displaying custom post type subsection of page.
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
@@ -12,14 +12,17 @@ $shadow = get_field('shadow', $id);
 $bgc = get_field('background_color', $id);
 $tc = get_field('text_color', $id);
 
-$visual_intro_text = get_field('visual_intro_text');
-$visual_button_text = get_field('visual_button_text');
-$visual_button_link = get_field('visual_button_link');
+$custom_post = get_field('custom_post');
+$custom_show = get_field('custom_show');
+
+if( $custom_show && in_array('featured', $custom_show) ) { $featured = 1; } else { $featured = 0; }
+if( $custom_show && in_array('circle', $custom_show) ) { $circle = 1; } else { $circle = 0; }
+if( $custom_show && in_array('button', $custom_show) ) { $button = 1; } else { $button = 0; }
 
 $tracking = get_field('tracking');
 ?>
 
-<section id="post-<?php the_ID(); ?>" <?php post_class('visual'); ?> style="<?php
+<section id="post-<?php the_ID(); ?>" <?php post_class('custompost'); ?> style="<?php
 	if ( !empty($url) ) { echo 'background-image: url('. $url .');'; }
 	if ( !empty($bgc) ) { echo ' background-color:'. $bgc .';'; }
 	if ( !empty($tc) ) { echo ' color:'. $tc .';'; }
@@ -28,9 +31,9 @@ $tracking = get_field('tracking');
 	<div class="entry-content">
 		<?php
 		the_title( '<h1>', '</h1>' );
-		if ( $visual_intro_text ) { echo $visual_intro_text; }
-		if ( $visual_button_text && $visual_button_link ) {
-			echo '<a href="'.$visual_button_link.'" class="button">'.$visual_button_text.'</a>';
+		if ( $custom_post ) { echo $custom_post; }
+		if( $colors && in_array('red', $colors) ) { ?>
+			echo $custom_show;
 		}
 
 		wp_link_pages( array(
