@@ -73,8 +73,8 @@ function expanse_widgets_init() {
 	$options = get_option( 'expanse_options' );
 	if ( $options['es_home'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Home Sidebar', 'expanse' ),
-			'id'            => 'home-sidebar',
+			'name'		  => __( 'Home Sidebar', 'expanse' ),
+			'id'			=> 'home-sidebar',
 			'description'   => 'Appears on homepage in the sidebar.',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -84,8 +84,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_page'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Pages Sidebar', 'expanse' ),
-			'id'            => 'pages-sidebar',
+			'name'		  => __( 'Pages Sidebar', 'expanse' ),
+			'id'			=> 'pages-sidebar',
 			'description'   => 'Appears on pages in the sidebar.',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -95,8 +95,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_blog'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Blog Sidebar', 'expanse' ),
-			'id'            => 'blog-sidebar',
+			'name'		  => __( 'Blog Sidebar', 'expanse' ),
+			'id'			=> 'blog-sidebar',
 			'description'   => __( 'Appears on blog and blog posts in the sidebar.' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -106,8 +106,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_contact'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Contact Page Sidebar', 'expanse' ),
-			'id'            => 'contact-sidebar',
+			'name'		  => __( 'Contact Page Sidebar', 'expanse' ),
+			'id'			=> 'contact-sidebar',
 			'description'   => __( 'Appears on the contact page template in the sidebar.' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -117,8 +117,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_header'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Header', 'expanse' ),
-			'id'            => 'header',
+			'name'		  => __( 'Header', 'expanse' ),
+			'id'			=> 'header',
 			'description'   => 'This is located in the header area. Only 1 widget pls.',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -128,8 +128,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_above'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Above Header', 'expanse' ),
-			'id'            => 'top',
+			'name'		  => __( 'Above Header', 'expanse' ),
+			'id'			=> 'top',
 			'description'   => 'Tippy top of the site. No more than 2 widgets pls.',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -139,8 +139,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_features'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Features', 'expanse' ),
-			'id'            => 'features',
+			'name'		  => __( 'Features', 'expanse' ),
+			'id'			=> 'features',
 			'description'   => 'This is located below the banner on the home page. Perfect time to break out the feature widget! Use up to 4 widgets.',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -150,8 +150,8 @@ function expanse_widgets_init() {
 	}
 	if ( $options['es_footer'] ) {
 		register_sidebar( array(
-			'name'          => __( 'Footer', 'expanse' ),
-			'id'            => 'footer',
+			'name'		  => __( 'Footer', 'expanse' ),
+			'id'			=> 'footer',
 			'description'   => 'This is located in the footer. Use up to 4 widgets.',
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -169,7 +169,9 @@ function expanse_posttypes_init() {
 	$options = get_option( 'expanse_options' );
 	$options['es_services'];
 	$options['es_team'];
+	$options['es_team'];
 	$options['es_events'];
+	$options['es_testimonials'];
 
 	if ( $options['es_services'] ) {
 		$services_labels = array(
@@ -183,6 +185,7 @@ function expanse_posttypes_init() {
 			'menu_icon'			=> 'dashicons-star-filled',
 			'public'			=> true,
 			'capability_type'	=> 'page',
+			'taxonomies'		=> array('services'),
 			'has_archive'		=> true,
 			'supports'			=> array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' )
 		);
@@ -201,6 +204,7 @@ function expanse_posttypes_init() {
 			'menu_icon'			=> 'dashicons-groups',
 			'public'			=> true,
 			'capability_type'	=> 'page',
+			'taxonomies'		=> array('team'),
 			'has_archive'		=> true,
 			'supports'			=> array( 'title', 'editor', 'thumbnail', 'revisions' )
 		);
@@ -219,10 +223,30 @@ function expanse_posttypes_init() {
 			'menu_icon'			=> 'dashicons-calendar',
 			'public'			=> true,
 			'capability_type'	=> 'post',
+			'taxonomies'		=> array('events'),
 			'has_archive'		=> true,
 			'supports'			=> array( 'title', 'editor', 'thumbnail', 'revisions' )
 		);
 		register_post_type('events', $events_args);
+	}
+
+	if ( $options['es_testimonials'] ) {
+		$testimonials_labels = array(
+			'name'				=> 'Testimonials',
+			'singular_name'		=> 'Testimonial',
+			'menu_name'			=> 'Testimonials',
+			'add_new_item'		=> 'Add New Testimonials'
+		);
+		$testimonials_args = array(
+			'labels'			=> $testimonials_labels,
+			'menu_icon'			=> 'dashicons-format-chat',
+			'public'			=> true,
+			'capability_type'	=> 'post',
+			'taxonomies'		=> array('testimonials'),
+			'has_archive'		=> true,
+			'supports'			=> array( 'title', 'editor', 'thumbnail', 'revisions' )
+		);
+		register_post_type('testimonials', $testimonials_args);
 	}
 }
 add_action( 'widgets_init', 'expanse_posttypes_init' );
@@ -232,7 +256,7 @@ add_action( 'widgets_init', 'expanse_posttypes_init' );
  * HOH custom excerpt
  */
 function excerpt($limit) {
-    return wp_trim_words(get_the_excerpt(), $limit, custom_read_more());
+	return wp_trim_words(get_the_excerpt(), $limit, custom_read_more());
 }
 
 
@@ -261,7 +285,7 @@ if ( ! function_exists( 'expanse_fonts_url' ) ) :
  */
 function expanse_fonts_url() {
 	$fonts_url = '';
-	$fonts     = array();
+	$fonts	 = array();
 	$subsets   = 'latin,latin-ext';
 
 	/* translators: If there are characters in your language that are not supported by Merriweather, translate this to 'off'. Do not translate into your own language. */
@@ -487,26 +511,6 @@ function expanse_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'expanse_widget_tag_cloud_args' );
-
-
-
-// Add Custom Post Types to ACF dropdown???
-// function acf_load_post_type_choices( $field ) {
-
-// $field['choices'] = array();
-// $choices = get_post_types( array('public' => true) );
-
-// if( is_array($choices) ) {
-// 	foreach( $choices as $choice ) {
-// 		$field['choices'][ $choice ] = $choice;
-// 	}
-// }
-// return $field;
-
-// }
-// add_filter('acf/load_field/name=post_types', 'acf_load_post_type_choices');
-
-
 
 /**
  * ACF Rule Type: Parent Page Template

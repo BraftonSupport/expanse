@@ -420,7 +420,7 @@ function expanse_default_options() {
 			'ss_li'			=>	'',
 			'ss_pin'		=>	'',
 			'ss_email'		=>	'',
-			'ss_on'		=>	'',
+			'ss_on'			=>	'',
 		'es_home'			=>	'',
 		'es_page'			=>	'',
 		'es_blog'			=>	'',
@@ -428,7 +428,11 @@ function expanse_default_options() {
 		'es_above'			=>	'',
 		'es_header'			=>	'',
 		'es_features'		=>	'',
-		'es_footer'			=>	''
+		'es_footer'			=>	'',
+			'es_services'	=>	'',
+			'es_team'		=>	'',
+			'es_events'		=>	'',
+			'es_testimonials' => ''
 
 	);
 	return apply_filters( 'expanse_default_options', $defaults );
@@ -689,7 +693,14 @@ function expanse_default_options() {
 			if ($events) {
 				$html .= 'checked="checked"';
 			}
-			$html .= '> Events</p>';
+			$html .= '> Events &nbsp; &nbsp;';
+
+		$testimonials = $options['es_testimonials'];
+			$html .= ' <input type="checkbox" id="es_testimonials" name="expanse_options[es_testimonials]"';
+			if ($testimonials) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Testimonials</p>';
 		echo $html;
 	}
 
