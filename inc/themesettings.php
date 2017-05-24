@@ -371,6 +371,14 @@ function expanse_initialize_options() {
 		'expanse_options',
 		'options_section'
 	);
+	
+	add_settings_field(
+		'Extra Post Types',
+		__( 'Extra Post Types', 'expanse' ),
+		'expanse_extra_posttypes_callback',
+		'expanse_options',
+		'options_section'
+	);
 
 	register_setting(
 		'expanse_options',
@@ -654,6 +662,34 @@ function expanse_default_options() {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Footer Widget Area</p>';
+		echo $html;
+	}
+
+	function expanse_extra_posttypes_callback() {
+		$options = get_option( 'expanse_options' );
+
+		$html .'More Post Types';
+
+		$services = $options['es_services'];
+			$html .= '<p><input type="checkbox" id="es_services" name="expanse_options[es_services]"';
+			if ($services) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Services &nbsp; &nbsp;';
+
+		$team = $options['es_team'];
+			$html .= '<input type="checkbox" id="es_team" name="expanse_options[es_team]"';
+			if ($team) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Team &nbsp; &nbsp;';
+
+		$events = $options['es_events'];
+			$html .= ' <input type="checkbox" id="es_events" name="expanse_options[es_events]"';
+			if ($events) {
+				$html .= 'checked="checked"';
+			}
+			$html .= '> Events</p>';
 		echo $html;
 	}
 

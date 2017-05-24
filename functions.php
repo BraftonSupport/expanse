@@ -162,6 +162,71 @@ function expanse_widgets_init() {
 }
 add_action( 'widgets_init', 'expanse_widgets_init' );
 
+/**
+ * Register Post Types.
+ */
+function expanse_posttypes_init() {
+	$options = get_option( 'expanse_options' );
+	$options['es_services'];
+	$options['es_team'];
+	$options['es_events'];
+
+	if ( $options['es_services'] ) {
+		$services_labels = array(
+			'name'				=> 'Services',
+			'singular_name'		=> 'Service',
+			'menu_name'			=> 'Services',
+			'add_new_item'		=> 'Add New Service',
+		);
+		$services_args = array(
+			'labels'			=> $services_labels,
+			'menu_icon'			=> 'dashicons-star-filled',
+			'public'			=> true,
+			'capability_type'	=> 'page',
+			'has_archive'		=> true,
+			'supports'			=> array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' )
+		);
+		register_post_type('services', $services_args);
+	}
+
+	if ( $options['es_team'] ) {
+		$team_labels = array(
+			'name'				=> 'Team',
+			'singular_name'		=> 'Team Member',
+			'menu_name'			=> 'Team',
+			'add_new_item'		=> 'Add New Team Member'
+		);
+		$team_args = array(
+			'labels'			=> $team_labels,
+			'menu_icon'			=> 'dashicons-groups',
+			'public'			=> true,
+			'capability_type'	=> 'page',
+			'has_archive'		=> true,
+			'supports'			=> array( 'title', 'editor', 'thumbnail', 'revisions' )
+		);
+		register_post_type('team', $team_args);
+	}
+
+	if ( $options['es_events'] ) {
+		$events_labels = array(
+			'name'				=> 'Events',
+			'singular_name'		=> 'Event',
+			'menu_name'			=> 'Events',
+			'add_new_item'		=> 'Add New Event'
+		);
+		$events_args = array(
+			'labels'			=> $events_labels,
+			'menu_icon'			=> 'dashicons-calendar',
+			'public'			=> true,
+			'capability_type'	=> 'post',
+			'has_archive'		=> true,
+			'supports'			=> array( 'title', 'editor', 'thumbnail', 'revisions' )
+		);
+		register_post_type('events', $events_args);
+	}
+}
+add_action( 'widgets_init', 'expanse_posttypes_init' );
+
 
 /**
  * HOH custom excerpt
@@ -424,25 +489,22 @@ function expanse_widget_tag_cloud_args( $args ) {
 add_filter( 'widget_tag_cloud_args', 'expanse_widget_tag_cloud_args' );
 
 
-// // Add templates if is child of front page
-// add_filter( 'theme_page_templates', 'frontpage_template', 1, 3 );
-// function frontpage_template( $template, $this, $post ) {
-//Find the front page
-	// global $post_ID;
-	// if ( wp_get_post_parent_id( $post_ID ) === (int) get_option( 'page_on_front' ) ) {
-// // get rid of your templates
-// 		unset($template);
-// // add only these templates
-// 		$files = array_diff( scandir(__DIR__ . '\frontpage-parts'), array('.', '..') );
-// 		foreach ($files as $name){
-// 			$template[$name] = preg_replace("/-template.php/", "", $name);
-// 		}
-// 		return $template;
 
-// 	} else {
-		// return $template;
-	// }
+// Add Custom Post Types to ACF dropdown???
+// function acf_load_post_type_choices( $field ) {
+
+// $field['choices'] = array();
+// $choices = get_post_types( array('public' => true) );
+
+// if( is_array($choices) ) {
+// 	foreach( $choices as $choice ) {
+// 		$field['choices'][ $choice ] = $choice;
+// 	}
 // }
+// return $field;
+
+// }
+// add_filter('acf/load_field/name=post_types', 'acf_load_post_type_choices');
 
 
 
