@@ -501,6 +501,12 @@ function expanse_post_thumbnail() {
 	<?php endif; // End is_singular()
 }
 
+add_action( 'after_setup_theme', 'services_thumb' );
+function services_thumb() {
+    add_image_size( 'mediumsquared', 300, 300, true ); // (cropped)
+}
+
+
 /**
  * Modifies tag cloud widget arguments to have all tags in the widget same font size.
  */
