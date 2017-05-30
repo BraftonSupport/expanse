@@ -187,7 +187,7 @@ function expanse_posttypes_init() {
 			'capability_type'	=> 'page',
 			'taxonomies'		=> array('services'),
 			'has_archive'		=> true,
-			'supports'			=> array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' )
+			'supports'			=> array( 'title', 'editor', 'thumbnail', 'revisions' )
 		);
 		register_post_type('services', $services_args);
 	}

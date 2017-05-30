@@ -29,7 +29,7 @@ $text_underneath = get_field('text_underneath');
 $tracking = get_field('tracking');
 ?>
 
-<section id="post-<?php the_ID(); ?>" <?php post_class('custompost'); ?> style="<?php
+<section id="post-<?php the_ID(); ?>" <?php post_class('list'); ?> style="<?php
 	if ( !empty($url) ) { echo 'background-image: url('. $url .');'; }
 	if ( !empty($bgc) ) { echo ' background-color:'. $bgc .';'; }
 	if ( !empty($tc) ) { echo ' color:'. $tc .';'; } ?>">
@@ -67,32 +67,26 @@ $tracking = get_field('tracking');
 		<?php }
 	}
 	if ($type=='recent'){
-		if (!$recent_posts=='posts'){
-			query_posts(array( 
-				'post_type' => $recent_posts,
-				'showposts' => $number_of_posts
-			) );
-		} elseif ($recent_posts=='posts'){
-			query_posts(array(
-				'showposts' => $number_of_posts
-			) );  
-		}
+		query_posts(array( 
+			'post_type' => $recent_posts,
+			'showposts' => $number_of_posts
+		) );
 		while (have_posts()) : the_post(); ?>
-			<div><?php if ( $featured && $circle && has_post_thumbnail() ){
-			 	the_post_thumbnail('mediumsquared', ['class' => 'round']);
-			} elseif($featured && has_post_thumbnail()){
-				the_post_thumbnail('mediumsquared');
-			}
-			if ( $title ){ ?>
-				<h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
-			<?php }
-			if ( $excerpt ){ 
-				echo '<p>'.get_the_excerpt().'</p>';
-			}
-			if ( $button ){ ?>
-				<a href="<?php echo get_permalink(); ?>" class="button">Read More</a>
-			<?php } ?>
-
+			<div>
+				<?php if ( $featured && $circle && has_post_thumbnail() ){
+				 	the_post_thumbnail('mediumsquared', ['class' => 'round']);
+				} elseif($featured && has_post_thumbnail()){
+					the_post_thumbnail('mediumsquared');
+				}
+				if ( $title ){ ?>
+					<h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+				<?php }
+				if ( $excerpt ){ 
+					echo '<p>'.get_the_excerpt().'</p>';
+				}
+				if ( $button ){ ?>
+					<a href="<?php echo get_permalink(); ?>" class="button">Read More</a>
+				<?php } ?>
 			</div>
 		<?php endwhile;
 		wp_reset_query();

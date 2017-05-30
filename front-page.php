@@ -33,8 +33,8 @@ get_header(); ?>
 
 			if ($template=='visual'){
 				get_template_part( 'frontpage-parts/visual', 'template' );
-			} elseif ($template=='customposts'){
-				get_template_part( 'frontpage-parts/customposts', 'template' );
+			} elseif ($template=='list'){
+				get_template_part( 'frontpage-parts/list', 'template' );
 			} elseif ($template=='slider'){
 				get_template_part( 'frontpage-parts/slider', 'template' );
 			}
