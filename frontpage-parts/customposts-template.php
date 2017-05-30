@@ -44,7 +44,7 @@ $tracking = get_field('tracking');
 						if ( $circle ) {
 							echo get_the_post_thumbnail( $post->ID, 'mediumsquared', array( 'class' => 'round' ) );
 						} else {
-							echo get_the_post_thumbnail($post->ID, 'mediumsquared');
+							echo get_the_post_thumbnail( $post->ID, 'mediumsquared' );
 						}
 					} elseif ( wp_attachment_is_image( $post->ID ) ) {
 						if ( $circle ) {
@@ -55,7 +55,7 @@ $tracking = get_field('tracking');
 					}
 				}
 				if ( $title ){ ?>
-					<h5><a href="<?php echo get_permalink($post->ID); ?>"><?php echo get_the_title($post->ID); ?></a></h5>
+					<h3><a href="<?php echo get_permalink($post->ID); ?>"><?php echo get_the_title($post->ID); ?></a></h3>
 				<?php }
 				if ( $excerpt ){
 					echo get_the_excerpt($post->ID);
@@ -67,27 +67,40 @@ $tracking = get_field('tracking');
 		<?php }
 	}
 	if ($type=='recent'){
-		
 		if (!$recent_posts=='posts'){
 			query_posts(array( 
 				'post_type' => $recent_posts,
 				'showposts' => $number_of_posts
-			) );  
-			while (have_posts()) : the_post(); ?>
-				<div><h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
-				<p><?php echo get_the_excerpt(); ?></p></div>
-			<?php endwhile;
+			) );
 		} elseif ($recent_posts=='posts'){
 			query_posts(array(
 				'showposts' => $number_of_posts
 			) );  
-			while (have_posts()) : the_post(); ?>
-				<div><h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
-				<p><?php echo get_the_excerpt(); ?></p></div>
-			<?php endwhile;
 		}
+		while (have_posts()) : the_post(); ?>
+			<div><?php if ( $featured && $circle && has_post_thumbnail() ){
+			 	the_post_thumbnail('mediumsquared', ['class' => 'round']);
+			} elseif($featured && has_post_thumbnail()){
+				the_post_thumbnail('mediumsquared');
+			}
+			if ( $title ){ ?>
+				<h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+			<?php }
+			if ( $excerpt ){ 
+				echo '<p>'.get_the_excerpt().'</p>';
+			}
+			if ( $button ){ ?>
+				<a href="<?php echo get_permalink(); ?>" class="button">Read More</a>
+			<?php } ?>
+
+			</div>
+		<?php endwhile;
+		wp_reset_query();
 	} ?>
 	</div>
+	<?php if ( $extra_text&&$text_underneath ) {
+		echo $text_underneath;
+	} ?>
 
 	<?php
 		edit_post_link(
@@ -97,11 +110,9 @@ $tracking = get_field('tracking');
 				get_the_title()
 			),
 			'<footer class="entry-footer"><span class="edit-link">',
-			'</span></footer><!-- .entry-footer -->'
+			'</span></footer><!-- .entry-footer -->',
+			$id
 		);
 	?>
-	<?php if ( $extra_text&&$text_underneath ) {
-		$text_underneath;
-	} ?>
 </section><!-- section -->
 <?php if ( $shadow ) { echo '<div class="shadow"></div>'; } ?>

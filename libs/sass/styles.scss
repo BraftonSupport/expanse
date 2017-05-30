@@ -1,0 +1,13 @@
+@import "partials/base";
+@media only screen and (min-width: 481px) { //Landscape phones
+    @import "partials/481";
+}
+@media only screen and (min-width: 769px) { //Tablets
+    @import "partials/769";
+} 
+@media only screen and (min-width: 1025px) { //Large tablets and laptops
+    @import "partials/1025";
+} 
+@media only screen and (min-width: 1225px) { //Destop and larger
+    @import "partials/1225";
+}

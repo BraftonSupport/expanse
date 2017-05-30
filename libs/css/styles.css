@@ -1,0 +1,9 @@
+/* line 1, ../sass/partials/_base.scss */
+h1 {
+  color: red;
+}
+
+/* line 8, ../sass/partials/_base.scss */
+.home:hover {
+  text-align: center;
+}

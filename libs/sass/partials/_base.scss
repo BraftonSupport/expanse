@@ -1,0 +1,11 @@
+h1 {
+	color: red;
+}
+
+//comments
+
+.home {
+	&:hover {
+		text-align: center;
+	}
+}
