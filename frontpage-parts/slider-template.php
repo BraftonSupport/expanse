@@ -31,7 +31,13 @@ $tracking = get_field('tracking');
 	<?php if ( $slider_type=='choose' && $custom_slider_post ) {
 		foreach( $custom_slider_post as $post ) { ?>
 			<div>
-				<?php echo get_the_excerpt($post->ID);
+				<?php
+					$excerpt= get_post_field('post_content', $post);
+					if (strlen($excerpt) > 150){
+						echo implode(' ', array_slice(explode(' ', strip_tags($excerpt)), 0, 28)).'...';
+					} else {
+						echo strip_tags($excerpt);
+					}
 				if ( $slider_button ){ ?>
 					<a href="<?php echo get_permalink($post->ID); ?>" class="button">Read More</a>
 				<?php } ?>
@@ -45,7 +51,13 @@ $tracking = get_field('tracking');
 		) );  
 		while (have_posts()) : the_post(); ?>
 			<div><?php
-				echo '<p>'.get_the_excerpt().'</p>';
+					$excerpt= get_the_content();
+					if (strlen($excerpt) > 150){
+						echo implode(' ', array_slice(explode(' ', strip_tags($excerpt)), 0, 28)).'...';
+					} else {
+						echo strip_tags($excerpt);
+					}
+					echo '</p>';
 			if ( $slider_button ){ ?>
 				<a href="<?php echo get_permalink(); ?>" class="button">Read More</a>
 			<?php } ?>

@@ -40,25 +40,31 @@ $tracking = get_field('tracking');
 		foreach( $custom_post as $post ) { ?>
 			<div>
 				<?php if ( $featured ){
-					if ( has_post_thumbnail( $post->ID ) ){
+					if ( has_post_thumbnail( $post ) ){
 						if ( $circle ) {
-							echo get_the_post_thumbnail( $post->ID, 'mediumsquared', array( 'class' => 'round' ) );
+							echo get_the_post_thumbnail( $post, 'mediumsquared', array( 'class' => 'round' ) );
 						} else {
-							echo get_the_post_thumbnail( $post->ID, 'mediumsquared' );
+							echo get_the_post_thumbnail( $post, 'mediumsquared' );
 						}
-					} elseif ( wp_attachment_is_image( $post->ID ) ) {
+					} elseif ( wp_attachment_is_image( $post ) ) {
 						if ( $circle ) {
-							echo '<img src="'.wp_get_attachment_image_src( $post->ID, 'mediumsquared', true )[0].'" class="round">';
+							echo '<img src="'.wp_get_attachment_image_src( $post, 'mediumsquared', true )[0].'" class="round">';
 						} else {
-							echo '<img src="'.wp_get_attachment_image_src( $post->ID, 'mediumsquared', true )[0].'">';
+							echo '<img src="'.wp_get_attachment_image_src( $post, 'mediumsquared', true )[0].'">';
 						}
 					}
 				}
 				if ( $title ){ ?>
-					<h3><a href="<?php echo get_permalink($post->ID); ?>"><?php echo get_the_title($post->ID); ?></a></h3>
+					<h3><a href="<?php echo get_permalink($post->ID); ?>"><?php echo get_the_title($post); ?></a></h3>
 				<?php }
 				if ( $excerpt ){
-					echo get_the_excerpt($post->ID);
+					$content= get_post_field('post_content', $post);
+					$the_excerpt= substr($content,0,strpos($content,'.')+1);
+					if (strlen($the_excerpt) > 125){
+						echo '<p>'.implode(' ', array_slice(explode(' ', strip_tags($the_excerpt)), 0, 15)).'...</p>';
+					} else {
+						echo '<p>'.strip_tags($the_excerpt).'</p>';
+					}
 				}
 				if ( $button ){ ?>
 					<a href="<?php echo get_permalink($post->ID); ?>" class="button">Read More</a>
@@ -81,8 +87,16 @@ $tracking = get_field('tracking');
 				if ( $title ){ ?>
 					<h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
 				<?php }
-				if ( $excerpt ){ 
-					echo '<p>'.get_the_excerpt().'</p>';
+				if ( $excerpt ){
+					echo '<p>';
+					$content= get_the_content();
+					$the_excerpt= substr($content,0,strpos($content,'.')+1);
+					if (strlen($the_excerpt) > 125){
+						echo implode(' ', array_slice(explode(' ', strip_tags($the_excerpt)), 0, 15)).'...';
+					} else {
+						echo strip_tags($the_excerpt);
+					}
+					echo '</p>';
 				}
 				if ( $button ){ ?>
 					<a href="<?php echo get_permalink(); ?>" class="button">Read More</a>
