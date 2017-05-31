@@ -197,4 +197,13 @@
 		belowEntryMetaClass( 'img.size-full' );
 		belowEntryMetaClass( 'blockquote.alignleft, blockquote.alignright' );
 	} );
+
+	$(document).ready(function(){
+		$('.slider').slick({
+		  dots: true,
+		  // autoplay: true,
+		  // autoplaySpeed: 11000,
+		});
+	});
+
 } )( jQuery );
