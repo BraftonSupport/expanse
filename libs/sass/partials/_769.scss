@@ -1,0 +1,29 @@
+
+.slider {
+	    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+        -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.slick {
+	max-width: 65%;
+	margin: auto;
+	-webkit-flex: 1 1 65%;
+    -ms-flex: 1 1 65%;
+    flex: 1 1 65%;
+    }
+.toolbar{
+	-webkit-flex: 0 1 100%;
+    -ms-flex: 0 1 100%;
+    flex: 0 1 100%;
+}
+.quotes{
+    -webkit-flex: 0 0 10%;
+    -ms-flex: 0 0 10%;
+    flex: 0 0 10%;
+	line-height: inherit;
+	position: inherit;
+	z-index: inherit;
+}

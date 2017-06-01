@@ -199,10 +199,14 @@
 	} );
 
 	$(document).ready(function(){
-		$('.slider').slick({
-		  dots: true,
-		  // autoplay: true,
-		  // autoplaySpeed: 11000,
+		$('.slider .slick').slick({
+			dots: true,
+			appendArrows: $(".toolbar"),
+			appendDots: $(".toolbar"),
+			prevArrow:'<span class="fa fa-angle-left"></span>',
+			nextArrow:'<span class="fa fa-angle-right"></span>',
+			autoplay: true,
+			autoplaySpeed: 11000,
 		});
 	});
 

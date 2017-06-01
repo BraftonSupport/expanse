@@ -27,7 +27,8 @@ $tracking = get_field('tracking');
 	if ( !empty($bgc) ) { echo ' background-color:'. $bgc .';'; }
 	if ( !empty($tc) ) { echo ' color:'. $tc .';'; }
 	?>">
-
+<span class="quotes">&ldquo;</span>
+<div class="slick">
 	<?php if ( $slider_type=='choose' && $custom_slider_post ) {
 		foreach( $custom_slider_post as $post ) { ?>
 			<div>
@@ -65,5 +66,8 @@ $tracking = get_field('tracking');
 			</div>
 		<?php endwhile;
 		wp_reset_query();
-	}
-if ( $shadow ) { echo '<div class="shadow"></div>'; } ?>
+	} ?>
+</div><span class="quotes">&rdquo;</span>
+<div class="toolbar"></div>
+</section><!-- section -->
+<?php if ( $shadow ) { echo '<div class="shadow"></div>'; } ?>

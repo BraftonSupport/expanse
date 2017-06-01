@@ -52,6 +52,7 @@ Tags: fluid-layout, responsive-layout, accessibility-ready, two-columns, left-si
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 
+@import url(libs/css/styles.css);
 html {
 	font-family: 'Open Sans', 'Helvetica', sans-serif;
 	-webkit-text-size-adjust: 100%;
