@@ -3663,7 +3663,7 @@ p > video {
 
 @media screen and (min-width: 61.5625em) {
 
-	.site-inner { max-width: 1000px; }
+	.site-inner { max-width: 1000px; width: 92%; }
 	.compact {
 		max-width: 75%;
 	}

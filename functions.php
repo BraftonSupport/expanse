@@ -176,9 +176,9 @@ add_filter(
 	function ($excerpt) {
 		$excerpt= substr($excerpt,0,strpos($excerpt,'.')+1);
 		if (strlen($excerpt) > 125){
-			return implode(' ', array_slice(explode(' ', strip_tags($excerpt)), 0, 15)).'... <a href="'. get_permalink($post->ID) . '">Read More</a>';
+			return implode(' ', array_slice(explode(' ', strip_tags($excerpt)), 0, 15)).'... <a href="'. get_permalink($post->ID) . '" class="button">Read More</a>';
 		} else {
-			return strip_tags($excerpt).' <a href="'. get_permalink($post->ID) . '" class="more-link">Read More</a>';
+			return strip_tags($excerpt).' <a href="'. get_permalink($post->ID) . '" class="button">Read More</a>';
 		}
 	}
 );
