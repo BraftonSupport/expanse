@@ -80,7 +80,7 @@ if ( ! function_exists( 'social_sharing_buttons' ) ) :
 			$twitterURL = 'https://twitter.com/intent/tweet?text='.$ssbTitle.'&amp;url='.$ssbURL;
 			$googleURL = 'https://plus.google.com/share?url='.$ssbURL;
 			$pinterestURL = 'https://pinterest.com/pin/create/button/?url='.$ssbURL.'&amp;media='.$ssbThumbnail[0].'&amp;description='.$ssbTitle;
-			$linkedURL = 'linkedin.com/shareArticle?mini=true&url='.$ssbURL.'&title='.$ssbTitle;
+			$linkedURL = 'https://linkedin.com/shareArticle?mini=true&url='.$ssbURL.'&title='.$ssbTitle;
 
 			// Add sharing button at the end of page/page content
 			$variable .= '<span class="ssb-social"><span class="ssb-text">Social Share: </span>';
