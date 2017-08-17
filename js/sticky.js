@@ -2,7 +2,7 @@ jQuery(document).ready(function($){
   
   var mn = $(".site-header-main");
       mns = "scrolled";
-      hdr = $('.site-header-main').height()-10;
+      hdr = $('.site-header-main').height()-40;
 
   $(window).scroll(function() {
     if( $(this).scrollTop() > hdr ) {

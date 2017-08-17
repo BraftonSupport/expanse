@@ -780,10 +780,10 @@ a:active,
 
 .scrolled img.site-title { max-width: 120px; }
 .scrolled .site-title { display: block; }
-.scrolled .site-branding { margin: 3px auto 3px 0; width: 10%; }
+.scrolled .site-branding { margin: 3px auto 3px 0; max-width: 55px; }
 .scrolled .site-description, .scrolled .widget { display: none; }
 .scrolled .main-navigation .menu-main-menu-container { margin-top: 6px; }
-.scrolled .main-navigation a { font-size: 12px; }
+.scrolled .main-navigation a { font-size: 15px; }
 
 .scrolled > .site-header-menu {display: none;}
 .site-header .scrolled .below {display: block;}
@@ -793,7 +793,7 @@ a:active,
 
 .site-header-main.scrolled .next {
 	float: right;
-    margin: 0 0 0 auto;
+    margin: auto 0 auto auto;
     width: 80%;
     text-align: right;
 }
@@ -1839,7 +1839,7 @@ section div {
 .row { padding: 50px 0; }
 
 .site-main > section {
-	padding: 75px 0;
+	padding: 50px 0;
 }
 
 .container { 
@@ -1940,7 +1940,7 @@ footer .container,
 }
 
 .site-header-main.scrolled .site-branding { float: left; }
-.site-header-main.scrolled .menu-toggle { float: right; margin: 2px 0 2px auto; padding: 0.5em; }
+.site-header-main.scrolled .menu-toggle { float: right; margin: 2px 0 2px auto; padding: 0.5em; width: auto; }
 
 .site-title {
 	font-size: 23px;
@@ -3663,7 +3663,7 @@ p > video {
 
 @media screen and (min-width: 61.5625em) {
 
-	.site-inner { max-width: 1000px; }
+	.site-inner { max-width: 1000px; width: 92%; }
 	.compact {
 		max-width: 75%;
 	}
