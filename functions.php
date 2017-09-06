@@ -71,7 +71,7 @@ add_action( 'after_setup_theme', 'expanse_content_width', 0 );
  */
 function expanse_widgets_init() {
 	$options = get_option( 'expanse_options' );
-	if ( $options['es_home'] ) {
+	if ( !empty($options['es_home'])&&$options['es_home'] ) {
 		register_sidebar( array(
 			'name'          => __( 'Home Sidebar', 'expanse' ),
 			'id'            => 'home-sidebar',

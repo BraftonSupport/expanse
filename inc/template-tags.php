@@ -64,7 +64,7 @@ endif;
  */
 if ( ! function_exists( 'social_sharing_buttons' ) ) :
 	$options = get_option( 'expanse_options' );
-	if ( $options['ssbutton']=="on" ) {
+	if (!empty($options['ssbutton'])&& $options['ssbutton']=="on" ) {
 		function social_sharing_buttons() {
 			// Get current page URL 
 			$ssbURL = get_permalink();
