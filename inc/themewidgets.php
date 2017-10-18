@@ -178,7 +178,7 @@ class feature extends WP_Widget {
  	<textarea id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" class="widefat title" rows="1"><?php echo $title; ?></textarea></p>
 	<textarea id="<?php echo $this->get_field_id('textarea'); ?>" name="<?php echo $this->get_field_name('textarea'); ?>" class="widefat" rows="5"><?php echo $textarea; ?></textarea>
 	<p>
-		<?php if (!$image) :?><img src="" > <?php endif; ?>
+		<?php if (!$image) :?><img src="" alt="empty"> <?php endif; ?>
 		<?php echo wp_get_attachment_image( intval( $image ) , "thumbnail" );  ?>
 	<input class="upload_image_button" type="button" 
 		<?php if ($image) :?> value="Change Image"
@@ -218,7 +218,7 @@ class feature extends WP_Widget {
 		echo '>';
 
 		// Check if title is set
-		if ( $image && $options['featured_style']=="icon" ) { echo '<img src="'.$image.'" class="img">'; }
+		if ( $image && $options['featured_style']=="icon" ) { echo '<img src="'.$image.'" class="img" alt="'.$title.'">'; }
 		echo '<div class="inside">';
 		if ( $title ) { echo $before_title . $title . $after_title; }
 		if ( $textarea ) { echo $textarea; }
